@@ -1,0 +1,118 @@
+$header-bg-color: #3483df;
+.emr-header {
+  .emr-header-content {
+    background-color: $header-bg-color;
+    color: #fff;
+    width: calc(100vw - 5px);
+    margin: -5px 0 0 -20px;
+    padding: 3px 0;
+    height: 50px;
+    position: fixed;
+    z-index: 9999;
+
+    .header-layout-flex {
+      display: flex;
+      justify-content: space-between;
+
+      .header-l-f-right {
+        display: flex;
+
+        .user-info {
+          margin-top: 10px;
+          font-weight: bold;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .hospital {
+      float: left;
+      position: relative;
+      padding-left: 48px;
+      height: 100%;
+      margin-left: 30px;
+      .hos-logo {
+        position: absolute;
+        left: 0;
+        width: 48px;
+        height: 48px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .hos-right {
+        font-size: 14px;
+        font-weight: 600;
+        margin: 9px 0 0 3px;
+        line-height: 1;
+      }
+      .hos-name {
+        margin-top: 5px;
+      }
+    }
+    .patient-info {
+      float: left;
+      height: 100%;
+      margin-left: 50px;
+      font-weight: 700;
+      margin-top: 15px;
+      span {
+        margin-right: 10px;
+      }
+    }
+    .tools {
+      // float: right;
+      height: 100%;
+      color: white;
+      margin-right: 20px;
+      line-height: 50px;
+      i {
+        cursor: pointer;
+        font-size: 20px;
+        &:hover {
+          color: rgba(35, 82, 124, 0.3);
+        }
+      }
+      .tool-content {
+        display: inline-block;
+        border-right: 1px solid #fff;
+        .tool {
+          display: inline-block;
+          margin: 0 15px;
+          a {
+            color: white;
+          }
+        }
+      }
+      .toggle-view {
+        display: inline-block;
+        position: relative;
+        margin: 0 0 0 15px;
+        .toggle-content {
+          position: absolute;
+          top: 53px;
+          right: 0;
+          padding: 8px 0;
+          background-color: $header-bg-color;
+          z-index: 99;
+          border: 0.5px solid #fff;
+          line-height: 1;
+          .toggle-menu {
+            padding: 0 14px;
+            color: white;
+            text-decoration: none;
+            white-space: nowrap;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+  .null {
+    height: 55px;
+  }
+}
+.btn {
+  cursor: pointer;
+}

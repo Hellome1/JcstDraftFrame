@@ -1,0 +1,81 @@
+/* 
+ *  重置element-ui样式
+ */
+//栅格响应式重写
+@media only screen and (min-width: 768px) {
+  .el-col-sm-3 {
+    width: 14.28%;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .el-col-xs-3 {
+    width: 14.28%;
+  }
+}
+
+.module-content-list.el-row {
+  display: flex;
+
+  > div {
+    flex: 1;
+  }
+}
+.tl-list > .el-row {
+  display: flex;
+  > div {
+    flex: 1;
+  }
+}
+//  时间轴下拉选择框
+.el-select-dropdown .el-select-dropdown__item {
+  height: 16px;
+  line-height: 16px;
+}
+
+@media only screen and (max-width: 870px) {
+  .el-main,
+  .el-header {
+    width: 1000px !important;
+  }
+}
+//布局容器
+.el-main {
+  overflow: auto;
+}
+.el-header {
+  padding-top: 5px;
+}
+// 复选框
+.el-checkbox-button--mini .el-checkbox-button__inner {
+  padding: 5px 10px;
+  border-radius: 0 !important;
+  color: inherit;
+}
+//折叠面板
+.el-collapse {
+  border-top: transparent;
+  border-bottom: transparent;
+}
+.el-collapse-item {
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+}
+.el-collapse-item__header {
+  background-color: #f9f9f9;
+}
+.el-collapse-item__content {
+  padding-bottom: 0;
+  text-align: center;
+}
+.el-collapse-item__wrap {
+  border-bottom: transparent;
+}
+//checkbox
+.el-checkbox-button.is-checked .el-checkbox-button__inner {
+  color: inherit;
+  font-weight: 600;
+}
+// loading z-index 重写
+.el-loading-mask {
+  z-index: 999;
+}
