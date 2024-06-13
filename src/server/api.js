@@ -44,10 +44,23 @@ function getVisit(query = {}) {
   })
 }
 
+function getSurgery(query = {}) {
+  request(
+    handleReq({
+      url: 'MES0020',
+      method: 'post',
+      data: query
+    })
+  ).then(res => {
+    timeline_surgeryData(res);
+  })
+}
+
 export default function () {
   getPatInfo();
   getAllergy();
   header_userInfo();
 
   getVisit();
+  getSurgery();
 }

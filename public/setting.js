@@ -69,8 +69,9 @@ var setting = {
     }
   },
   timeline: {
-    weeks: 1,
+    pages: 1,
     days: [],
+    curdays: [],
     showDays: 7,
     interval: 4,
     leftW: 5,
@@ -81,7 +82,7 @@ var setting = {
 
 function handleEvent(obj) {
   var jsonObj = JSON.parse(JSON.stringify(obj));
-  console.log(jsonObj);
+  console.log('setting.js 85', jsonObj);
   for (var k in jsonObj) {
     var keys = k.split('.'), val = jsonObj[k];
     if (val.indexOf && val.indexOf('Data.') === 0) {

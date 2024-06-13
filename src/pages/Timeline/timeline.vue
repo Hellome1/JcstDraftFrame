@@ -10,7 +10,6 @@
         <div class="tl-bottom">
           <i class="el-icon-caret-left" :class="selectWeek > 1 ? 'clickable' : 'btn-disabled'" @click="() => { selectWeek > 1 ? selectWeek-- : null }"></i>
           <el-select
-            @change="handleChange"
             class="select-week"
             size="mini"
             popper-class="select-week-dropdown"
@@ -18,14 +17,14 @@
             :placeholder="$t('timeline.selectWeek.placeholder')"
           >
             <el-option
-              v-for="week in weeks"
+              v-for="week in pages"
               :label="$t('timeline.selectWeek.beforePageText') + ' ' + week + ' ' + $t('timeline.selectWeek.afterPageText')"
               :value="week"
               :key="week"
               >{{ $t('timeline.selectWeek.beforePageText') + ' ' + week + ' ' + $t('timeline.selectWeek.afterPageText') }}</el-option
             >
           </el-select>
-          <i class="el-icon-caret-right clickable" :class="selectWeek < weeks ? 'clickable' : 'btn-disabled'" @click="() => { selectWeek < weeks ? selectWeek++ : null }"></i>
+          <i class="el-icon-caret-right clickable" :class="selectWeek < pages ? 'clickable' : 'btn-disabled'" @click="() => { selectWeek < pages ? selectWeek++ : null }"></i>
         </div>
       </el-col>
       <el-col class="tl-list" :span="rightW">
@@ -33,7 +32,7 @@
           <el-col
             :sm="3"
             :xs="3"
-            v-for="(day, i) in days"
+            v-for="(day, i) in curdays"
             :key="i"
             class="tl-day"
           >
@@ -87,31 +86,19 @@ export default {
     rightW() {
       return this.timeline.rightW;
     },
-    weeks() {
-      return this.timeline.weeks;
+    pages() {
+      return this.timeline.pages;
     },
-    days() {
-      return this.timeline.days;
+    curdays() {
+      return this.timeline.curdays;
     },
     topTimeSubTract() {
       return this.timeline.topTimeSubTract;
     }
   },
   methods: {
-    handleChange() {
-      return;
-      let selectWeek = this.selectWeek;
-      let days = STATE.get('tlDays');
-      let showDays = setting.timeline.showDays;
-      let ndays = days.filter((_, i) => (showDays * (selectWeek - 1) <= i && i < showDays * selectWeek));
-      setting.timeline.days = ndays;
-    },
     handle_selectWeek_change() {
-      let selectWeek = this.selectWeek;
-      let days = STATE.get('tlDays');
-      let showDays = setting.timeline.showDays;
-      let ndays = days.filter((_, i) => (showDays * (selectWeek - 1) <= i && i < showDays * selectWeek));
-      setting.timeline.days = ndays;
+      selectPage(this.selectWeek);
     }
   }
 };

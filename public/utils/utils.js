@@ -38,9 +38,7 @@ function getToday(splStr) {
 var STATE = (function() {
   var storeObj = {
     surgeryRes: null,
-    surgeryInfo: [],
-    pages: 1,
-    tlDays: []
+    surgeryInfo: []
   }
 
   function get(key) {
@@ -87,7 +85,7 @@ function getShowText(date, encIndex) {
 }
 
 var getTlDatesRangeExecCount = 0;
-function getTlDatesRange(encTimeRanges) {
+function getTimelineDays(encTimeRanges) {
   if (getTlDatesRangeExecCount >= 2) return;
   getTlDatesRangeExecCount++;
   var days = [];
@@ -119,7 +117,8 @@ function getTlDatesRange(encTimeRanges) {
     }
   });
   var pages = Math.ceil(days.length / showDays);
-  STATE.set({ pages })
+  setting.timeline.pages = pages;
+
   var evenDaysNum = pages * showDays;
   for (var i = 0; i < evenDaysNum; i++) {
     if (!days[i]) {
@@ -129,7 +128,12 @@ function getTlDatesRange(encTimeRanges) {
     }
     if (i % pages === 0) days[i].className += ' last';
   }
-  console.log('[timeline.js 154] days', days);
-  STATE.set({ tlDays: days });
-  return days.map(day => day.date);
+  setting.timeline.days = days;
+}
+
+function selectPage(num) {
+  var timeline = setting.timeline;
+  var days = timeline.days;
+  var showDays = timeline.showDays;
+  timeline.curdays = days.filter(function(_, i) { return showDays * (num - 1) <= i && i < showDays * num; });
 }

@@ -71,7 +71,6 @@ function header_allergyData(res) {
 }
 
 function timeline_timelineData(res) {
-  console.log('timelineData:', res);
   var encTimeRanges = res.data.map(function(data) {
     var encStartDate = data.encStartDate || '',
       encStartTime = data.encStartTime || '',
@@ -104,14 +103,13 @@ function timeline_timelineData(res) {
       return null;
     }
   });
+  Data.encTimeRanges = encTimeRanges;
   var firstNotNullTimeRange = encTimeRanges.filter(itm => itm)[0];
-  var tlDatesRange = getTlDatesRange(encTimeRanges);
-  console.log('tlDatesRange', tlDatesRange);
-  var days = STATE.get('tlDays');
-  var weeks = STATE.get('pages');
-  var timeline = setting.timeline;
-  var showDays = timeline.showDays;
-  var selectWeek = 1;
-  timeline.days = days.filter(function(_, i) { return showDays * (selectWeek - 1) <= i && i < showDays * selectWeek; });
-  timeline.weeks = weeks;
+  getTimelineDays(encTimeRanges);
+  // console.log('tlDatesRange', tlDatesRange);
+  selectPage(1);
+}
+
+function timeline_surgeryData(res) {
+  console.log('res', res);
 }
