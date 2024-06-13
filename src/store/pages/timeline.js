@@ -1,4 +1,4 @@
-let state = setting['header'];
+let state = setting['timeline'];
 let mutations = {};
 for (let k in state) {
   mutations['header_' + k] = (state, payload) => {
@@ -6,8 +6,6 @@ for (let k in state) {
   }
 }
 
-// console.log('state', state);
-// console.log('mutations', mutations);
 export default {
   state,
   mutations

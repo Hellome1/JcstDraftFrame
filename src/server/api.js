@@ -7,7 +7,7 @@
 
 import request from '@/utils/request';
 //患者基本信息
-export function getPatInfo(query = {}) {
+function getPatInfo(query = {}) {
   request(
     handleReq({
       url: 'MES0001',
@@ -20,7 +20,7 @@ export function getPatInfo(query = {}) {
 }
 
 //患者过敏信息
-export function getAllergy(query = {}) {
+function getAllergy(query = {}) {
   request(
     handleReq({
       url: 'MES0011',
@@ -32,8 +32,22 @@ export function getAllergy(query = {}) {
   })
 }
 
+function getVisit(query = {}) {
+  request(
+    handleReq({
+      url: 'MES0002',
+      method: 'post',
+      data: query
+    })
+  ).then(res => {
+    timeline_timelineData(res);
+  })
+}
+
 export default function () {
   getPatInfo();
   getAllergy();
   header_userInfo();
+
+  getVisit();
 }

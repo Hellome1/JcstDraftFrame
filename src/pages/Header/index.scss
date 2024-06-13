@@ -1,12 +1,11 @@
-$header-bg-color: #3483df;
 .emr-header {
   .emr-header-content {
-    background-color: $header-bg-color;
+    background-color: #3483df;
     color: #fff;
     width: calc(100vw - 5px);
     margin: -5px 0 0 -20px;
     padding: 3px 0;
-    height: 50px;
+    height: 56px;
     position: fixed;
     z-index: 9999;
 
@@ -61,58 +60,5 @@ $header-bg-color: #3483df;
         margin-right: 10px;
       }
     }
-    .tools {
-      // float: right;
-      height: 100%;
-      color: white;
-      margin-right: 20px;
-      line-height: 50px;
-      i {
-        cursor: pointer;
-        font-size: 20px;
-        &:hover {
-          color: rgba(35, 82, 124, 0.3);
-        }
-      }
-      .tool-content {
-        display: inline-block;
-        border-right: 1px solid #fff;
-        .tool {
-          display: inline-block;
-          margin: 0 15px;
-          a {
-            color: white;
-          }
-        }
-      }
-      .toggle-view {
-        display: inline-block;
-        position: relative;
-        margin: 0 0 0 15px;
-        .toggle-content {
-          position: absolute;
-          top: 53px;
-          right: 0;
-          padding: 8px 0;
-          background-color: $header-bg-color;
-          z-index: 99;
-          border: 0.5px solid #fff;
-          line-height: 1;
-          .toggle-menu {
-            padding: 0 14px;
-            color: white;
-            text-decoration: none;
-            white-space: nowrap;
-            font-size: 14px;
-          }
-        }
-      }
-    }
   }
-  .null {
-    height: 55px;
-  }
-}
-.btn {
-  cursor: pointer;
 }

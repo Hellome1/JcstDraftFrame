@@ -5,6 +5,7 @@ import modal from './modal/index.js';
 import table from './table/index.js';
 
 import header from './pages/header.js';
+import timeline from './pages/timeline.js';
 
 Vue.use(Vuex);
 
@@ -21,6 +22,7 @@ export default new Vuex.Store({
   modules: {
     modal,
     table,
-    header
+    header,
+    timeline
   }
 });

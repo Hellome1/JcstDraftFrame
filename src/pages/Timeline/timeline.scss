@@ -1,0 +1,122 @@
+$tlListFontSize: 12px;
+$tlTopH: 45px;
+$tlBottomH: 24px;
+$borderColor: #dedede;
+#app {
+  .timeline {
+    margin-top: 60px;
+    border: 1px solid $borderColor;
+    .el-col {
+      text-align: center;
+      background: #f0f0f0;
+    }
+    .tl-list {
+      font-size: $tlListFontSize;
+      border: none;
+      .tl-day {
+        .tl-top.last {
+          border-right: 1px solid #dedede;
+        }
+        .tl-bottom.last {
+          border-right: 1px solid #dedede;
+        }
+      }
+    }
+  
+    .tl-top {
+      height: $tlTopH;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      border-bottom: 1px solid $borderColor;
+      .tl-fold {
+        padding: 4px 8px;
+      }
+    }
+    .tl-select .tl-top {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+    .tl-bottom {
+      font-size: $tlListFontSize;
+      height: $tlBottomH;
+      line-height: $tlBottomH;
+      background: #fff;
+
+      .select-week {
+        width: 97px;
+      }
+    }
+
+    .tl_O_type {
+      background-color: rgb(255, 246, 119);
+    }
+  
+    .tl-list .tl-day {
+      border-left: 1px solid $borderColor;
+    }
+  
+    .tl-list .tl-bottom {
+      display: flex;
+    }
+    .tl-list .tl-bottom span {
+      flex: 1;
+      display: block;
+      border-left: 1px solid $borderColor;
+      &:first-child {
+        border-left: none;
+      }
+    }
+    .select-week {
+      width: 90px;
+      margin: 0 5px;
+      & input {
+        border-radius: 0;
+        height: 20px;
+        line-height: 20px;
+      }
+      & i {
+        font-size: 12px;
+        line-height: 20px;
+      }
+    }
+  }
+  
+  .timeline .showSetting {
+    z-index: 1;
+    font-size: 14px;
+    color: rgb(161, 84, 97);
+    display: inline-block;
+    margin: auto;
+    .tl-icons-box {
+      position: absolute;
+      left: 5px;
+      top: 0;
+
+      .tl-icon {
+        margin-left: 5px;
+        background-color: #aaa;
+        color: white;
+        padding: 1px;
+        font-size: 10px;
+        border: 2px solid blue;
+        cursor: pointer;
+      }
+      .tl-icon.type1 {
+        background-color: purple;
+      }
+      .tl-icon.type2 {
+        background-color: red;
+      }
+    }
+
+    .settingMsg {
+      cursor: pointer;
+      &::after {
+        content: '\f013';
+        font: normal normal normal 14px/1 FontAwesome;
+      }
+    }
+  }
+}

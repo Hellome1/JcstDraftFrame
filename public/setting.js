@@ -40,9 +40,6 @@ var setting = {
     },
     patInfo: {},
     userInfo: {},
-    i: {
-      type: 'icon'
-    },
     allergyData: [],
     handleClick: {
       'setting.modal.dialogVisible': true,
@@ -70,6 +67,15 @@ var setting = {
         }
       ]
     }
+  },
+  timeline: {
+    weeks: 1,
+    days: [],
+    showDays: 7,
+    interval: 4,
+    leftW: 5,
+    rightW: 19,
+    topTimeSubTract: 0
   }
 }
 

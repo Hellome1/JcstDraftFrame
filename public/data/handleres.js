@@ -69,3 +69,49 @@ function header_allergyData(res) {
   Data['allergyData'] = res.data;
   VUEX_STORE.commit('header_allergyData', res.data);
 }
+
+function timeline_timelineData(res) {
+  console.log('timelineData:', res);
+  var encTimeRanges = res.data.map(function(data) {
+    var encStartDate = data.encStartDate || '',
+      encStartTime = data.encStartTime || '',
+      encEndDate = data.encEndDate || '',
+      encEndTime = data.encEndTime || '',
+      encTypeCode = data.encTypeCode || '';
+    if (encStartDate) {
+      if (!encEndDate) encEndDate = getToday();
+      if (!encEndTime) encEndTime = '23:59:59';
+      if (encTypeCode != 'I') {
+        encEndDate = encStartDate;
+        encEndTime = '23:59:59';
+      }
+      encStartDate = encStartDate.split(' ')[0];
+      encEndDate = encEndDate.split(' ')[0];
+      return { 
+        startDate: encStartDate + ' ' + encStartTime, 
+        endDate: encEndDate + ' ' + encEndTime ,
+        encStartDate,
+        encEndDate,
+        encTypeCode
+      };
+    } else {
+      ElementUI.Message({
+        showClose: true,
+        message: 'MES0002接口数据就诊开始日期(encStartDate)必须存在！！！',
+        type: 'error',
+        duration: 0
+      });
+      return null;
+    }
+  });
+  var firstNotNullTimeRange = encTimeRanges.filter(itm => itm)[0];
+  var tlDatesRange = getTlDatesRange(encTimeRanges);
+  console.log('tlDatesRange', tlDatesRange);
+  var days = STATE.get('tlDays');
+  var weeks = STATE.get('pages');
+  var timeline = setting.timeline;
+  var showDays = timeline.showDays;
+  var selectWeek = 1;
+  timeline.days = days.filter(function(_, i) { return showDays * (selectWeek - 1) <= i && i < showDays * selectWeek; });
+  timeline.weeks = weeks;
+}
