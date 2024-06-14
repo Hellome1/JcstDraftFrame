@@ -105,11 +105,37 @@ function timeline_timelineData(res) {
   });
   Data.encTimeRanges = encTimeRanges;
   var firstNotNullTimeRange = encTimeRanges.filter(itm => itm)[0];
-  getTimelineDays(encTimeRanges);
+  getTimelineDays();
   // console.log('tlDatesRange', tlDatesRange);
   selectPage(1);
 }
 
 function timeline_surgeryData(res) {
   console.log('res', res);
+
+  let uniqueRes = uniqueData(res.data);
+  let surgeryInfo = handleSurgeryData(uniqueRes);
+  setting.surgery.surgeryInfo = surgeryInfo;
+  getTimelineDays();
+
+  function uniqueData(data) {
+    let arr = [];
+    for (let i = 0; i < data.length; i++) {
+      // 判断是否重复，若没有重复则push
+      let pushFlag = true;
+      for (let j = 0; j < arr.length; j++) {
+        if (arr[j].diagnoseName == data[i].diagnoseName && arr[j].diagnoseDate == data[i].diagnoseDate) pushFlag = false;
+      }
+      if (pushFlag) arr.push(data[i]);
+    }
+
+    return arr;
+  }
+  function handleSurgeryData(data) {
+    let surgeryInfo = data.map((itm, index) => ({
+      surgeryDate: itm.operStartDate,
+      count: index + 1
+    }));
+    return surgeryInfo;
+  }
 }

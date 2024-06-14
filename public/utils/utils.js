@@ -67,8 +67,8 @@ var curOperationDate = '';
 function getShowText(date, encIndex) {
   // surgeryInfo [ { count: 1, surgeryDate: '2022-02-02' } ]
   var text = translate.$t('timeline.rtltop.beforeTreatmentDayText') + ' ' + (encIndex + 1) + ' ' + translate.$t('timeline.rtltop.afterTreatmentDayText');
-  var surgeryInfo = STATE.get('surgeryInfo') || [];
-  surgeryInfo.forEach(surgery => {
+  var surgeryInfo = setting.surgery.surgeryInfo;
+  surgeryInfo.forEach(function(surgery) {
     var surgeryDate = surgery.surgeryDate, count = surgery.count;
     var state = {};
     state.isInOperation = dayjs(date).diff(surgeryDate, 'day') === 0;
@@ -85,7 +85,9 @@ function getShowText(date, encIndex) {
 }
 
 var getTlDatesRangeExecCount = 0;
-function getTimelineDays(encTimeRanges) {
+function getTimelineDays() {
+  var encTimeRanges = Data.encTimeRanges;
+  if (!encTimeRanges) return;
   if (getTlDatesRangeExecCount >= 2) return;
   getTlDatesRangeExecCount++;
   var days = [];

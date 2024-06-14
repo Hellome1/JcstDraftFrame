@@ -77,6 +77,9 @@ var setting = {
     leftW: 5,
     rightW: 19,
     topTimeSubTract: 0
+  },
+  surgery: {
+    surgeryInfo: []
   }
 }
 
