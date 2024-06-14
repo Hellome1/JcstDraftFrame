@@ -1,5 +1,6 @@
 
 var splitChar = setting.default.splitChar;
+var timeline = setting.timeline;
 
 function setSettingStore(key) {
   var obj = {};

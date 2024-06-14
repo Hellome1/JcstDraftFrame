@@ -134,8 +134,18 @@ function getTimelineDays() {
 }
 
 function selectPage(num) {
-  var timeline = setting.timeline;
   var days = timeline.days;
   var showDays = timeline.showDays;
   timeline.curdays = days.filter(function(_, i) { return showDays * (num - 1) <= i && i < showDays * num; });
+}
+
+function selectPageFromDate(date) {
+  var encTimeRanges = Data.encTimeRanges;
+  var encStartDate = encTimeRanges[0].encStartDate;
+  var daysFromEncStartDate = dayjs(date).diff(encStartDate, 'day');
+  var showDays = timeline.showDays;
+  var page = Math.ceil(daysFromEncStartDate / showDays);
+  selectPage(page);
+
+  return page;
 }

@@ -3,28 +3,34 @@
     <el-row>
       <el-col class="tl-select" :span="leftW">
         <div class="tl-top">
+          <div class="showSetting">
+            <div v-if="iconShow" class="tl-icons-box">
+              <span class="tl-icon type1" ref="detailBoxPosi1" v-if="hasSurgeryInfo" @click="handleClickIconBox">{{$t('timeline.iconBox.type1.text')}}</span>
+            </div>
+          </div>
+
           <div>
             <el-button class="tl-fold" type="primary" size="mini">{{ $t('timeline.foldBtn.foldTxt') }}</el-button>
           </div>
         </div>
         <div class="tl-bottom">
-          <i class="el-icon-caret-left" :class="selectWeek > 1 ? 'clickable' : 'btn-disabled'" @click="() => { selectWeek > 1 ? selectWeek-- : null }"></i>
+          <i class="el-icon-caret-left" :class="selectPage > 1 ? 'clickable' : 'btn-disabled'" @click="() => { selectPage > 1 ? selectPage-- : null }"></i>
           <el-select
             class="select-week"
             size="mini"
             popper-class="select-week-dropdown"
-            v-model="selectWeek"
-            :placeholder="$t('timeline.selectWeek.placeholder')"
+            v-model="selectPage"
+            :placeholder="$t('timeline.selectPage.placeholder')"
           >
             <el-option
               v-for="week in pages"
-              :label="$t('timeline.selectWeek.beforePageText') + ' ' + week + ' ' + $t('timeline.selectWeek.afterPageText')"
+              :label="$t('timeline.selectPage.beforePageText') + ' ' + week + ' ' + $t('timeline.selectPage.afterPageText')"
               :value="week"
               :key="week"
-              >{{ $t('timeline.selectWeek.beforePageText') + ' ' + week + ' ' + $t('timeline.selectWeek.afterPageText') }}</el-option
+              >{{ $t('timeline.selectPage.beforePageText') + ' ' + week + ' ' + $t('timeline.selectPage.afterPageText') }}</el-option
             >
           </el-select>
-          <i class="el-icon-caret-right clickable" :class="selectWeek < pages ? 'clickable' : 'btn-disabled'" @click="() => { selectWeek < pages ? selectWeek++ : null }"></i>
+          <i class="el-icon-caret-right clickable" :class="selectPage < pages ? 'clickable' : 'btn-disabled'" @click="() => { selectPage < pages ? selectPage++ : null }"></i>
         </div>
       </el-col>
       <el-col class="tl-list" :span="rightW">
@@ -55,13 +61,13 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
   name: 'timeline',
   data() {
     return {
-      selectWeek: 1
+      selectPage: 1
     };
   },
   mounted() {
@@ -71,12 +77,12 @@ export default {
     
   },
   watch: {
-    selectWeek(v) {
-      this.handle_selectWeek_change();
+    selectPage(v) {
+      this.handle_selectPage_change();
     }
   },
   computed: {
-    ...mapState(['timeline']),
+    ...mapState(['timeline', 'surgery']),
     interval() {
       return this.timeline.interval;
     },
@@ -94,11 +100,21 @@ export default {
     },
     topTimeSubTract() {
       return this.timeline.topTimeSubTract;
+    },
+    iconShow() {
+      return this.timeline.iconShow;
+    },
+    hasSurgeryInfo() {
+      return this.surgery.surgeryInfo.length;
     }
   },
   methods: {
-    handle_selectWeek_change() {
-      selectPage(this.selectWeek);
+    handle_selectPage_change() {
+      selectPage(this.selectPage);
+    },
+    handleClickIconBox() {
+      let page = selectPageFromDate(setting.surgery.surgeryInfo[0].surgeryDate);
+      this.selectPage = page;
     }
   }
 };

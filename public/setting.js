@@ -69,6 +69,7 @@ var setting = {
     }
   },
   timeline: {
+    iconShow: true,
     pages: 1,
     days: [],
     curdays: [],

@@ -111,8 +111,6 @@ function timeline_timelineData(res) {
 }
 
 function timeline_surgeryData(res) {
-  console.log('res', res);
-
   let uniqueRes = uniqueData(res.data);
   let surgeryInfo = handleSurgeryData(uniqueRes);
   setting.surgery.surgeryInfo = surgeryInfo;

@@ -6,6 +6,7 @@ import table from './table/index.js';
 
 import header from './pages/header.js';
 import timeline from './pages/timeline.js';
+import surgery from './pages/surgery.js';
 
 Vue.use(Vuex);
 
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     modal,
     table,
     header,
-    timeline
+    timeline,
+    surgery
   }
 });
