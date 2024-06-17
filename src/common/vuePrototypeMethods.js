@@ -3,12 +3,13 @@ import store from '@/store';
 
 Vue.prototype.getDomAbsPosition = function getDomAbsPosition(node) {
   let x = node.offsetLeft, y = node.offsetTop;
+  let offsetHeight = node.offsetHeight || setting.default.tipboxDefaultOffset;
   while (node.offsetParent) {
     node = node.offsetParent;
     x += node.offsetLeft;
     y += node.offsetTop;
   }
-  return { x, y };
+  return { left: x, top: y + offsetHeight };
 };
 Vue.prototype.$t = translate.$t;
 Vue.prototype.weekContract = translate.weekContract;

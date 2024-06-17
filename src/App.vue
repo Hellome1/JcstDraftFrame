@@ -12,6 +12,7 @@
 
     <div class="common">
       <Modal />
+      <TipBoxShow />
     </div>
   </div>
 </template>
@@ -20,12 +21,14 @@
 import { mapState } from 'vuex';
 import Header from '@/pages/Header/header.vue';
 import Timeline from '@/pages/Timeline/timeline.vue';
+import TipBoxShow from '@/components/TipBox/index.vue';
 
 export default {
   name: 'index',
   components: {
     Header,
-    Timeline
+    Timeline,
+    TipBoxShow
   },
   props: {},
   data() {

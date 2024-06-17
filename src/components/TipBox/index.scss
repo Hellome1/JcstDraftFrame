@@ -1,0 +1,17 @@
+.glb-tip-box {
+  position: absolute;
+  z-index: 999;
+  background-color: white;
+  padding: 5px 8px;
+  border-radius: 3px;
+  border: 1px solid #eee;
+
+  .tip-mian {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+  }
+  .tip-fns {
+    font-size: 12px;
+  }
+}

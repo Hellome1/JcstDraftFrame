@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import modal from './modal/index.js';
 import table from './table/index.js';
+import tipbox from './tipbox/index.js';
 
 import header from './pages/header.js';
 import timeline from './pages/timeline.js';
@@ -23,6 +24,7 @@ export default new Vuex.Store({
   modules: {
     modal,
     table,
+    tipbox,
     header,
     timeline,
     surgery

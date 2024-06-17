@@ -1,7 +1,15 @@
 
 var setting = {
   default: {
-    splitChar: '^'
+    splitChar: '^',
+    tipboxDefaultOffset: 30
+  },
+  tipbox: {
+    pos: { left: 100, top: 150 },
+    text: '',
+    fns: [
+      '左键点击实现功能'
+    ]
   },
   modal: {
     dialogVisible: false,

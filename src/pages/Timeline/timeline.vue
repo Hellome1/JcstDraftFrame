@@ -5,7 +5,9 @@
         <div class="tl-top">
           <div class="showSetting">
             <div v-if="iconShow" class="tl-icons-box">
-              <span class="tl-icon type1" ref="detailBoxPosi1" v-if="hasSurgeryInfo" @click="handleClickIconBox">{{$t('timeline.iconBox.type1.text')}}</span>
+              <TipBox tipmsg="点击定位到手术页">
+                <span class="tl-icon type1" ref="detailBoxPosi1" v-if="hasSurgeryInfo" @click="handleClickIconBox">{{$t('timeline.iconBox.type1.text')}}</span>
+              </TipBox>
             </div>
           </div>
 

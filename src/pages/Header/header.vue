@@ -17,7 +17,9 @@
             </div>
           </div>
           <div class="patient-info">
-            <i v-if="allergyData.length" class="fa fa-street-view" style="color: #ff5d5d; cursor: pointer" @click="showModal"></i>
+            <TipBox tipmsg="点击查看过敏记录">
+              <i v-if="allergyData.length" class="fa fa-street-view" style="color: #ff5d5d; cursor: pointer" @click="showModal"></i>
+            </TipBox>
             <Txt :txtstyle="stl(patInfo.name)">{{ txt(patInfo.name) }}</Txt>
             <Txt :txtstyle="stl(patInfo.gender)">{{ txt(patInfo.gender) }}</Txt>
             <Txt :txtstyle="stl(patInfo.birth)">{{ txt(patInfo.birth) }}</Txt>
