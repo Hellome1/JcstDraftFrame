@@ -35,34 +35,6 @@ function getToday(splStr) {
   return str;
 }
 
-var STATE = (function() {
-  var storeObj = {
-    surgeryRes: null,
-    surgeryInfo: []
-  }
-
-  function get(key) {
-    if (!key) {
-      console.error('Key must not null when get attr!');
-      return false;
-    }
-    return storeObj[key];
-  }
-  function set(assignObj) {
-    if (!assignObj) {
-      console.error('AssignObj must not null when set attr!');
-      return false;
-    }
-    storeObj = Object.assign({}, storeObj, assignObj);
-    return true;
-  }
-  
-  return {
-    get: get,
-    set: set
-  };
-})()
-
 var curOperationDate = '';
 function getShowText(date, encIndex) {
   // surgeryInfo [ { count: 1, surgeryDate: '2022-02-02' } ]
