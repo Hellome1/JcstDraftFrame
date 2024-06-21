@@ -32,10 +32,22 @@ Vue.prototype.cp = (obj) => {
     return obj;
   }
 }
-
 Vue.prototype.txt = (payload) => {
   return payload && payload.text || '';
 }
 Vue.prototype.stl = (payload) => {
   return payload && payload.style || {};
+}
+
+Vue.prototype.layout = store.state.layout;
+
+export function inject(...keys) {
+  let obj = {};
+  keys.forEach(key => {
+    let tar = store.state[key];
+    for (let k in tar) {
+      obj[k] = () => tar[k];
+    }
+  })
+  return obj;
 }

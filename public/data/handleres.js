@@ -89,9 +89,9 @@ function timeline_timelineData(res) {
       return { 
         startDate: encStartDate + ' ' + encStartTime, 
         endDate: encEndDate + ' ' + encEndTime ,
-        encStartDate,
-        encEndDate,
-        encTypeCode
+        encStartDate: encStartDate,
+        encEndDate: encEndDate,
+        encTypeCode: encTypeCode
       };
     } else {
       ElementUI.Message({
@@ -111,17 +111,17 @@ function timeline_timelineData(res) {
 }
 
 function timeline_surgeryData(res) {
-  let uniqueRes = uniqueData(res.data);
-  let surgeryInfo = handleSurgeryData(uniqueRes);
+  var uniqueRes = uniqueData(res.data);
+  var surgeryInfo = handleSurgeryData(uniqueRes);
   setting.surgery.surgeryInfo = surgeryInfo;
   getTimelineDays();
 
   function uniqueData(data) {
-    let arr = [];
-    for (let i = 0; i < data.length; i++) {
+    var arr = [];
+    for (var i = 0; i < data.length; i++) {
       // 判断是否重复，若没有重复则push
-      let pushFlag = true;
-      for (let j = 0; j < arr.length; j++) {
+      var pushFlag = true;
+      for (var j = 0; j < arr.length; j++) {
         if (arr[j].diagnoseName == data[i].diagnoseName && arr[j].diagnoseDate == data[i].diagnoseDate) pushFlag = false;
       }
       if (pushFlag) arr.push(data[i]);
@@ -130,10 +130,51 @@ function timeline_surgeryData(res) {
     return arr;
   }
   function handleSurgeryData(data) {
-    let surgeryInfo = data.map((itm, index) => ({
+    var surgeryInfo = data.map((itm, index) => ({
       surgeryDate: itm.operStartDate,
       count: index + 1
     }));
     return surgeryInfo;
   }
+}
+
+function vitalsigns_data(res) {
+  console.log('res', res);
+  bus.$emit('vitalsigns', function() {
+    var items = this.itemsObj;
+    var data = res.data || [];
+    var checkList = [];
+    var nullData = true;
+    var smtz_data = {};
+    var moduleTimeInfo = {};
+    for (var k in data[0]) {
+      var module = items[k].module;
+      var data_trans = data[0][k].map(function(ele) {
+        var value = ele.vitalSignMeasValue, date = ele.vitalSignMeasDate, time = ele.vitalSignMeasTime;
+        return { date: date, time: time, value: value };
+      });
+      setVitalTimes(data_trans, module.name);
+      checkList.push(module.name);
+      nullData = false;
+      smtz_data[module.name] = { module, data: data_trans, display: true };
+    }
+    bus.$emit('vitalsigns', function() {
+      this.checkList = checkList;
+      this.smtz_data = smtz_data;
+      this.plotPoint();
+    });
+    console.log('moduleTimeInfo', moduleTimeInfo);
+
+    function setVitalTimes(data_trans, name) {
+      var dates = [];
+      data_trans.map(function(itm) {
+        return itm.date;
+      }).sort(function(a, b) { return dayjs(a).diff(b) })
+      .forEach(function(itm) {
+        if (!dates.includes(itm)) dates.push(itm);
+      });
+      moduleTimeInfo[name] = dates;
+    }
+  });
+
 }

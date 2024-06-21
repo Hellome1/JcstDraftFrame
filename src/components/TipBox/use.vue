@@ -9,7 +9,8 @@ export default {
   name: 'UseTipBox',
   props: {
     tipmsg: '',
-    fns: []
+    fns: [],
+    isFixed: false
   },
   methods: {
     handleMouseEnter() {
@@ -18,7 +19,10 @@ export default {
       const pos = this.getDomAbsPosition(tar || root);
       console.log('position', pos);
       let tipbox = setting.tipbox;
-      tipbox.pos = pos;
+      let { left, top } = pos;
+      let style = { left: left + 'px', top: top + 'px' };
+      if (this.isFixed) style.position = 'fixed';
+      tipbox.style = style;
       tipbox.text = this.tipmsg;
       tipbox.fns = this.fns;
     },

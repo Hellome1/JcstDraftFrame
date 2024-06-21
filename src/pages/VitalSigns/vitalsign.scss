@@ -1,0 +1,74 @@
+.vitalSigns.module-content {
+  .vital-check .el-checkbox-group {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .is-checked {
+      .el-checkbox-button__inner {
+        // background-color: #40a0ff;
+        background-color: rgba(64, 176, 256, 0.7);
+      }
+      &::after {
+        content: '\f00d';
+        display: block;
+        color: white;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.15);
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        top: -4px;
+        right: -6px;
+        cursor: pointer;
+        font: normal normal normal 12px/12px FontAwesome;
+        -webkit-font-smoothing: antialiased;
+      }
+    }
+  }
+  .vital-check-item {
+    margin-bottom: 5px;
+  }
+  .vital-left {
+    display: flex;
+  }
+  .vital-coords {
+    display: flex;
+    justify-content: space-around;
+    flex-grow: 1;
+    ul {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    li {
+      list-style: none;
+      line-height: 1;
+      font-weight: 600;
+    }
+  }
+  .vital-chart-outer {
+    text-align: left;
+    font-size: 0;
+    border-left: 1px solid #ccc;
+  }
+}
+
+.nullDataFloat {
+  position: absolute;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.el-checkbox-button--mini .el-checkbox-button__inner {
+  padding: 5px 10px;
+  border-radius: 0 !important;
+  color: inherit;
+  font-weight: 600;
+}
+
+.el-checkbox-button.is-checked .el-checkbox-button__inner {
+  color: inherit;
+}

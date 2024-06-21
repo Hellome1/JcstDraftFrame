@@ -54,8 +54,20 @@ function getAxiosSetting() {
   }
 }
 
+function handleObjData(param, obj) {
+  var from = param.from;
+  if (from === 'vitalsigns') {
+    console.log('param', param);
+    var extra = handleVitalsignsItems();
+    console.log('extra', extra);
+    param = Object.assign({}, param, extra);
+  }
+  obj.testData = JCSTTestData[from];
+  return param;
+}
+
 function handleReq(obj) {
-  obj.data = setBasicParams(obj.data);
+  obj.data = setBasicParams(handleObjData(obj.data, obj));
   return obj;
 
   function qs_stringify(obj) {
@@ -67,13 +79,12 @@ function handleReq(obj) {
     }
     return str.slice(1);
   }
-  function setBasicParams(param) {
+  function setBasicParams(query) {
     var basicParams = {};
-    var exclude = param.exc1 || {};
+    var exclude = query.exc1 || {};
     
-    var query = param.query || {};
-    var rows = param.rows || 1000;
-    var page = param.page || 1;
+    var rows = query.rows || 1000;
+    var page = query.page || 1;
     
     var hosCode = PARAM.hosCode || query.hosCode;
     var hdcId = PARAM.hdcId;
@@ -86,6 +97,7 @@ function handleReq(obj) {
     delete query.rows;
     delete query.page;
     delete query.hosCode;
+    delete query.from;
 
     var basic = { 
       businessFieldCode: hosCode, 
@@ -102,4 +114,34 @@ function handleReq(obj) {
 
     return qs_stringify(basicParams);
   }
+}
+
+function handleVitalsignsItems() {
+  var items = {};
+  var thisSettingItems = setting.vitalsigns.items;
+  var max_scale = 0;
+  thisSettingItems.forEach(function(item) {
+    var scale = [];
+    for (var i = 0; i <= (item.endValue - item.startValue) / item.interval; i++) {
+      scale.push(item.startValue + i * item.interval);
+    }
+    scale.reverse();
+    item.scale = scale;
+    max_scale = Math.max(max_scale, scale.length);
+
+    var desc = item.desc;
+    var code = [];
+    smtzfield.data.forEach(function(el) {
+      var vitalCode = el.vitalCode, vitalDesc = el.vitalDesc;
+      var descs = desc.map(function(d){ return translate.$t(d); });
+      if (descs.includes(vitalDesc)) code.push(vitalCode);
+    });
+    items[code[0]] = { module: item, code };
+  });
+  console.log('items', items);
+  bus.$emit('vitalsigns', function() {
+    this.itemsObj = items;
+    this.max_scale = max_scale;
+  });
+  return { vitalSignInfo: { vitalSignMeasItemCode: Object.keys(items) } };
 }

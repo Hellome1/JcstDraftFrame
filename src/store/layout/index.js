@@ -1,7 +1,7 @@
-let state = setting['timeline'];
+let state = setting['layout'];
 let mutations = {};
 for (let k in state) {
-  mutations['timeline_' + k] = (state, payload) => {
+  mutations['layout_' + k] = (state, payload) => {
     state[k] = payload;
   }
 }

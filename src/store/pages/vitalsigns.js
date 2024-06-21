@@ -1,7 +1,7 @@
-let state = setting['timeline'];
+let state = setting['vitalsigns'];
 let mutations = {};
 for (let k in state) {
-  mutations['timeline_' + k] = (state, payload) => {
+  mutations['vitalsigns_' + k] = (state, payload) => {
     state[k] = payload;
   }
 }

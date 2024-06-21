@@ -30,3 +30,15 @@
 ul {
   list-style: none;
 }
+
+.el-collapse-item {
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+}
+.el-collapse-item__header {
+  background-color: #f9f9f9;
+}
+.el-collapse-item__content {
+  padding-bottom: 0;
+  text-align: center;
+}

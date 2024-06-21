@@ -106,15 +106,16 @@ function getTimelineDays() {
 }
 
 function selectPage(num) {
-  var days = timeline.days;
-  var showDays = timeline.showDays;
-  timeline.curdays = days.filter(function(_, i) { return showDays * (num - 1) <= i && i < showDays * num; });
+  bus.$emit('timeline', function() {
+    if (this.selectPage != num) this.selectPage = num;
+    else this.handleSelectPage(num);
+  })
 }
 
 function selectPageFromDate(date) {
   var encTimeRanges = Data.encTimeRanges;
   var encStartDate = encTimeRanges[0].encStartDate;
-  var daysFromEncStartDate = dayjs(date).diff(encStartDate, 'day');
+  var daysFromEncStartDate = dayjs(date).add(1, 'day').diff(encStartDate, 'day'); // 需要加一天，如果选择就诊第一天diff就会变成0天
   var showDays = timeline.showDays;
   var page = Math.ceil(daysFromEncStartDate / showDays);
   selectPage(page);

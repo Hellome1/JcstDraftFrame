@@ -2,10 +2,18 @@
 var setting = {
   default: {
     splitChar: '^',
-    tipboxDefaultOffset: 30
+    tipboxDefaultOffset: 30,
+  },
+  layout: {
+    leftW: 5,
+    rightW: 19,
+    leftBgColor: '#f9f9f9',
+    moduleHeadFontSize: '16px',
+    moduleHeadColor: '#000',
+    displayModules: ['vitalsigns']
   },
   tipbox: {
-    pos: { left: 100, top: 150 },
+    style: { left: '100px', top: '150px' },
     text: '',
     fns: [
       '左键点击实现功能'
@@ -83,12 +91,46 @@ var setting = {
     curdays: [],
     showDays: 7,
     interval: 4,
-    leftW: 5,
-    rightW: 19,
     topTimeSubTract: 0
   },
   surgery: {
     surgeryInfo: []
+  },
+  vitalsigns: {
+    title: '生命体征',
+    leftBgColor: '#f9f9f9',
+    rowHeight: 25,
+    rowLine: 'dashed',
+    columnLine: 'solid',
+    items: [
+      {
+        name: 'pulse',
+        desc: ['setting.modules.vitalSigns.items[0].desc[0]'],
+        color: '#FF6A50',
+        startRow: 1,
+        startValue: 0,
+        endValue: 200,
+        interval: 20
+      },
+      {
+        name: 'breathe',
+        desc: ['setting.modules.vitalSigns.items[1].desc[0]'],
+        color: '#FF9C00',
+        startRow: 2,
+        startValue: 15,
+        endValue: 60,
+        interval: 5
+      },
+      {
+        name: 'temperature',
+        desc: ['setting.modules.vitalSigns.items[2].desc[0]', 'setting.modules.vitalSigns.items[2].desc[1]'],
+        color: '#2AB66A',
+        startRow: 1,
+        startValue: 34,
+        endValue: 42,
+        interval: 1
+      }
+    ]
   }
 }
 

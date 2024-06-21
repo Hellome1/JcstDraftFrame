@@ -5,7 +5,7 @@
  * @LastEditTime: 2021-11-24 17:16
  */
 
-import request from '@/utils/request';
+import request from './utils';
 //患者基本信息
 function getPatInfo(query = {}) {
   request(
@@ -56,11 +56,25 @@ function getSurgery(query = {}) {
   })
 }
 
+export function getVitals(query = {}) {
+  request(
+    handleReq({
+      url: 'MES0014',
+      method: 'post',
+      data: query
+    })
+  ).then(res => {
+    vitalsigns_data(res);
+  }).catch(e => {
+    throw e;
+  })
+}
+
 export default function () {
   getPatInfo();
   getAllergy();
   header_userInfo();
 
-  getVisit();
+  getVisit({ from: 'timeline' });
   getSurgery();
 }

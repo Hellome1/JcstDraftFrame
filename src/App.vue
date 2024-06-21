@@ -7,6 +7,7 @@
       </el-header>
 
       <el-main class="main">
+        <Modules />
       </el-main>
     </el-container>
 
@@ -22,13 +23,15 @@ import { mapState } from 'vuex';
 import Header from '@/pages/Header/header.vue';
 import Timeline from '@/pages/Timeline/timeline.vue';
 import TipBoxShow from '@/components/TipBox/index.vue';
+import Modules from '@/pages/Modules/index.vue';
 
 export default {
   name: 'index',
   components: {
     Header,
     Timeline,
-    TipBoxShow
+    TipBoxShow,
+    Modules
   },
   props: {},
   data() {

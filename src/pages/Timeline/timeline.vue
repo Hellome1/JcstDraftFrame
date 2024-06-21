@@ -5,7 +5,7 @@
         <div class="tl-top">
           <div class="showSetting">
             <div v-if="iconShow" class="tl-icons-box">
-              <TipBox tipmsg="点击定位到手术页">
+              <TipBox tipmsg="点击定位到手术页" :isFixed="true">
                 <span class="tl-icon type1" ref="detailBoxPosi1" v-if="hasSurgeryInfo" @click="handleClickIconBox">{{$t('timeline.iconBox.type1.text')}}</span>
               </TipBox>
             </div>
@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { inject } from '@/common/vuePrototypeMethods.js';
 
 export default {
   name: 'timeline',
@@ -76,47 +76,30 @@ export default {
     
   },
   created() {
-    
+    this.busOn();
   },
   watch: {
-    selectPage(v) {
-      this.handle_selectPage_change();
+    selectPage() {
+      this.handleSelectPage(this.selectPage)
     }
   },
   computed: {
-    ...mapState(['timeline', 'surgery']),
-    interval() {
-      return this.timeline.interval;
-    },
-    leftW() {
-      return this.timeline.leftW;
-    },
-    rightW() {
-      return this.timeline.rightW;
-    },
-    pages() {
-      return this.timeline.pages;
-    },
-    curdays() {
-      return this.timeline.curdays;
-    },
-    topTimeSubTract() {
-      return this.timeline.topTimeSubTract;
-    },
-    iconShow() {
-      return this.timeline.iconShow;
-    },
+    ...inject('layout', 'timeline', 'surgery'),
     hasSurgeryInfo() {
-      return this.surgery.surgeryInfo.length;
+      return this.surgeryInfo.length;
     }
   },
   methods: {
-    handle_selectPage_change() {
-      selectPage(this.selectPage);
+    busOn() {
+      bus.$on('timeline', cb => cb && cb.call(this));
+    },
+    handleSelectPage(num) {
+      var days = timeline.days;
+      var showDays = timeline.showDays;
+      timeline.curdays = days.filter(function(_, i) { return showDays * (num - 1) <= i && i < showDays * num; });
     },
     handleClickIconBox() {
-      let page = selectPageFromDate(setting.surgery.surgeryInfo[0].surgeryDate);
-      this.selectPage = page;
+      selectPageFromDate(setting.surgery.surgeryInfo[0].surgeryDate);
     }
   }
 };

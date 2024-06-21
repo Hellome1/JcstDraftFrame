@@ -17,7 +17,7 @@
             </div>
           </div>
           <div class="patient-info">
-            <TipBox tipmsg="点击查看过敏记录">
+            <TipBox tipmsg="点击查看过敏记录" :isFixed="true">
               <i v-if="allergyData.length" class="fa fa-street-view" style="color: #ff5d5d; cursor: pointer" @click="showModal"></i>
             </TipBox>
             <Txt :txtstyle="stl(patInfo.name)">{{ txt(patInfo.name) }}</Txt>
@@ -44,27 +44,12 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { inject } from '@/common/vuePrototypeMethods.js';
 
 export default {
   name: 'jcstheader',
   computed: {
-    ...mapState(['header']),
-    product() {
-      return this.header.product;
-    },
-    hosName() {
-      return this.header.hosName;
-    },
-    patInfo() {
-      return this.header.patInfo;
-    },
-    userInfo() {
-      return this.header.userInfo;
-    },
-    allergyData() {
-      return this.header.allergyData;
-    }
+    ...inject('header'),
   },
   created() {
     
