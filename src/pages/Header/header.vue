@@ -1,6 +1,6 @@
 <template>
   <div class="emr-header">
-    <div class="emr-header-content clear">
+    <div class="emr-header-content clear" :style="isEmbeded ? { position: 'absolute', width: '100%' } : null">
       <div class="header-layout-flex">
         <div class="header-l-f-left">
           <div class="hospital">

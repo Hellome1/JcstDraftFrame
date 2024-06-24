@@ -1,29 +1,37 @@
 <template>
   <div id="app">
-    <el-container :style="isEmbeded ? { position: 'relative' } : ''">
-      <el-header class="header clear" :style="isEmbeded ? { position: 'absolute', top: 0, left: 0 } : ''">
-        <Header v-if="isHeaderShow"></Header>
-        <Timeline />
-      </el-header>
+    <el-row>
+      <el-col :span="showLiveSetting ? 16 : 24">
+        <el-container :style="isEmbeded ? { position: 'relative' } : ''">
+          <el-header class="header clear" :style="isEmbeded ? { position: 'absolute', top: 0, left: 0 } : ''">
+            <Header v-if="isShow"></Header>
+            <Timeline />
+          </el-header>
 
-      <el-main class="main">
-        <Modules />
-      </el-main>
-    </el-container>
+          <el-main class="main">
+            <Modules />
+          </el-main>
+        </el-container>
 
-    <div class="common">
-      <Modal />
-      <TipBoxShow />
-    </div>
+        <div class="common">
+          <Modal />
+          <TipBoxShow />
+        </div>
+      </el-col>
+      <el-col v-if="showLiveSetting" :span="showLiveSetting ? 8 : 0">
+        <LayoutRight />
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { inject } from '@/common/vuePrototypeMethods.js';
 import Header from '@/pages/Header/header.vue';
 import Timeline from '@/pages/Timeline/timeline.vue';
 import TipBoxShow from '@/components/TipBox/index.vue';
 import Modules from '@/pages/Modules/index.vue';
+import LayoutRight from '@/pages/LayoutRight/index.vue';
 
 export default {
   name: 'index',
@@ -31,7 +39,8 @@ export default {
     Header,
     Timeline,
     TipBoxShow,
-    Modules
+    Modules,
+    LayoutRight
   },
   props: {},
   data() {
@@ -49,13 +58,7 @@ export default {
     
   },
   computed: {
-    ...mapState(['header']),
-    isHeaderShow() {
-      return this.header.isShow
-    },
-    isEmbeded() {
-      return this.header.isEmbeded
-    }
+    ...inject('layout', 'header')
   },
   methods: {
     

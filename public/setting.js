@@ -5,6 +5,7 @@ var setting = {
     tipboxDefaultOffset: 30,
   },
   layout: {
+    showLiveSetting: false,
     leftW: 5,
     rightW: 19,
     leftBgColor: '#f9f9f9',
@@ -43,7 +44,7 @@ var setting = {
   },
   header: {
     isShow: true,
-    isEmbeded: false,
+    isEmbeded: true,
     product: {
       type: 'text',
       text: 'iMedical PatView',
@@ -98,7 +99,6 @@ var setting = {
   },
   vitalsigns: {
     title: '生命体征',
-    leftBgColor: '#f9f9f9',
     rowHeight: 25,
     rowLine: 'dashed',
     columnLine: 'solid',

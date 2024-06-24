@@ -67,6 +67,12 @@ export default {
         smtz_data[name].display = this.checkList.includes(name);
       }
       this.reDraw();
+    },
+    showLiveSetting() {
+      this.setCanvasW();
+      this.$nextTick(() => {
+        this.reDraw();
+      })
     }
   },
   computed: {
@@ -77,7 +83,8 @@ export default {
     getVitals({ from: 'vitalsigns' });
   },
   updated() {
-    this.initChart();
+    this.setCanvasW();
+    this.reDraw();
   },
   mounted() {
     this.initChart();

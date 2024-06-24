@@ -1,5 +1,5 @@
 <template>
-  <el-collapse v-model="activeNames" @change="handleChange">
+  <el-collapse v-model="activeNames">
     <!-- <CollapseItem name="1" titleText="生命体征">
       <VitalSigns class="vitalSigns"/>
     </CollapseItem> -->
@@ -26,7 +26,6 @@ export default {
     }
   },
   created() {
-    console.log('modules', this.modules);
     this.activeNames = this.modules.map(m => m.name);
   },
   computed: {
@@ -36,9 +35,7 @@ export default {
     }
   },
   methods: {
-    handleChange(val) {
-      console.log(val);
-    }
+    
   }
 }
 </script>

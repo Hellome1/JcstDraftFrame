@@ -2,6 +2,7 @@
   <el-collapse-item class="module-item" :name="name">
     <template slot="title">
       <h4 class="module-title" :style="{ fontSize: moduleHeadFontSize, color: moduleHeadColor }">{{titleText}}</h4>
+      <div class="func-area">1</div>
     </template>
     <slot></slot>
   </el-collapse-item>
@@ -24,8 +25,7 @@ export default {
   computed: {
     ...inject('layout')
   },
-  methods: {
-  }
+  methods: {}
 }
 </script>
 
