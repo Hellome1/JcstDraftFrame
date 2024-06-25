@@ -1,5 +1,6 @@
 
 var splitChar = setting.default.splitChar;
+var layout = setting.layout;
 var timeline = setting.timeline;
 
 var smtzfield;

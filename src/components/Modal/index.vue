@@ -6,7 +6,7 @@ export default {
     return {};
   },
   created() {
-    console.log(1);
+    
   },
   mounted() {},
   computed: {

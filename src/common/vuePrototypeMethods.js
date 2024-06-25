@@ -39,8 +39,6 @@ Vue.prototype.stl = (payload) => {
   return payload && payload.style || {};
 }
 
-Vue.prototype.layout = store.state.layout;
-
 export function inject(...keys) {
   let obj = {};
   keys.forEach(key => {

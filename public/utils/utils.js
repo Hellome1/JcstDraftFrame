@@ -63,7 +63,7 @@ function getTimelineDays() {
   if (getTlDatesRangeExecCount >= 2) return;
   getTlDatesRangeExecCount++;
   var days = [];
-  var showDays = setting.timeline.showDays;
+  var showDays = timeline.showDays;
   encTimeRanges.forEach(function(tr) {
     var encStartDate = tr.encStartDate, encEndDate = tr.encEndDate, encTypeCode = tr.encTypeCode;
     if (encTypeCode != 'I') {
@@ -91,7 +91,7 @@ function getTimelineDays() {
     }
   });
   var pages = Math.ceil(days.length / showDays);
-  setting.timeline.pages = pages;
+  timeline.pages = pages;
 
   var evenDaysNum = pages * showDays;
   for (var i = 0; i < evenDaysNum; i++) {
@@ -102,7 +102,7 @@ function getTimelineDays() {
     }
     if (i % pages === 0) days[i].className += ' last';
   }
-  setting.timeline.days = days;
+  timeline.days = days;
 }
 
 function selectPage(num) {
