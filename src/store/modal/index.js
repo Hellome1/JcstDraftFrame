@@ -1,4 +1,4 @@
-let state = setting['modal'];
+let state = window['modal'];
 let mutations = {};
 state.main = function (h) {
   return h(

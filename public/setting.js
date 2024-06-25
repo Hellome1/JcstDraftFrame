@@ -1,4 +1,32 @@
-
+var tipbox = {
+  style: { left: '100px', top: '150px' },
+  text: '',
+  fns: [
+    '左键点击实现功能'
+  ]
+};
+var modal = {
+  dialogVisible: false,
+  title: '提示',
+  width: '80%',
+  path: 'components/Table/index.vue',
+};
+var table = {
+  tableData: [
+    {
+      date: '2016-05-02',
+      name: '王小虎',
+      address: '上海市普陀区金沙江路 1518 弄'
+    }
+  ],
+  column: [
+    {
+      prop: "date",
+      label: "日期",
+      width: "180",
+    }
+  ]
+};
 var setting = {
   default: {
     splitChar: '^',
@@ -13,19 +41,12 @@ var setting = {
     moduleHeadColor: '#000',
     displayModules: ['vitalsigns']
   },
-  tipbox: {
-    style: { left: '100px', top: '150px' },
-    text: '',
-    fns: [
-      '左键点击实现功能'
-    ]
-  },
-  modal: {
-    dialogVisible: false,
-    title: '提示',
-    width: '80%',
-    path: 'components/Table/index.vue',
-  },
+  // modal: {
+  //   dialogVisible: false,
+  //   title: '提示',
+  //   width: '80%',
+  //   path: 'components/Table/index.vue',
+  // },
   table: {
     tableData: [
       {
@@ -59,8 +80,8 @@ var setting = {
     userInfo: {},
     allergyData: [],
     handleClick: {
-      'setting.modal.dialogVisible': true,
-      'setting.modal.title': '过敏信息',
+      'modal.dialogVisible': true,
+      'modal.title': '过敏信息',
       'setting.table.tableData': 'Data.allergyData',
       'setting.table.column': [
         {

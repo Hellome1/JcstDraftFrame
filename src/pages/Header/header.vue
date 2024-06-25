@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     showModal() {
-      handleEvent(this.header.handleClick)
+      handleEvent(this.handleClick)
     }
   }
 };

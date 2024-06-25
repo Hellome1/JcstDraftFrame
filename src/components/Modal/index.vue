@@ -5,7 +5,9 @@ export default {
   data() {
     return {};
   },
-  created() {},
+  created() {
+    console.log(1);
+  },
   mounted() {},
   computed: {
     ...mapState(["modal"]),

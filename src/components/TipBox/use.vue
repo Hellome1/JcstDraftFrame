@@ -18,7 +18,6 @@ export default {
       const tar = this.$slots.default[0] && this.$slots.default[0].elm;
       const pos = this.getDomAbsPosition(tar || root);
       console.log('position', pos);
-      let tipbox = setting.tipbox;
       let { left, top } = pos;
       let style = { left: left + 'px', top: top + 'px' };
       if (this.isFixed) style.position = 'fixed';
@@ -27,7 +26,7 @@ export default {
       tipbox.fns = this.fns;
     },
     handleMouseLeave() {
-      setting.tipbox.text = '';
+      tipbox.text = '';
     }
   }
 }
