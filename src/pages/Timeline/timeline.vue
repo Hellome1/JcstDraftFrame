@@ -94,12 +94,12 @@ export default {
       bus.$on('timeline', cb => cb && cb.call(this));
     },
     handleSelectPage(num) {
-      var days = timeline.days;
-      var showDays = timeline.showDays;
-      timeline.curdays = days.filter(function(_, i) { return showDays * (num - 1) <= i && i < showDays * num; });
+      var days = jcst_timeline.days;
+      var showDays = jcst_timeline.showDays;
+      jcst_timeline.curdays = days.filter(function(_, i) { return showDays * (num - 1) <= i && i < showDays * num; });
     },
     handleClickIconBox() {
-      selectPageFromDate(setting.surgery.surgeryInfo[0].surgeryDate);
+      selectPageFromDate(jcst_setting.surgery.surgeryInfo[0].surgeryDate);
     }
   }
 };

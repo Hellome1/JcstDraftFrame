@@ -1,63 +1,34 @@
-var tipbox = {
-  style: { left: '100px', top: '150px' },
-  text: '',
-  fns: [
-    '左键点击实现功能'
-  ]
+var jcst_setting_default = {
+  splitChar: '^',
+  tipboxDefaultOffset: 30,
 };
-var modal = {
-  dialogVisible: false,
-  title: '提示',
-  width: '80%',
-  path: 'components/Table/index.vue',
-};
-var table = {
-  tableData: [
-    {
-      date: '2016-05-02',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }
-  ],
-  column: [
-    {
-      prop: "date",
-      label: "日期",
-      width: "180",
-    }
-  ]
-};
-var setting = {
-  default: {
-    splitChar: '^',
-    tipboxDefaultOffset: 30,
-  },
+var jcst_setting = {
   layout: {
     showLiveSetting: false,
-    leftW: 5,
-    rightW: 19,
-    leftBgColor: '#f9f9f9',
-    moduleHeadFontSize: '16px',
-    moduleHeadColor: '#000',
-    displayModules: ['vitalsigns']
+    leftW: 5, // 数字
+    rightW: 19, // 数字
+    leftBgColor: '#f9f9f9', // 颜色
+    moduleHeadFontSize: '16px', // 字体大小
+    moduleHeadColor: '#000', // 颜色
+    displayModules: ['vitalsigns'] // 数组
   },
   header: {
-    isShow: true,
-    isEmbeded: true,
-    product: {
+    isShow: true, // 布尔值
+    isEmbeded: true, // 由使用场景决定
+    product: { // 文字
       type: 'text',
       text: 'iMedical PatView',
       style: {}
     },
-    hosName: {
+    hosName: { // 文字
       type: 'text',
       text: translate.$t('setting.header.hosName'),
       style: {}
     },
-    patInfo: {},
-    userInfo: {},
-    allergyData: [],
-    handleClick: {
+    patInfo: {}, // 文字
+    userInfo: {}, // 文字
+    allergyData: [], // 数据
+    handleClick: { // 事件
       'modal.dialogVisible': true,
       'modal.title': '过敏信息',
       'table.tableData': 'Data.allergyData',
@@ -93,9 +64,6 @@ var setting = {
     interval: 4,
     topTimeSubTract: 0
   },
-  surgery: {
-    surgeryInfo: []
-  },
   vitalsigns: {
     title: '生命体征',
     rowHeight: 25,
@@ -130,6 +98,9 @@ var setting = {
         interval: 1
       }
     ]
+  },
+  surgery: {
+    surgeryInfo: []
   }
 }
 
@@ -150,3 +121,14 @@ function handleEvent(obj) {
     curObj[lastKey] = val;
   }
 }
+
+var jcst_config = {
+  history: {
+    lastshow: ''
+  },
+  show: {
+    basic: true,
+    dataShow: false
+  },
+  dataShow: {}
+};

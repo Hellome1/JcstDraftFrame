@@ -16,3 +16,33 @@ var FIELD = {};
 var TextStyle = {};
 
 var Data = {};
+
+var tipbox = {
+  style: { left: '100px', top: '150px' },
+  text: '',
+  fns: [
+    '左键点击实现功能'
+  ]
+};
+var modal = {
+  dialogVisible: false,
+  title: '提示',
+  width: '80%',
+  path: 'components/Table/index.vue',
+};
+var table = {
+  tableData: [
+    {
+      date: '2016-05-02',
+      name: '王小虎',
+      address: '上海市普陀区金沙江路 1518 弄'
+    }
+  ],
+  column: [
+    {
+      prop: "date",
+      label: "日期",
+      width: "180",
+    }
+  ]
+};

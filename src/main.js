@@ -8,6 +8,8 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import '@/assets/font/font-awesome-4.7.0/css/font-awesome.min.css';
 
+import JsonViewer from 'vue-json-viewer';
+
 import App from './App.vue';
 import store from './store';
 
@@ -17,6 +19,7 @@ import '@/assets/font/font-awesome-4.7.0/css/font-awesome.min.css';
 Vue.config.productionTip = false;
 Vue.config.devtools = true;
 Vue.use(ElementUI);
+Vue.use(JsonViewer);
 
 window.bus = new Vue()
 VUEX_STORE.setStore(store);

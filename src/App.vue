@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-row>
-      <el-col :span="showLiveSetting ? 16 : 24">
+      <el-col :span="showLiveSetting ? 16 : 24" :style="isShow ? { position: 'relative' } : { position: 'relative', top: '-56px' }">
         <el-container :style="isEmbeded ? { position: 'relative' } : ''">
           <el-header class="header clear" :style="isEmbeded ? { position: 'absolute', top: 0, left: 0 } : ''">
             <Header v-if="isShow"></Header>

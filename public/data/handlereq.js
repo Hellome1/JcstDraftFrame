@@ -118,7 +118,7 @@ function handleReq(obj) {
 
 function handleVitalsignsItems() {
   var items = {};
-  var thisSettingItems = setting.vitalsigns.items;
+  var thisSettingItems = jcst_setting.vitalsigns.items;
   var max_scale = 0;
   thisSettingItems.forEach(function(item) {
     var scale = [];

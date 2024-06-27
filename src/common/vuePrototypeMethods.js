@@ -3,7 +3,7 @@ import store from '@/store';
 
 Vue.prototype.getDomAbsPosition = function getDomAbsPosition(node) {
   let x = node.offsetLeft, y = node.offsetTop;
-  let offsetHeight = node.offsetHeight || setting.default.tipboxDefaultOffset;
+  let offsetHeight = node.offsetHeight || jcst_setting_default.tipboxDefaultOffset;
   while (node.offsetParent) {
     node = node.offsetParent;
     x += node.offsetLeft;
@@ -37,6 +37,14 @@ Vue.prototype.txt = (payload) => {
 }
 Vue.prototype.stl = (payload) => {
   return payload && payload.style || {};
+}
+
+Vue.prototype.crouter = (key) => {
+  let show = store.state.layoutRight.show;
+  for (let k in show) {
+    show[k] = false;
+  }
+  show[key] = true;
 }
 
 export function inject(...keys) {

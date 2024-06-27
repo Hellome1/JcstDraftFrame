@@ -12,6 +12,8 @@
     .header-layout-flex {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      height: 52px;
 
       .header-l-f-right {
         display: flex;

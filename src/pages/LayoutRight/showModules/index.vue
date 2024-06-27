@@ -8,9 +8,16 @@
 
 <script>
 import { inject } from '@/common/vuePrototypeMethods.js';
-const dict = {
-  'vitalsigns': '生命体征'
-};
+const dict = {};
+let excludes = ['layout', 'header', 'timeline'];
+let displayModules = [];
+for (let k in jcst_setting) {
+  if (!excludes.includes(k)) {
+    displayModules.push(k);
+    let title = jcst_setting[k].title || k;
+    dict[k] = title;
+  }
+}
 const getList = (arr) => {
   return arr.map(key => dict[key]);
 }
@@ -28,7 +35,7 @@ export default {
   data() {
     return {
       checkList: [],
-      list: getList(['vitalsigns'])
+      list: getList(displayModules)
     }
   },
   created() {
@@ -38,7 +45,7 @@ export default {
   },
   watch: {
     checkList() {
-      setting.layout.displayModules = getKey(this.checkList);
+      jcst_layout.displayModules = getKey(this.checkList);
     }
   },
   computed: {

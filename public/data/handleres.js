@@ -113,7 +113,7 @@ function timeline_timelineData(res) {
 function timeline_surgeryData(res) {
   var uniqueRes = uniqueData(res.data);
   var surgeryInfo = handleSurgeryData(uniqueRes);
-  setting.surgery.surgeryInfo = surgeryInfo;
+  jcst_setting.surgery.surgeryInfo = surgeryInfo;
   getTimelineDays();
 
   function uniqueData(data) {

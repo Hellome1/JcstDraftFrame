@@ -1,7 +1,7 @@
 
-var splitChar = setting.default.splitChar;
-var layout = setting.layout;
-var timeline = setting.timeline;
+var splitChar = jcst_setting_default.splitChar;
+var jcst_layout = jcst_setting.layout;
+var jcst_timeline = jcst_setting.timeline;
 
 var smtzfield;
 (function () {

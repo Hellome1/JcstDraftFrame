@@ -45,7 +45,7 @@ var translate = {
   },
   init: function () {
     var contract = translate.req({
-      url: 'undefined' != typeof ms_address ? '/EMR/emrviewdoctor/scripts/event/PVIN/language/' + translate.lang + '.json' : './language/' + translate.lang + '.json'
+      url: isProduction ? '/EMR/emrviewdoctor/scripts/event/PVIN/language/' + translate.lang + '.json' : './language/' + translate.lang + '.json'
     });
 
     translate.contract = contract;
