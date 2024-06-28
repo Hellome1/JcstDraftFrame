@@ -8,12 +8,12 @@
       <div class="live-s-item">
         <h3>{{dict.layout.title}}</h3>
         <div class="live-s-main">
-          <label>{{dict.layout.leftW}}</label><el-input type="number" v-model="layout_leftW"></el-input>
-          <label>{{dict.layout.rightW}}</label><el-input type="number" v-model="layout_rightW"></el-input>
-          <label>{{dict.layout.leftBgColor}}</label><el-color-picker v-model="layout_leftBgColor"></el-color-picker>
+          <label>{{dict.layout.leftW}}</label><el-input type="number" v-model="layout_leftW" v-highlight="'leftW,leftW-leftBgColor'"></el-input>
+          <label>{{dict.layout.rightW}}</label><el-input type="number" v-model="layout_rightW" v-highlight="'rightW'"></el-input>
+          <label>{{dict.layout.leftBgColor}}</label><el-color-picker v-model="layout_leftBgColor" v-highlight="'leftW-leftBgColor'"></el-color-picker>
           <br>
-          <label>{{dict.layout.moduleHeadFontSize}}</label><el-input type="text" v-model="layout_moduleHeadFontSize"></el-input>
-          <label>{{dict.layout.moduleHeadColor}}</label><el-color-picker v-model="layout_moduleHeadColor"></el-color-picker>
+          <label>{{dict.layout.moduleHeadFontSize}}</label><el-input type="text" v-model="layout_moduleHeadFontSize" v-highlight="'moduleHeadFontSize-moduleHeadColor'"></el-input>
+          <label>{{dict.layout.moduleHeadColor}}</label><el-color-picker v-model="layout_moduleHeadColor" v-highlight="'moduleHeadFontSize-moduleHeadColor'"></el-color-picker>
           <br>
           <label>{{dict.layout.displayModules}}</label><ShowModules/>
         </div>
@@ -53,9 +53,7 @@
         </div>
       </div>
     </div>
-    <div class="other1" v-show="show.dataselect">
-      数据选择
-    </div>
+    
     <DataShow v-show="show.dataShow"/>
   </div>
 </template>

@@ -2,7 +2,7 @@
   <div class="module-content vitalSigns" style="position: relative;" v-loading="isLoading">
     <div>
       <el-row>
-        <el-col class="layout-left vital-left" :span="leftW" :style="{ backgroundColor: leftBgColor }">
+        <el-col class="layout-left vital-left" :span="leftW" shape="leftW-leftBgColor" :style="{ backgroundColor: leftBgColor }">
           <div class="vital-check">
             <el-checkbox-group v-model="checkList" size="mini">
               <p v-for="(el, i) in items" :key="i" class="vital-check-item">
@@ -16,7 +16,7 @@
             </ul>
           </div>
         </el-col>
-        <el-col :span="rightW" class="layout-right vital-chart-outer">
+        <el-col :span="rightW" shape="rightW" class="layout-right vital-chart-outer">
           <!-- <div v-if="nullData" class="nullDataFloat">
             <el-empty :description="$t('vitalSigns.noDataDesc')"></el-empty>
           </div> -->
@@ -76,7 +76,7 @@ export default {
     }
   },
   computed: {
-    ...inject('layout', 'vitalsigns', 'timeline')
+    ...inject('layout', 'vitalsigns', 'timeline', 'layoutRight')
   },
   created() {
     this.busOn();

@@ -1,7 +1,7 @@
 <template>
   <el-collapse-item class="module-item" :name="name">
     <template slot="title">
-      <h4 class="module-title" :style="{ fontSize: moduleHeadFontSize, color: moduleHeadColor }">{{titleText}}</h4>
+      <h4 class="module-title" shape="moduleHeadFontSize-moduleHeadColor" :style="{ fontSize: moduleHeadFontSize, color: moduleHeadColor }">{{titleText}}</h4>
       <div class="func-area">1</div>
     </template>
     <slot></slot>

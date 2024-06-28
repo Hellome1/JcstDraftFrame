@@ -1,7 +1,7 @@
 <template>
   <div class="timeline">
     <el-row>
-      <el-col class="tl-select" :span="leftW">
+      <el-col class="tl-select" :span="leftW" shape="leftW">
         <div class="tl-top">
           <div class="showSetting">
             <div v-if="iconShow" class="tl-icons-box">
@@ -35,7 +35,7 @@
           <i class="el-icon-caret-right clickable" :class="selectPage < pages ? 'clickable' : 'btn-disabled'" @click="() => { selectPage < pages ? selectPage++ : null }"></i>
         </div>
       </el-col>
-      <el-col class="tl-list" :span="rightW">
+      <el-col class="tl-list" :span="rightW" shape="rightW">
         <el-row>
           <el-col
             :sm="3"

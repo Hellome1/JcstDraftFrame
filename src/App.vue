@@ -16,6 +16,7 @@
         <div class="common">
           <Modal />
           <TipBoxShow />
+          <HighLightBox />
         </div>
       </el-col>
       <el-col v-if="showLiveSetting" :span="showLiveSetting ? 8 : 0">
@@ -33,6 +34,7 @@ import TipBoxShow from '@/components/TipBox/index.vue';
 import Modules from '@/pages/Modules/index.vue';
 import LayoutRight from '@/pages/LayoutRight/index.vue';
 import Table from '@/components/Table/index.vue';
+import HighLightBox from '@/components/highLightBox/index.vue';
 
 export default {
   name: 'index',
@@ -42,7 +44,8 @@ export default {
     TipBoxShow,
     Modules,
     LayoutRight,
-    Table
+    Table,
+    HighLightBox
   },
   props: {},
   data() {

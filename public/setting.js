@@ -130,5 +130,6 @@ var jcst_config = {
     basic: true,
     dataShow: false
   },
-  dataShow: {}
+  dataShow: {},
+  shape: ''
 };
