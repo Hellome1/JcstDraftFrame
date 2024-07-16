@@ -138,6 +138,9 @@ function timeline_surgeryData(res) {
   }
 }
 
+var moduleTimeInfo = {
+  'vitalsigns': {}
+};
 function vitalsigns_data(res) {
   console.log('res', res);
   bus.$emit('vitalsigns', function() {
@@ -146,7 +149,6 @@ function vitalsigns_data(res) {
     var checkList = [];
     var nullData = true;
     var smtz_data = {};
-    var moduleTimeInfo = {};
     for (var k in data[0]) {
       var module = items[k].module;
       var data_trans = data[0][k].map(function(ele) {
@@ -171,7 +173,7 @@ function vitalsigns_data(res) {
       .forEach(function(itm) {
         if (!dates.includes(itm)) dates.push(itm);
       });
-      moduleTimeInfo[name] = dates;
+      moduleTimeInfo['vitalsigns'][name] = dates;
     }
   });
 
