@@ -49,18 +49,18 @@ export default {
             {},
             ''
           ),
-          h(
-            'span',
-            {
-              slot: 'footer',
-              class: {
-                'dialog-footer': true
-              }
-            },
-            [
-              h(require('@/components/Modal/footer.vue').default, {})
-            ],
-          ),
+          // h(
+          //   'span',
+          //   {
+          //     slot: 'footer',
+          //     class: {
+          //       'dialog-footer': true
+          //     }
+          //   },
+          //   [
+          //     h(require('@/components/Modal/footer.vue').default, {})
+          //   ],
+          // ),
         ]
       ),
     ]);

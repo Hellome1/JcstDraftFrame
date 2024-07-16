@@ -22,7 +22,23 @@ var jcst_setting_lang_dict = {
     userInfo_dept: '科室',
     userInfo_group: '安全组',
     userInfo_name: '用户名称',
-    allergyData: '过敏数据'
+    allergyTitle: '过敏信息',
+    allergyIcon: '过敏图标',
+    allergyData: '展示过敏图标当',
+    handleClick: '点击事件'
+  },
+  timeline: {
+    title: '时间轴',
+    iconShow: '展示图标',
+    showDays: '展示天数',
+    interval: '时间间隔',
+    topTimeSubTract: '减少天数'
+  },
+  vitalsigns: {
+    title: '生命体征',
+    vitalsignsTitle: '标题',
+    rowHeight: '行高',
+    vitalsignsItems: '生命体征配置项'
   }
 };
 

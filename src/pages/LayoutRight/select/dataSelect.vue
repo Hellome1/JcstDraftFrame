@@ -1,6 +1,6 @@
 <template>
   <span>
-    <el-select style="margin-left: 15px;" v-model="value" placeholder="请选择">
+    <el-select size="mini" style="margin-left: 15px;" v-model="value" placeholder="请选择">
       <el-option
         v-for="item in options"
         :key="item.value"
@@ -8,6 +8,7 @@
         :value="item.value">
       </el-option>
     </el-select>
+    存在
     <a style="margin-left: 15px; color: blue; cursor: pointer;" @click="viewData">查看数据</a>
   </span>
 </template>

@@ -5,13 +5,13 @@
         <el-col class="layout-left vital-left" :span="leftW" shape="leftW-leftBgColor" :style="{ backgroundColor: leftBgColor }">
           <div class="vital-check">
             <el-checkbox-group v-model="checkList" size="mini">
-              <p v-for="(el, i) in items" :key="i" class="vital-check-item">
+              <p v-for="(el, i) in vitalsignsItems" :key="i" class="vital-check-item">
                 <el-checkbox-button :label="el.name" :style="{ color: el.color }">{{ $t(el.desc[0]) }}</el-checkbox-button>
               </p>
             </el-checkbox-group>
           </div>
           <div class="vital-coords">
-            <ul v-for="(item, i) in items" :key="i" :style="{ color: item.color }">
+            <ul v-for="(item, i) in vitalsignsItems" :key="i" :style="{ color: item.color }">
               <li v-for="(el, j) in item.scale" :key="j" :style="{ height: rowHeight + 'px', lineHeight: rowHeight + 'px' }">{{ el }}</li>
             </ul>
           </div>
@@ -20,7 +20,7 @@
           <!-- <div v-if="nullData" class="nullDataFloat">
             <el-empty :description="$t('vitalSigns.noDataDesc')"></el-empty>
           </div> -->
-          <canvas :height="canvas_h" :width="canvas_w" class="vital-chart"></canvas>
+          <canvas :height="canvas_h" :width="canvas_w" shape="rowHeight" class="vital-chart"></canvas>
         </el-col>
       </el-row>
       <div class="panelArea">
@@ -72,6 +72,14 @@ export default {
       this.setCanvasW();
       this.$nextTick(() => {
         this.reDraw();
+      })
+    },
+    rowHeight() {
+      this.$nextTick(() => {
+        this.setCanvasH();
+        this.$nextTick(() => {
+          this.reDraw();
+        })
       })
     }
   },

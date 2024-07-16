@@ -158,11 +158,9 @@ function vitalsigns_data(res) {
       nullData = false;
       smtz_data[module.name] = { module, data: data_trans, display: true };
     }
-    bus.$emit('vitalsigns', function() {
-      this.checkList = checkList;
-      this.smtz_data = smtz_data;
-      this.plotPoint();
-    });
+    this.checkList = checkList;
+    this.smtz_data = smtz_data;
+    this.plotPoint();
     console.log('moduleTimeInfo', moduleTimeInfo);
 
     function setVitalTimes(data_trans, name) {

@@ -27,6 +27,7 @@ var jcst_setting = {
     },
     patInfo: {}, // 文字
     userInfo: {}, // 文字
+    allergyIcon: 'street-view',
     allergyData: [], // 数据
     handleClick: { // 事件
       'modal.dialogVisible': true,
@@ -57,24 +58,23 @@ var jcst_setting = {
   },
   timeline: {
     iconShow: true,
-    pages: 1,
-    days: [],
-    curdays: [],
+    pages: 1, // 内部决定
+    days: [], // 数据决定
+    curdays: [], // 内部决定
     showDays: 7,
     interval: 4,
     topTimeSubTract: 0
   },
   vitalsigns: {
-    title: '生命体征',
+    vitalsignsTitle: '生命体征',
     rowHeight: 25,
     rowLine: 'dashed',
     columnLine: 'solid',
-    items: [
+    vitalsignsItems: [ // 不开放配置
       {
         name: 'pulse',
         desc: ['setting.modules.vitalSigns.items[0].desc[0]'],
         color: '#FF6A50',
-        startRow: 1,
         startValue: 0,
         endValue: 200,
         interval: 20
@@ -83,7 +83,6 @@ var jcst_setting = {
         name: 'breathe',
         desc: ['setting.modules.vitalSigns.items[1].desc[0]'],
         color: '#FF9C00',
-        startRow: 2,
         startValue: 15,
         endValue: 60,
         interval: 5
@@ -92,7 +91,6 @@ var jcst_setting = {
         name: 'temperature',
         desc: ['setting.modules.vitalSigns.items[2].desc[0]', 'setting.modules.vitalSigns.items[2].desc[1]'],
         color: '#2AB66A',
-        startRow: 1,
         startValue: 34,
         endValue: 42,
         interval: 1
@@ -112,14 +110,28 @@ function handleEvent(obj) {
     if (val.indexOf && val.indexOf('Data.') === 0) {
       val = Data[val.split('.')[1]];
     }
-    var curObj = window;
-    var lastKey = keys[keys.length - 1], restKey = keys.slice(0, keys.length - 1);
-    console.log(lastKey, restKey);
-    restKey.forEach(function(key) {
-      curObj = curObj[key]
-    });
-    curObj[lastKey] = val;
+    setJcstValue(keys, val);
   }
+}
+
+function getJcstValue(keys) {
+  var curObj = window;
+  var lastKey = keys[keys.length - 1], restKey = keys.slice(0, keys.length - 1);
+  console.log('getJcstValue', lastKey, restKey);
+  restKey.forEach(function(key) {
+    curObj = curObj[key]
+  });
+  return curObj[lastKey];
+}
+
+function setJcstValue(keys, val) {
+  var curObj = window;
+  var lastKey = keys[keys.length - 1], restKey = keys.slice(0, keys.length - 1);
+  console.log('setJcstValue', lastKey, restKey);
+  restKey.forEach(function(key) {
+    curObj = curObj[key]
+  });
+  curObj[lastKey] = val;
 }
 
 var jcst_config = {
@@ -128,8 +140,12 @@ var jcst_config = {
   },
   show: {
     basic: true,
-    dataShow: false
+    dataShow: false,
+    eventShow: false,
+    itemsShow: false
   },
   dataShow: {},
-  shape: ''
+  shape: '',
+  eventShow: '',
+  itemsShow: ''
 };

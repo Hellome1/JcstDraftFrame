@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label>{{dict.text}}</label><el-input type="text" v-model="text"></el-input>
+    <label>{{dict.text}}</label><el-input type="text" v-model="text" :disabled="disabled"></el-input>
     <p v-for="(v, k) in styleDict" :key="k">
       <label>{{v}}</label>
       <el-color-picker v-if="k.indexOf('olor') > -1" v-model="style[k]"></el-color-picker>
@@ -18,7 +18,8 @@ const getVal = (name) => {
 export default {
   name: 't-txt',
   props: {
-    name: ''
+    name: '',
+    disabled: false
   },
   data() {
     let obj = getVal(this.name);

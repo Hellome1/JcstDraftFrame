@@ -4,8 +4,8 @@
       <VitalSigns class="vitalSigns"/>
     </CollapseItem> -->
 
-    <CollapseItem v-for="m in modules" :key="m.name" :name="m.name" :titleText="m.text">
-      <DynamicImport :name="m.name"/>
+    <CollapseItem v-for="m in modules" :key="m.name" :name="m.name" :titleText="m.text" shape="displayModules">
+      <DynamicImport :name="m.name" />
     </CollapseItem>
   </el-collapse>
 </template>
@@ -31,7 +31,7 @@ export default {
   computed: {
     ...inject('layout'),
     modules() {
-      return this.displayModules.map(key => ({name: key, text: jcst_setting[key].title }))
+      return this.displayModules.map(key => ({name: key, text: jcst_setting[key][key+'Title'] }))
     }
   },
   methods: {

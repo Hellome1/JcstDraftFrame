@@ -21,7 +21,7 @@ const getShape = (dom) => {
     height = dom.offsetHeight;
   return {
     position: 'absolute',
-    backgroundColor: 'rgba(255, 255, 0, 0.3)',
+    backgroundColor: 'rgba(255, 165, 0, 0.6)',
     zIndex: 99,
     left: left + 'px',
     top: top + 'px',
@@ -36,10 +36,30 @@ const map = (tar, cb) => {
   }
   return r;
 }
+const getObj = (obj, t) => {
+  let ts = t.split('_');
+  ts.forEach(t => {
+    obj = obj && obj[t]
+  });
+  return obj;
+}
+const getObjValue = (obj) => {
+  let value = [];
+
+  function s(obj) {
+    for (let k in obj) {
+      let v = obj[k];
+      if ('object' === typeof v) s(v);
+      else value.push(v);
+    }
+  }
+  s(obj);
+  return value;
+}
 export default {
   name: 'highLightBox',
   computed: {
-    ...inject('layoutRight', 'layout'),
+    ...inject('layoutRight', 'layout', 'header', 'timeline', 'vitalsigns'),
     shapes() {
       let shapes = [];
       let shape = this.shape;
@@ -49,7 +69,13 @@ export default {
         let doms = document.querySelectorAll(`[shape=${itm}]`);
         let rs = map(doms, dom => getShape(dom));
         shapes = [...shapes, ...rs];
-        let valuekeys = itm.split('-').map(t => this[t]);
+        let valuekeys = itm.split('-').map(t => {
+          if (t.indexOf('_') > -1) {
+            let obj = getObj(this, t);
+            return getObjValue(obj);
+          }
+          return this[t];
+        });
         console.log('valuekeys', valuekeys);
       })
       // console.log('doms', doms);
