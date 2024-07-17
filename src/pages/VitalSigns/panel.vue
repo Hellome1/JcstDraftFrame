@@ -1,5 +1,5 @@
 <template>
-  <div v-show="panelData.clocks.length" class="vts-panel" ref="vtsPanel" :style="isTouchWindowRight ? {left: parseInt(posi.left) - (width + 20) + 'px', top: posi.top} : posi">
+  <div v-show="panelData.clocks.length" class="vts-panel" ref="vtsPanel" :style="isTouchWindowRight ? {left: parseInt(panelPosition.left) - (width + 20) + 'px', top: panelPosition.top} : panelPosition">
     <p class="vts-panel-title">{{panelData.date}}</p>
     <div class="vts-panel-header">
       <span class="panel-header-desc panel-header-item">时间</span>
@@ -18,15 +18,23 @@
 export default {
   name: 'vtsPanel',
   props: {
-    panelData: {
+    smtz_data: {
       type: Object,
-      required: true
+      require: true
+    },
+    checkList: {
+      type: Array,
+      require: true
+    },
+    mouseIndex: {
+      type: Number,
+      require: true
     },
     appendToBody: {
       type: Boolean,
       default: true
     },
-    posi: {
+    panelPosition: {
       type: Object,
       default: function() {
         return {
@@ -45,10 +53,49 @@ export default {
     width() {
       let offset = 40 + 50;
       return this.panelData.clocks.length * 40 + offset;
+    },
+    currentDate() {
+      return jcst_timeline.curdays.map(itm => itm.date)[this.mouseIndex] || '';
+    },
+    panelData() {
+      let o = {
+        datas: [],
+        clocks: []
+      }, clocks = [];
+      console.log(1111);
+      for (let k in this.smtz_data) {
+        if (!this.checkList.includes(k)) continue;
+        let itm = this.smtz_data[k];
+        let data = itm['data'] && itm['data'].filter(dataitm => dataitm.date === this.currentDate) || [];
+        data.forEach(dataitm => {
+          let clock = dataitm.time.split(':')[0];
+          dataitm.clock = clock;
+          if (!clocks.includes(clock)) clocks.push(clock);
+        })
+        let desc = itm['module'] && itm['module']['desc'] || ['unknown'];
+        desc = desc.map(d => this.$t(d));
+        o.datas.push({ data, desc });
+      }
+      clocks = clocks.sort((a,b) => a - b);
+      for (let k in o['datas']) {
+        let obj = o['datas'][k], data = obj['data'], ndata;
+        ndata = clocks.map(clock => {
+          let index = data.map(dataitm => dataitm.clock).indexOf(clock);
+          if (index > -1) {
+            return data[index]
+          } else {
+            return { time: '-', value: '-' }
+          }
+        })
+        obj['data'] = ndata;
+      }
+      o['clocks'] = clocks;
+      o['date'] = o.datas[0] && o.datas[0].data[0] && o.datas[0].data[0].date || '';
+      return o;
     }
   },
   watch: {
-    posi(n) {
+    panelPosition(n) {
       let windowVisibleWith = document.documentElement.clientWidth;
       let left = parseInt(n.left);
       // console.log('posi:', this.width, left, windowVisibleWith);

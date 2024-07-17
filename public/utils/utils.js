@@ -98,7 +98,7 @@ function getTimelineDays() {
     if (!days[i]) {
       var $dayjs = dayjs(days[i - 1].date).add(1, 'day');
       var week = $dayjs.get('day');
-      days.push({ date: '1970-01-01', week, className: '', showText: '' });
+      days.push({ date: '1970-01-01', week: week, className: '', showText: '' });
     }
     if (i % pages === 0) days[i].className += ' last';
   }

@@ -110,7 +110,7 @@ function handleReq(obj) {
     for (var k in exclude) {
       if (k in basic) delete basic[k]
     }
-    basicParams = { params: { data: basic }, rows, page };
+    basicParams = { params: { data: basic }, rows: rows, page: page };
 
     return qs_stringify(basicParams);
   }
@@ -136,7 +136,7 @@ function handleVitalsignsItems() {
       var descs = desc.map(function(d){ return translate.$t(d); });
       if (descs.includes(vitalDesc)) code.push(vitalCode);
     });
-    items[code[0]] = { module: item, code };
+    items[code[0]] = { module: item, code: code };
   });
   console.log('items', items);
   bus.$emit('vitalsigns', function() {

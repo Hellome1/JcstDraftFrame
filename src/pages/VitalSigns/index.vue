@@ -20,11 +20,25 @@
           <!-- <div v-if="nullData" class="nullDataFloat">
             <el-empty :description="$t('vitalSigns.noDataDesc')"></el-empty>
           </div> -->
-          <canvas :height="canvas_h" :width="canvas_w" shape="rowHeight" class="vital-chart"></canvas>
+          <canvas 
+            :height="canvas_h"
+            :width="canvas_w" 
+            shape="rowHeight" 
+            class="vital-chart" 
+            @mousemove="handleMousemove"
+            @mouseenter="isPanelShow = true"
+            @mouseleave="isPanelShow = false"
+          ></canvas>
         </el-col>
       </el-row>
       <div class="panelArea">
-        <!-- <Panel v-if="isPanelShow" :panelData="panelData" :posi="panelPosition" /> -->
+        <Panel 
+          v-if="isPanelShow"
+          :smtz_data="smtz_data" 
+          :checkList="checkList" 
+          :mouseIndex="mouseIndex" 
+          :panelPosition="panelPosition" 
+        />
       </div>
     </div>
 
@@ -35,11 +49,12 @@
 import { inject } from '@/common/vuePrototypeMethods.js';
 import { getVitals } from '@/server/api.js';
 import { Draw } from './draw';
+import Panel from './panel.vue';
 
 export default {
   name: 'vitalsigns',
   components: {
-    
+    Panel
   },
   props: {
     
@@ -54,7 +69,10 @@ export default {
       nullData: true,
       itemsObj: {},
       checkList: [],
-      smtz_data: {}
+      smtz_data: {},
+      panelPosition: { left: 0, top: 0 },
+      isPanelShow: false,
+      mouseIndex: -1
     };
   },
   watch: {
@@ -102,6 +120,14 @@ export default {
       bus.$on('vitalsigns', cb => {
         cb && cb.call(this);
       });
+    },
+    handleMousemove(e) {
+      let panelOffset = 10;
+      let index, pointerX = e.offsetX, canvasW = e.target.offsetWidth, singleW = canvasW / jcst_timeline.showDays;
+      index = Math.floor(pointerX / singleW);
+      this.mouseIndex = index;
+      this.mouseIndex = 5;
+      this.panelPosition = { left: e.pageX + panelOffset + 'px', top: e.pageY + panelOffset + 'px' }
     },
     setCanvasH() {
       let coordinates = document.querySelector('.vital-coords');

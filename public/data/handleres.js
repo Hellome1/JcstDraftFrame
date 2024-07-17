@@ -104,7 +104,7 @@ function timeline_timelineData(res) {
     }
   });
   Data.encTimeRanges = encTimeRanges;
-  var firstNotNullTimeRange = encTimeRanges.filter(itm => itm)[0];
+  var firstNotNullTimeRange = encTimeRanges.filter(function(itm) { return itm})[0];
   getTimelineDays();
   // console.log('tlDatesRange', tlDatesRange);
   selectPage(1);
@@ -130,10 +130,12 @@ function timeline_surgeryData(res) {
     return arr;
   }
   function handleSurgeryData(data) {
-    var surgeryInfo = data.map((itm, index) => ({
-      surgeryDate: itm.operStartDate,
-      count: index + 1
-    }));
+    var surgeryInfo = data.map(function(itm, index) {
+      return {
+        surgeryDate: itm.operStartDate,
+        count: index + 1
+      }
+    });
     return surgeryInfo;
   }
 }
@@ -158,7 +160,7 @@ function vitalsigns_data(res) {
       setVitalTimes(data_trans, module.name);
       checkList.push(module.name);
       nullData = false;
-      smtz_data[module.name] = { module, data: data_trans, display: true };
+      smtz_data[module.name] = { module: module, data: data_trans, display: true };
     }
     this.checkList = checkList;
     this.smtz_data = smtz_data;
