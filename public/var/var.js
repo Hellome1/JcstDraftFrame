@@ -1,4 +1,5 @@
 var isProduction = 'undefined' != typeof ms_address;
+var isInEMRView = 'undefined' != typeof COMMOMOBJ;
 var INIT_lang = 'zh';
 
 var setting_MS_URL = isProduction ? ms_address + '/emr/' : 'http://43.143.230.30:8006/cdr-api/emr/',
@@ -17,20 +18,24 @@ var TextStyle = {};
 
 var Data = {};
 
-var tipbox = {
+var jcst = {};
+jcst.pageSize = {
+  timelineRightWidth: 0
+};
+jcst.tipbox = {
   style: { left: '100px', top: '150px' },
   text: '',
   fns: [
     '左键点击实现功能'
   ]
 };
-var modal = {
+jcst.modal = {
   dialogVisible: false,
   title: '提示',
   width: '80%',
   path: 'components/Table/index.vue',
 };
-var table = {
+jcst.table = {
   tableData: [
     {
       date: '2016-05-02',

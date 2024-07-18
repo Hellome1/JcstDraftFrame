@@ -11,10 +11,10 @@ import { inject } from '@/common/vuePrototypeMethods.js';
 const dict = {};
 let excludes = ['layout', 'header', 'timeline'];
 let displayModules = [];
-for (let k in jcst_setting) {
+for (let k in jcst.setting) {
   if (!excludes.includes(k)) {
     displayModules.push(k);
-    let title = jcst_setting[k].title || k;
+    let title = jcst.setting[k].title || k;
     dict[k] = title;
   }
 }

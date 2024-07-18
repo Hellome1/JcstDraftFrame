@@ -1,17 +1,3 @@
-var VUEX_STORE = (function () {
-  var _store = null;
-  function setStore(store) {
-    _store = store;
-  }
-  function commit(key, val) {
-    _store.commit(key, val);
-  }
-  return {
-    setStore: setStore,
-    commit: commit
-  }
-})();
-
 TextStyle.patInfo = {
   name: {},
   gender: {},
@@ -35,7 +21,7 @@ function header_patInfo(res) {
   var field = FIELD.patInfo, style = TextStyle.patInfo;
   fetchField(patInfo, field, res.data && res.data[0] || {})
   addTextStyle(patInfo, style);
-  VUEX_STORE.commit('header_patInfo', patInfo);
+  jcst.setting.header.patInfo = patInfo;
 }
 
 TextStyle.userInfo = {
@@ -62,16 +48,16 @@ function header_userInfo() {
   var field = FIELD.userInfo, style = TextStyle.userInfo;
   fetchField(userInfo, field, PARAM);
   addTextStyle(userInfo, style);
-  VUEX_STORE.commit('header_userInfo', userInfo);
+  jcst.setting.header.userInfo = userInfo;
 }
 
 function header_allergyData(res) {
   Data['allergyData'] = res.data;
-  VUEX_STORE.commit('header_allergyData', res.data);
+  jcst.setting.header.allergyData = res.data;
 }
 
 function timeline_timelineData(res) {
-  var encTimeRanges = res.data.map(function(data) {
+  var encTimeRanges = res.data.map(function (data) {
     var encStartDate = data.encStartDate || '',
       encStartTime = data.encStartTime || '',
       encEndDate = data.encEndDate || '',
@@ -86,9 +72,9 @@ function timeline_timelineData(res) {
       }
       encStartDate = encStartDate.split(' ')[0];
       encEndDate = encEndDate.split(' ')[0];
-      return { 
-        startDate: encStartDate + ' ' + encStartTime, 
-        endDate: encEndDate + ' ' + encEndTime ,
+      return {
+        startDate: encStartDate + ' ' + encStartTime,
+        endDate: encEndDate + ' ' + encEndTime,
         encStartDate: encStartDate,
         encEndDate: encEndDate,
         encTypeCode: encTypeCode
@@ -104,7 +90,7 @@ function timeline_timelineData(res) {
     }
   });
   Data.encTimeRanges = encTimeRanges;
-  var firstNotNullTimeRange = encTimeRanges.filter(function(itm) { return itm})[0];
+  var firstNotNullTimeRange = encTimeRanges.filter(function (itm) { return itm })[0];
   getTimelineDays();
   // console.log('tlDatesRange', tlDatesRange);
   selectPage(1);
@@ -113,7 +99,7 @@ function timeline_timelineData(res) {
 function timeline_surgeryData(res) {
   var uniqueRes = uniqueData(res.data);
   var surgeryInfo = handleSurgeryData(uniqueRes);
-  jcst_setting.surgery.surgeryInfo = surgeryInfo;
+  jcst.setting.surgery.surgeryInfo = surgeryInfo;
   getTimelineDays();
 
   function uniqueData(data) {
@@ -130,7 +116,7 @@ function timeline_surgeryData(res) {
     return arr;
   }
   function handleSurgeryData(data) {
-    var surgeryInfo = data.map(function(itm, index) {
+    var surgeryInfo = data.map(function (itm, index) {
       return {
         surgeryDate: itm.operStartDate,
         count: index + 1
@@ -141,11 +127,12 @@ function timeline_surgeryData(res) {
 }
 
 var moduleTimeInfo = {
-  'vitalsigns': {}
+  'vitalsigns': {},
+  'lis': {}
 };
 function vitalsigns_data(res) {
-  console.log('res', res);
-  bus.$emit('vitalsigns', function() {
+  console.log('[vitalsigns res] res', res);
+  bus.$emit('vitalsigns', function () {
     var items = this.itemsObj;
     var data = res.data || [];
     var checkList = [];
@@ -153,7 +140,7 @@ function vitalsigns_data(res) {
     var smtz_data = {};
     for (var k in data[0]) {
       var module = items[k].module;
-      var data_trans = data[0][k].map(function(ele) {
+      var data_trans = data[0][k].map(function (ele) {
         var value = ele.vitalSignMeasValue, date = ele.vitalSignMeasDate, time = ele.vitalSignMeasTime;
         return { date: date, time: time, value: value };
       });
@@ -165,18 +152,31 @@ function vitalsigns_data(res) {
     this.checkList = checkList;
     this.smtz_data = smtz_data;
     this.plotPoint();
-    console.log('moduleTimeInfo', moduleTimeInfo);
+    console.log('[vitalsigns res] moduleTimeInfo', moduleTimeInfo);
 
     function setVitalTimes(data_trans, name) {
       var dates = [];
-      data_trans.map(function(itm) {
+      data_trans.map(function (itm) {
         return itm.date;
-      }).sort(function(a, b) { return dayjs(a).diff(b) })
-      .forEach(function(itm) {
-        if (!dates.includes(itm)) dates.push(itm);
-      });
-      moduleTimeInfo['vitalsigns'][name] = dates;
+      }).sort(function (a, b) { return dayjs(a).diff(b) })
+        .forEach(function (itm) {
+          if (!dates.includes(itm)) dates.push(itm);
+        });
+      let timeinfo = JSON.parse(JSON.stringify(moduleTimeInfo['vitalsigns']));
+      timeinfo[name] = dates;
+      moduleTimeInfo['vitalsigns'] = timeinfo;
     }
   });
+}
 
+function pacs_data(res) {
+  console.log('pacs_data_res', res);
+}
+
+function lis_data(res) {
+  console.log('[lis res] lis_data_res', res);
+
+  bus.$emit('lis', function() {
+    this.resdata = JSON.parse(JSON.stringify(res.data));
+  })
 }

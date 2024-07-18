@@ -1,6 +1,8 @@
 <script>
 const dict = {
-  'vitalsigns': 'VitalSigns/index.vue'
+  'vitalsigns': 'VitalSigns/index.vue',
+  'pacs': 'Pacs/index.vue',
+  'lis': 'Lis/index.vue'
 }
 export default {
   name: 'dynamicImport',

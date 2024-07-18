@@ -20,8 +20,7 @@ Vue.config.devtools = true;
 Vue.use(ElementUI);
 Vue.use(JsonViewer);
 
-window.bus = new Vue()
-VUEX_STORE.setStore(store);
+window.bus = new Vue();
 
 getData();
 

@@ -1,6 +1,6 @@
 <template>
   <div class="emr-header">
-    <div class="emr-header-content clear" shape="isShow" :style="isEmbeded ? { position: 'absolute', width: '100%' } : null">
+    <div class="emr-header-content clear" shape="isShow" :style="isEmbeded || showLiveSetting ? { position: 'absolute', width: '100%' } : null">
       <div class="header-layout-flex">
         <div class="header-l-f-left">
           <div class="hospital">
@@ -17,7 +17,7 @@
             </div>
           </div>
           <div class="patient-info">
-            <TipBox tipmsg="点击查看过敏记录" :isFixed="true">
+            <TipBox tipmsg="点击查看过敏记录" :isFixed="!showLiveSetting">
               <i v-if="allergyData.length" shape="allergyIcon-allergyData" class="fa" :class="`fa-${allergyIcon}`" style="color: #ff5d5d; cursor: pointer" @click="showModal"></i>
             </TipBox>
             <Txt :txtstyle="stl(patInfo.name)" shape="patInfo_name">{{ txt(patInfo.name) }}</Txt>
@@ -49,7 +49,7 @@ import { inject } from '@/common/vuePrototypeMethods.js';
 export default {
   name: 'jcstheader',
   computed: {
-    ...inject('header'),
+    ...inject('layout', 'header'),
   },
   created() {
     

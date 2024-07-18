@@ -1,4 +1,4 @@
-let state = window['modal'];
+let state = window['jcst']['modal'];
 let mutations = {};
 state.main = function (h) {
   return h(

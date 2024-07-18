@@ -1,14 +1,5 @@
-let state = jcst_setting['header'];
-let mutations = {};
-for (let k in state) {
-  mutations['header_' + k] = (state, payload) => {
-    state[k] = payload;
-  }
-}
+let state = jcst.setting['header'];
 
-// console.log('state', state);
-// console.log('mutations', mutations);
 export default {
-  state,
-  mutations
+  state
 }

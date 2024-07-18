@@ -1,12 +1,5 @@
-let state = jcst_setting['vitalsigns'];
-let mutations = {};
-for (let k in state) {
-  mutations['vitalsigns_' + k] = (state, payload) => {
-    state[k] = payload;
-  }
-}
+let state = jcst.setting['vitalsigns'];
 
 export default {
-  state,
-  mutations
+  state
 }

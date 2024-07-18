@@ -50,7 +50,7 @@ const dict = {
   'modal': '模态框'
 };
 const getValue = (name) => {
-  let r = ['jcst_setting', ...name.split('_')];
+  let r = ['jcst', 'setting', ...name.split('_')];
   return getJcstValue(r);
 }
 const handleEventShow = (name) => {
@@ -65,11 +65,11 @@ const handleEventShow = (name) => {
 }
 const getModalTitle = (name) => {
   let value = getValue(name);
-  return value['modal.title'];
+  return value['jcst.modal.title'];
 }
 const setModalTitle = (name, title) => {
   let value = getValue(name);
-  value['modal.title'] = title;
+  value['jcst.modal.title'] = title;
   return value;
 }
 const getModalContent = (name) => {
@@ -77,18 +77,18 @@ const getModalContent = (name) => {
 }
 const getTableColumn = (name) => {
   let value = getValue(name);
-  let column = value['table.column'];
+  let column = value['jcst.table.column'];
   return column;
 }
 const setTableColumn = (name, column) => {
   let value = getValue(name);
-  value['table.column'] = column;
+  value['jcst.table.column'] = column;
   return value;
 }
 const getOptions = (name) => {
   let options = [];
   let value = getValue(name);
-  let tableData = value['table.tableData'];
+  let tableData = value['jcst.table.tableData'];
   let key = tableData.split('.')[1];
   let obj = Data[key] && Data[key][0] || {};
   for (let k in obj) {
@@ -117,7 +117,7 @@ export default {
     this.options = getOptions(this.eventShow);
   },
   beforeDestroy() {
-    modal.dialogVisible = false;
+    jcst.modal.dialogVisible = false;
   },
   data() {
     return {

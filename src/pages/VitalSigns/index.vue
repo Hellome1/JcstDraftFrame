@@ -56,9 +56,6 @@ export default {
   components: {
     Panel
   },
-  props: {
-    
-  },
   data() {
     return {
       canvas_h: 300,
@@ -92,6 +89,12 @@ export default {
         this.reDraw();
       })
     },
+    timelineRightWidth() {
+      this.setCanvasW();
+      this.$nextTick(() => {
+        this.reDraw();
+      })
+    },
     rowHeight() {
       this.$nextTick(() => {
         this.setCanvasH();
@@ -102,7 +105,7 @@ export default {
     }
   },
   computed: {
-    ...inject('layout', 'vitalsigns', 'timeline', 'layoutRight')
+    ...inject('layout', 'vitalsigns', 'timeline', 'layoutRight', 'pageSize')
   },
   created() {
     this.busOn();
@@ -126,7 +129,6 @@ export default {
       let index, pointerX = e.offsetX, canvasW = e.target.offsetWidth, singleW = canvasW / jcst_timeline.showDays;
       index = Math.floor(pointerX / singleW);
       this.mouseIndex = index;
-      this.mouseIndex = 5;
       this.panelPosition = { left: e.pageX + panelOffset + 'px', top: e.pageY + panelOffset + 'px' }
     },
     setCanvasH() {

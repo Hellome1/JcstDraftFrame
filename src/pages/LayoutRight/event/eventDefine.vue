@@ -22,7 +22,7 @@ const options = [
   }
 ];
 const getVal = (name) => {
-  let r = ['jcst_setting', ...name.split('_')];
+  let r = ['jcst', 'setting', ...name.split('_')];
   return getJcstValue(r);
 };
 const getValue = (name) => {

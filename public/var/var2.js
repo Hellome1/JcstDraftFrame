@@ -1,15 +1,21 @@
-
-var splitChar = jcst_setting_default.splitChar;
-var jcst_layout = jcst_setting.layout;
-var jcst_timeline = jcst_setting.timeline;
+jcst.default = {
+  splitChar: '^',
+  tipboxDefaultOffset: 30,
+};
+var jcst_splitChar = jcst.default.splitChar;
+var jcst_layout = jcst.setting.layout;
+var jcst_timeline = jcst.setting.timeline;
 
 var smtzfield;
 (function () {
   try {
-    var smtzfield_raw = 'undefined' != typeof INDEXInitconfigdata && INDEXInitconfigdata.Smtz.info || getSMTZField() || {};
+    var smtzfield_raw;
     var testData = JCSTTestData['vitalsignsDict'];
+    if (!testData) {
+      smtzfield_raw = 'undefined' != typeof INDEXInitconfigdata && INDEXInitconfigdata.Smtz.info || getSMTZField() || {};
+    }
     var records = handleRepeat(testData && testData.data || smtzfield_raw.data.records);
-    console.log('records', records);
+    console.log('[vitalsigns dict] records:', records);
     smtzfield = { data: records };
   } catch (err) {
     smtzfield = {};

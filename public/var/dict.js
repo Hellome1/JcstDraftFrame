@@ -55,4 +55,6 @@ var jcst_type_text_style_dict = {
 var jcst_Data_name_dict = {
   encTimeRanges: '就诊时间范围',
   allergyData: '过敏数据'
-}
+};
+
+var jcst_labelConfig_dict = {};

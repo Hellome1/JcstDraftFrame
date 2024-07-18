@@ -57,9 +57,9 @@ function getAxiosSetting() {
 function handleObjData(param, obj) {
   var from = param.from;
   if (from === 'vitalsigns') {
-    console.log('param', param);
+    console.log('[vitalsigns req] param', param);
     var extra = handleVitalsignsItems();
-    console.log('extra', extra);
+    console.log('[vitalsigns req] extra', extra);
     param = Object.assign({}, param, extra);
   }
   obj.testData = JCSTTestData[from];
@@ -91,8 +91,8 @@ function handleReq(obj) {
     var hosRegNo = PARAM.hosRegNo;
     var hdcEncId = PARAM.hdcEncId;
     var hosEncId = PARAM.hosEncId;
-    if (hdcEncId.indexOf(splitChar) > -1) hdcEncId = '';
-    if (hosEncId.indexOf(splitChar) > -1) hosEncId = '';
+    if (hdcEncId.indexOf(jcst_splitChar) > -1) hdcEncId = '';
+    if (hosEncId.indexOf(jcst_splitChar) > -1) hosEncId = '';
 
     delete query.rows;
     delete query.page;
@@ -118,7 +118,7 @@ function handleReq(obj) {
 
 function handleVitalsignsItems() {
   var items = {};
-  var thisSettingItems = jcst_setting.vitalsigns.vitalsignsItems;
+  var thisSettingItems = jcst.setting.vitalsigns.vitalsignsItems;
   var max_scale = 0;
   thisSettingItems.forEach(function(item) {
     var scale = [];
@@ -138,7 +138,7 @@ function handleVitalsignsItems() {
     });
     items[code[0]] = { module: item, code: code };
   });
-  console.log('items', items);
+  console.log('[vitalsigns req] items', items);
   bus.$emit('vitalsigns', function() {
     this.itemsObj = items;
     this.max_scale = max_scale;

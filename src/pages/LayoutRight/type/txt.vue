@@ -13,7 +13,7 @@
 const getVal = (name) => {
   let ns = name.split('_');
   let k1 = ns[0], k2 = ns[1], k3 = ns[2];
-  return k3 ? jcst_setting[k1][k2][k3] :jcst_setting[k1][k2];
+  return k3 ? jcst.setting[k1][k2][k3] :jcst.setting[k1][k2];
 }
 export default {
   name: 't-txt',

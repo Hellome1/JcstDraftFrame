@@ -21,12 +21,12 @@ export default {
       let { left, top } = pos;
       let style = { left: left + 'px', top: top + 'px' };
       if (this.isFixed) style.position = 'fixed';
-      tipbox.style = style;
-      tipbox.text = this.tipmsg;
-      tipbox.fns = this.fns;
+      jcst.tipbox.style = style;
+      jcst.tipbox.text = this.tipmsg;
+      jcst.tipbox.fns = this.fns;
     },
     handleMouseLeave() {
-      tipbox.text = '';
+      jcst.tipbox.text = '';
     }
   }
 }

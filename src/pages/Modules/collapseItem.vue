@@ -3,9 +3,11 @@
     <template slot="title">
       <h4 class="module-title" shape="moduleHeadFontSize-moduleHeadColor-vitalsignsTitle" :style="{ fontSize: moduleHeadFontSize, color: moduleHeadColor }">{{titleText}}</h4>
       <div class="func-area">
-        <TipBox :tipmsg="tipmsg" :isFixed="true">
-          <span class="tl-icon type1" ref="detailBoxPosi1" @click.stop="handleClickIconBox"> L </span>
-        </TipBox>
+        <div class="loca-icon" v-if="showLocaIcon">
+          <TipBox :tipmsg="tipmsg">
+            <span class="tl-icon" @click.stop="handleClickIconBox"> L </span>
+          </TipBox>
+        </div>
       </div>
     </template>
     <slot></slot>
@@ -16,7 +18,9 @@
 import { inject } from '@/common/vuePrototypeMethods.js';
 
 const tipdict = {
-  'vitalsigns': '点位到生命体征位置'
+  'vitalsigns': '定位到生命体征位置',
+  'pacs': '定位到检查位置',
+  'lis': '定位到检验位置'
 };
 export default {
   name: 'collapseItem',
@@ -25,13 +29,24 @@ export default {
     titleText: ''
   },
   data() {
-    const tipmsg = tipdict[this.name]
+    const name = this.name;
+    const tipmsg = tipdict[name];
     return {
+      timeinfo: moduleTimeInfo[name],
       tipmsg
     }
   },
   computed: {
-    ...inject('layout')
+    ...inject('layout'),
+    showLocaIcon() {
+      let r = false;
+      let { moduleTimeInfo } = this.$store.state;
+      let timeinfo = moduleTimeInfo[this.name];
+      for (let k in timeinfo) {
+        r = true;
+      }
+      return r;
+    }
   },
   methods: {
     handleClickIconBox() {

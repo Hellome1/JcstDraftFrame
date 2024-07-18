@@ -70,6 +70,36 @@ export function getVitals(query = {}) {
   })
 }
 
+export function getPacs(query = {}) {
+  request(
+    handleReq({
+      url: 'MES0012',
+      method: 'post',
+      data: query
+    })
+  ).then(res => {
+    pacs_data(res);
+  }).catch(e => {
+    throw e;
+  })
+}
+export function getLis(query = {}) {
+  request(
+    handleReq({
+      url: 'MES0024',
+      method: 'post',
+      data: query
+    })
+  ).then(res => {
+    lis_data(res);
+  }).catch(e => {
+    throw e;
+  })
+}
+
+export function getLisNorm() {}
+export function getLoop() {}
+
 export default function () {
   getPatInfo();
   getAllergy();

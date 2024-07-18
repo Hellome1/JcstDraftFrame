@@ -1,0 +1,653 @@
+.loop-row-axis * { padding: 0; margin: 0; box-sizing: border-box;}
+.loop-column-axis * { padding: 0; margin: 0; box-sizing: border-box;}
+.year-con-container * { padding: 0; margin: 0;}
+.datagrid-btable tr td div .loop-row-axis div,
+.datagrid-btable tr td div .loop-column-axis div,
+.datagrid-btable tr td div .loop-all-line div{
+	overflow: visible;
+}
+.datagrid-btable tr td div.datagrid-row-detail { overflow: auto; }
+.loop-column-axis {
+	padding: 10px 0 25px;
+}
+/* 闭环基础 */
+.loop-step-con {
+    display: inline-block;
+}
+.loop-step * {
+    margin: 0;
+    padding: 0;
+}
+.loop-step {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    height: 90px;
+    min-width: 100px;
+    font-size: 14px;
+    vertical-align: bottom;
+    user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+.loop-step.hasDupNode {
+    padding-left: 10px;
+}
+.loop-step::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.loop-step-flat-fold-btn {
+    display: block;
+    position: absolute;
+    left: -5px;
+    top: 30px;
+    font-style: normal;
+    border: 1px solid #aaa;
+    border-radius: 2px;
+    height: 20px;
+    width: 12px;
+    text-align: center;
+    line-height: 16px;
+    cursor: pointer;
+    z-index: 9;
+}
+.loop-step > .step-content-main {
+    /* width: 100px; */
+    min-width: 100px;
+    position: relative;
+	overflow: visible !important;
+}
+.loop-line .loop-step > .step-content-main {
+    padding: 0 5px;
+}
+.loop-step > .step-content-main .seq {
+    position: relative;
+    z-index: 2;
+}
+.loop-step .relative-top-25 {
+    position: relative;
+    /* top: -25px; */
+    top: -5px;
+    display: none;
+    /* width: 0; */
+    overflow: hidden;
+    /* transition: 0.3s; */
+}
+.loop-step .relative-top-25.showing {
+    display: block;
+}
+/* .loop-step .relative-top-25.showing {
+    width: 100px;
+} */
+.loop-step .float-left {
+    float: left;
+    text-align: center;
+    margin: auto;
+}
+.loop-step.hasDupNode:not(:first-child):before {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 4px;
+    background-color: rgba(67, 207, 124, 1);
+    position: absolute;
+    top: 8px;
+    left: 0;
+    z-index: 1;
+}
+/* 线条调整 */
+.step-content-main::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 4px;
+    background-color: rgba(67, 207, 124, 1);
+    position: absolute;
+    top: 8px;
+    left: 0;
+    z-index: 1;
+}
+.loop-step-se > .step-content-main::before {
+    width: 0;
+}
+.loop-row-section:first-child .loop-step:first-child > .step-content-main::before {
+    width: 50%;
+    left: 50%;
+}
+.loop-row-section:first-child .loop-all-line > .loop-line > .loop-step:first-child .relative-top-25 .loop-step:first-child > .step-content-main::before {
+    width: 50%;
+    left: 50%;
+}
+.loop-row-section:first-child  .relative-top-25 .loop-step > .step-content-main::before {
+    width: 100%;
+    left: 0;
+}
+.loop-step.hasDupNode.showing:first-child > .step-content-main::before {
+    width: 100%;
+    left: 0;
+}
+/* .loop-step.loop-step-vline.hasDupNode.showing:first-child > .step-content-main::before {
+    left: -12px;
+}
+.loop-verticel-line-con .loop-step.hasDupNode.showing:first-child > .step-content-main::before {
+    width: 4px;
+    left: -12px;
+}
+.loop-all-line .loop-vline .loop-step.loop-step-vline.hasDupNode > .step-content-main::before {
+    left: -12px;
+} */
+.relative-top-25 .loop-step:first-child > .step-content-main::before {
+    width: 100%;
+    left: 0;
+}
+.loop-step:last-child > .step-content-main::before {
+    width: 50%;
+    left: auto;
+    right: 50%;
+}
+.relative-top-25 .loop-step:last-child > .step-content-main::before {
+    width: 100%;
+    right: 0;
+}
+.hasDupNode:last-child > .step-content-main::before {
+    width: calc(50% + 10px);
+}
+.loop-step:first-child.loop-step:last-child > .step-content-main::before {
+    width: 0;
+}
+.loop-col-item-r .loop-step:first-child.loop-step:last-child > .step-content-main::before {
+    width: 50%;
+}
+.relative-top-25 .loop-step:first-child.loop-step:last-child > .step-content-main::before {
+    width: 100%;
+    right: 0;
+    left: auto;
+}
+.loop-step-vline .relative-top-25 .loop-step:first-child.loop-step:last-child > .step-content-main::before {
+    width: 100%;
+    left: 0;
+    right: auto;
+}
+.loop-step-vline.hasDupNode .relative-top-25 .loop-step:first-child.loop-step:last-child > .step-content-main::before {
+    /* width: 100%; */
+    left: -12px;
+    right: auto;
+}
+.hasDupNode .relative-top-25 .loop-step:first-child.loop-step:last-child > .step-content-main::before {
+    width: 100%;
+}
+.hasDupNode:first-child .relative-top-25 .loop-step:first-child.loop-step:last-child > .step-content-main::before {
+    width: 50%;
+}
+.loop-row-section:last-child .hasDupNode:first-child .relative-top-25 .loop-step:first-child.loop-step:last-child > .step-content-main::before {
+    width: 100%;
+}
+.loop-row-section:first-child:last-child .hasDupNode:first-child .relative-top-25 .loop-step:first-child.loop-step:last-child > .step-content-main::before {
+    width: 50%;
+}
+.loop-section-con .hasDupNode:first-child .relative-top-25 .loop-step:first-child.loop-step:last-child > .step-content-main::before {
+    width: 100%;
+}
+.loop-step-cvItem > step-content-main::before,
+.loop-step-cvItem .relative-top-25 .loop-step > .step-content-main::before,
+.loop-step-vline > .step-content-main::before,
+.loop-step-vline .relative-top-25 .loop-step > .step-content-main::before {
+    width: 4px !important;
+    height: 100% !important;
+    left: -2px !important;
+}
+.loop-step-cvItem.hasDupNode > .step-content-main::before,
+.loop-step-cvItem.hasDupNode .relative-top-25 .loop-step > .step-content-main::before,
+.loop-step-vline.hasDupNode > .step-content-main::before,
+.loop-step-vline.hasDupNode .relative-top-25 .loop-step > .step-content-main::before {
+    left: -12px !important;
+}
+.sub .loop-step-vline:last-child > .step-content-main::before {
+    height: 0 !important;
+}
+.hasDupNode.loop-step.showing:first-child.loop-step:last-child > .step-content-main::before {
+    width: 50%;
+}
+.loop-box .loop-step:first-child > .step-content-main::before {
+    width: 50%;
+    left: 50%;
+}
+.loop-box .loop-step:not(:first-child) .relative-top-25 .loop-step > .step-content-main::before {
+    width: 100%;
+    left: 0;
+}
+/* 线条调整 */
+.loop-step b {
+    /* position: absolute; */
+    display: inline-block;
+    top: -20px;
+    left: 40px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    color: white;
+    background-color: rgba(67, 207, 124, 1);
+    border-radius: 50%;
+    text-align: center;
+}
+.loop-step span {
+    color: rgba(67, 207, 124, 1);
+}
+.loop-step p {
+    font-size: 12px;
+}
+.loop-step.loop-step-lack b {
+    background-color: rgba(204, 204, 204, 1);
+}
+.loop-step.loop-step-lack span {
+    color: rgba(204, 204, 204, 1);
+}
+.loop-step.loop-step-cvRoot > .step-content-main b{
+    background-color: red;
+}
+.loop-step.loop-step-cvRoot > .step-content-main > span {
+    color: red;
+}
+.loop-step.loop-step-cvItem {
+    padding-top: 0;
+    height: 70px;
+}
+.loop-step.loop-step-cvItem > .step-content-main {
+    height: 70px;
+}
+.loop-step.loop-step-cvItem > .relative-top-25 .step-content-main::before {
+    background-color: red;
+}
+.loop-step.loop-step-cvItem > .step-content-main::before {
+    width: 4px;
+    height: 100%;
+    left: -2px;
+    background-color: red;
+}
+.loop-step.loop-step-cvItem b {
+    background-color: red;
+    position: absolute;
+    top: 0;
+    left: -15px;
+}
+.loop-step.loop-step-cvItem span {
+    color: red;
+}
+.loop-step.loop-step-cvItem.loop-step-lack b {
+    background-color: rgba(204, 204, 204, 1);
+}
+.loop-step.loop-step-cvItem.loop-step-lack span {
+    color: rgba(204, 204, 204, 1);
+}
+
+.loop-step .loop-cvLine-con .loop-vline,
+.loop-step.hasDupNode .loop-cvLine-con .loop-vline {
+    position: absolute;
+    /* bottom: 92px; */
+    /* left: 50px; */
+    bottom: 10px;
+    left: 50%;
+}
+.loop-step-cvRoot.loop-step .loop-vline {
+    /* bottom: 97px; */
+    bottom: 10px;
+}
+.loop-step.hasDupNode .loop-vline {
+    left: auto;
+    right: 0;
+}
+
+.loop-vline .loop-step {
+    display: block;
+}
+.loop-all-line .loop-vline .loop-step.loop-step-cvItem > .step-content-main::before {
+    width: 4px;
+}
+/* 线 */
+
+.loop-step.loop-step-vline {
+    display: block;
+    padding-top: 0;
+    height: auto;
+    padding-bottom: 10px;
+}
+.loop-step.loop-step-vline > .step-content-main {
+    height: 65px;
+}
+.loop-step.loop-step-vline.hasDupNode {
+    width: 100px;
+}
+.loop-step.loop-step-vline.hasDupNode.showing > .relative-top-25{
+    overflow: visible;
+    top: 0px;
+}
+.loop-step.loop-step-vline.hasDupNode > .relative-top-25 .loop-all-line {
+    padding: 0;
+}
+.loop-step.loop-step-vline.hasDupNode > .relative-top-25 .loop-step {
+    padding-top: 0;
+    height: 75px;
+}
+.loop-step.loop-step-vline.hasDupNode b{
+    left: -20px;
+}
+.loop-step.loop-step-vline.hasDupNode .relative-top-25 b{
+    left: -25px;
+}
+.loop-step.loop-step-vline > .step-content-main::before {
+    width: 4px;
+    height: 100%;
+    left: -2px;
+    top: 10px;
+}
+.loop-cvLine-con .loop-step.loop-step-vline > .step-content-main::before {
+    top: 18px;
+}
+.loop-step.loop-step-vline b {
+    position: absolute;
+    left: -10px;
+    top: 0;
+}
+.pd-right-50 .loop-step.loop-step-vline b {
+    left: -15px;
+}
+.pd-right-50 .loop-step.loop-step-vline.hasDupNode b {
+    left: -25px;
+}
+.loop-all-line .sub .loop-vline .loop-step.loop-step-vline:last-child > .step-content-main::before {
+    width: 0px;
+}
+.sub .step-content-main {
+    z-index: 2;
+}
+.sub .relative-top-25 {
+    z-index: 1;
+}
+.loop-step.space-line {
+    height: 50px;
+}
+.loop-step.space-line b{
+    display: none;
+}
+/* 区 */
+.loop-row-section {
+    float: left;
+    position: relative;
+}
+.loop-row-section:not(:first-child) .loop-all-line .beforeLine {
+	/* display: block; */
+	position: absolute;
+	width: 50px;
+	/* top: 13px; */
+    bottom: 83px;
+	left: 0;
+	z-index: 0;
+	border-bottom: 4px solid rgba(67, 207, 124, 1);
+}
+.loop-row-section:not(:first-child) .loop-all-line:not(:first-child) .beforeLine {
+    height: 100%;
+    border-left: 4px solid rgba(67, 207, 124, 1);
+}
+.hasDupNode .beforeLine,
+.hasDupNode .afterLine {
+    display: none;
+}
+.loop-row-section:not(:last-child) .loop-all-line .afterLine {
+	/* display: block; */
+	position: absolute;
+	width: calc(100% - 50px);
+	/* top: 13px; */
+    bottom: 83px;
+	right: 0;
+	z-index: 0;
+	border-bottom: 4px solid rgba(67, 207, 124, 1);
+}
+.loop-row-section:last-child .afterLine {
+    display: none;
+}
+.loop-row-section:not(:last-child) .loop-all-line:not(:first-child) .afterLine {
+    height: 100%;
+    width: 100%;
+    border-right: 4px solid rgba(67, 207, 124, 1);
+}
+.loop-all-line .loop-line {
+    position: relative;
+    z-index: 1;
+    white-space: nowrap;
+}
+
+.loop-row-section .loop-all-line {
+    position: relative;
+    z-index: 9;
+    padding: 5px 0;
+}
+.loop-all-line {
+    position: relative;
+    z-index: 9;
+    padding: 5px 0;
+}
+/* 横轴 */
+.loop-row-axis {
+    position: relative;
+    user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+.loop-row-axis::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+/* 纵轴 */
+.loop-column-axis {
+    /* margin-left: 2px; */
+    margin-left: -150px;
+    position: relative;
+    user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+.loop-column-axis .loop-col-main-title-con {
+    height: 50px;
+    position: relative;
+    padding-left: 196px;
+	text-align: left;
+}
+.loop-column-axis .loop-col-main-l {
+    height: 100%;
+    line-height: 18px;
+    width: 100px;
+    display: inline-block;
+    text-align: right;
+    vertical-align: top;
+    padding-right: 10px;
+    font-size: 16px;
+}
+.loop-column-axis .loop-col-main-r {
+    display: inline-block;
+    height: 100%;
+    border-left: 4px solid rgba(67, 207, 124, 1);
+    position: relative;
+}
+.loop-column-axis .loop-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid rgba(24, 144, 255, 0.6);
+    box-shadow: 0px 0px 10px 1px rgba(24, 144, 255, 0.5);
+    background-color: white;
+    position: absolute;
+    left: -12px;
+    top: -1px;
+}
+.loop-column-axis .loop-dot::after {
+    content: ' ';
+    box-sizing: border-box;
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    border-radius: 50%;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    border: 1px solid rgba(24, 144, 255, 1);
+    background-color: rgba(24, 144, 255, 1);
+}
+.loop-column-axis .loop-main-desc {
+    /* padding-left: 10px; */
+    font-size: 14px;
+}
+.loop-main-desc .loop-step {
+    top: -15px;
+}
+.loop-main-desc .loop-step > .step-content-main::before {
+    display: none;
+}
+.loop-main-desc .loop-step b {
+    position: absolute;
+    left: -12px;
+    top: 13px;
+}
+.loop-main-desc .loop-step span {
+    color: rgba(67, 207, 124, 1);
+}
+.loop-column-axis .loop-col-items {
+    position: relative;
+    list-style: none;
+	text-align: left;
+}
+
+.loop-column-axis .loop-col-item {
+    position: relative;
+    padding-left: 200px;
+    height: 150px;
+    white-space: nowrap;
+}
+.loop-col-item::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.loop-column-axis .loop-col-item-l {
+    width: 100px;
+    display: inline-block;
+    text-align: right;
+    vertical-align: top;
+    margin-top: 50px;
+}
+.loop-column-axis .loop-tip {
+    text-align: right;
+    padding-right: 8px;
+    font-size: 14px;
+}
+.loop-column-axis .loop-col-item-r {
+    display: inline-block;
+    height: 100%;
+    position: relative;
+}
+.loop-column-axis .loop-col-item-r::after {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: -4px;
+    border-left: 4px solid rgba(67, 207, 124, 1);
+}
+.loop-column-axis .loop-col-item-r.half::after {
+    top: 48%;
+    height: 53%;
+}
+.loop-column-axis .loop-col-items:first-of-type:last-of-type .loop-col-item:first-of-type .loop-col-item-r.half::after {
+    height: 0;
+}
+.loop-col-items:last-child .loop-col-item:last-child .loop-col-item-r {
+    height: 48%;
+}
+.loop-column-axis .loop-col-item-r > div {
+    margin-top: 65px;
+}
+.loop-column-axis .loop-cross {
+    display: inline-block;
+    height: 4px;
+    width: 100px;
+    background-color: rgba(67, 207, 124, 1);
+    position: relative;
+    vertical-align: top;
+    z-index: 2;
+}
+.loop-column-axis .loop-cross::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: -8px;
+    top: -4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 3px solid rgba(67, 207, 124, 1);
+    background-color: white;
+}
+
+.loop-column-axis .loop-section-con {
+    display: inline-block;
+    position: relative;
+    z-index: 3;
+}
+/* .loop-column-axis .loop-section-con .loop-all-line {
+    position: relative;
+    top: -8px;
+    left: -40px;
+} */
+.loop-verticel-line-con .showing.loop-step:first-child.loop-step:last-child > .step-content-main::before {
+    width: 0px;
+}
+.loop-verticel-line-con:last-child .loop-step.loop-step-vline:last-child > .step-content-main:before {
+	height: calc(100% - 70px) !important;
+}
+
+/* 年份日期表 */
+.year-con-container {
+    white-space: nowrap;
+}
+.year-con-year {
+    text-align: center;
+}
+.year-con-year,.year-con-month,.year-con-day {
+    display: inline-block;
+    vertical-align: top;
+}
+.year-con-year-item,.year-con-month-item,.year-con-day-item {
+    padding: 3px 10px;
+}
+.year-con-year-item,
+.year-con-month-item,
+.year-con-day-item,
+.year-con-index-item {
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+}
+.loop-box {
+    min-height: 50px;
+    min-width: 120px;
+    border: 1px solid black;
+    border-right: none;
+}
+.year-con-year:last-child {
+    border-right: 1px solid black;
+}
+
+/* 横向时 .pd-right-50 对 before 线条影响消除 */
+.loop-row-axis .loop-step.pd-right-50:not(:last-child) > .step-content-main::before {
+    width: calc(100% + 50px);
+}

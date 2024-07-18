@@ -1,8 +1,4 @@
-var jcst_setting_default = {
-  splitChar: '^',
-  tipboxDefaultOffset: 30,
-};
-var jcst_setting = {
+jcst.setting = {
   layout: {
     showLiveSetting: false,
     leftW: 5, // 数字
@@ -10,11 +6,11 @@ var jcst_setting = {
     leftBgColor: '#f9f9f9', // 颜色
     moduleHeadFontSize: '16px', // 字体大小
     moduleHeadColor: '#000', // 颜色
-    displayModules: ['vitalsigns'] // 数组
+    displayModules: ['vitalsigns', 'lis'] // 数组
   },
   header: {
     isShow: true, // 布尔值
-    isEmbeded: true, // 由使用场景决定
+    isEmbeded: isInEMRView, // 由使用场景决定
     product: { // 文字
       type: 'text',
       text: 'iMedical PatView',
@@ -30,10 +26,10 @@ var jcst_setting = {
     allergyIcon: 'street-view',
     allergyData: [], // 数据
     handleClick: { // 事件
-      'modal.dialogVisible': true,
-      'modal.title': '过敏信息',
-      'table.tableData': 'Data.allergyData',
-      'table.column': [
+      'jcst.modal.dialogVisible': true,
+      'jcst.modal.title': '过敏信息',
+      'jcst.table.tableData': 'Data.allergyData',
+      'jcst.table.column': [
         {
           prop: 'allerSourceDesc',
           label: translate.$t('header.allergy.th.sourceDesc'),
@@ -97,10 +93,30 @@ var jcst_setting = {
       }
     ]
   },
+  pacs: {
+    pacsTitle: '检查',
+    dateKey: 'examDate'
+  },
+  lis: {
+    lisTitle: '检验',
+    name: 'orderName', // 必选，data中标签显示内容的key
+    // date: 'inspectionDate',
+    // time: 'inspectionTime',
+    date: 'inspAppDate',
+    time: 'inspAppTime',
+    leftKey: 'inspRptDeptName',
+    noClassifyText: 'setting.modules.lis.noClassifyText',
+    labelConfig: {
+      isDetail: true,
+      pStyle: {
+        textAlign: 'center'
+      }
+    }
+  },
   surgery: {
     surgeryInfo: []
   }
-}
+};
 
 function handleEvent(obj) {
   var jsonObj = JSON.parse(JSON.stringify(obj));

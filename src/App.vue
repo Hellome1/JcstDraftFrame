@@ -2,8 +2,8 @@
   <div id="app">
     <el-row>
       <el-col :span="showLiveSetting ? 16 : 24" :style="isShow ? { position: 'relative' } : { position: 'relative', top: '-56px' }">
-        <el-container :style="isEmbeded ? { position: 'relative' } : ''">
-          <el-header class="header clear" :style="isEmbeded ? { position: 'absolute', top: 0, left: 0 } : ''">
+        <el-container :style="isEmbeded || showLiveSetting ? { position: 'relative' } : ''">
+          <el-header class="header clear" :style="isEmbeded || showLiveSetting ? { position: 'absolute', top: 0, left: 0 } : ''">
             <Header v-if="isShow"></Header>
             <Timeline />
           </el-header>

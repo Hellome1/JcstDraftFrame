@@ -39,7 +39,7 @@ var curOperationDate = '';
 function getShowText(date, encIndex) {
   // surgeryInfo [ { count: 1, surgeryDate: '2022-02-02' } ]
   var text = translate.$t('timeline.rtltop.beforeTreatmentDayText') + ' ' + (encIndex + 1) + ' ' + translate.$t('timeline.rtltop.afterTreatmentDayText');
-  var surgeryInfo = jcst_setting.surgery.surgeryInfo;
+  var surgeryInfo = jcst.setting.surgery.surgeryInfo;
   surgeryInfo.forEach(function(surgery) {
     var surgeryDate = surgery.surgeryDate, count = surgery.count;
     var state = {};

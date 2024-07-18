@@ -3,7 +3,7 @@ import store from '@/store';
 
 Vue.prototype.getDomAbsPosition = function getDomAbsPosition(node) {
   let x = node.offsetLeft, y = node.offsetTop;
-  let offsetHeight = node.offsetHeight || jcst_setting_default.tipboxDefaultOffset;
+  let offsetHeight = node.offsetHeight || jcst.default.tipboxDefaultOffset;
   while (node.offsetParent) {
     node = node.offsetParent;
     x += node.offsetLeft;

@@ -5,15 +5,15 @@
         <div class="tl-top">
           <div class="showSetting">
             <div v-if="iconShow" shape="iconShow" class="tl-icons-box">
-              <TipBox tipmsg="点击定位到手术页" :isFixed="true">
+              <TipBox tipmsg="点击定位到手术页" :isFixed="!showLiveSetting">
                 <span class="tl-icon type1" ref="detailBoxPosi1" v-if="hasSurgeryInfo" @click="handleClickIconBox">{{$t('timeline.iconBox.type1.text')}}</span>
               </TipBox>
             </div>
           </div>
 
-          <div>
+          <!-- <div>
             <el-button class="tl-fold" type="primary" size="mini">{{ $t('timeline.foldBtn.foldTxt') }}</el-button>
-          </div>
+          </div> -->
         </div>
         <div class="tl-bottom">
           <i class="el-icon-caret-left" :class="selectPage > 1 ? 'clickable' : 'btn-disabled'" @click="() => { selectPage > 1 ? selectPage-- : null }"></i>
@@ -65,6 +65,11 @@
 <script>
 import { inject } from '@/common/vuePrototypeMethods.js';
 
+function s() {
+  let dom = document.querySelector('.tl-list');
+  jcst.pageSize.timelineRightWidth = parseFloat(window.getComputedStyle(dom).getPropertyValue('width'));
+}
+
 export default {
   name: 'timeline',
   data() {
@@ -73,7 +78,8 @@ export default {
     };
   },
   mounted() {
-    
+    s();
+    window.addEventListener('resize', () => { s() });
   },
   created() {
     this.busOn();
@@ -87,6 +93,9 @@ export default {
     },
     interval() {
       this.handleSelectPage(this.selectPage);
+    },
+    showLiveSetting() {
+      s();
     }
   },
   computed: {
@@ -106,7 +115,7 @@ export default {
       jcst_timeline.curdays = days.filter(function(_, i) { return showDays * (num - 1) <= i && i < showDays * num; });
     },
     handleClickIconBox() {
-      selectPageFromDate(jcst_setting.surgery.surgeryInfo[0].surgeryDate);
+      selectPageFromDate(jcst.setting.surgery.surgeryInfo[0].surgeryDate);
     }
   }
 };

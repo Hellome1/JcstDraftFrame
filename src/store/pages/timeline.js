@@ -1,12 +1,5 @@
-let state = jcst_setting['timeline'];
-let mutations = {};
-for (let k in state) {
-  mutations['timeline_' + k] = (state, payload) => {
-    state[k] = payload;
-  }
-}
+let state = jcst.setting['timeline'];
 
 export default {
-  state,
-  mutations
+  state
 }

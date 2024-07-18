@@ -31,7 +31,7 @@ export default {
   computed: {
     ...inject('layout'),
     modules() {
-      return this.displayModules.map(key => ({name: key, text: jcst_setting[key][key+'Title'] }))
+      return this.displayModules.map(key => ({name: key, text: jcst.setting[key][key+'Title'] }))
     }
   },
   methods: {

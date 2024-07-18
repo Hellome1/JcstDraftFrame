@@ -30,11 +30,11 @@ const options = [
   'medkit'
 ];
 const getVal = (name) => {
-  let r = ['jcst_setting', ...name.split('_')];
+  let r = ['jcst', 'setting', ...name.split('_')];
   return getJcstValue(r);
 };
 const setVal = (name, v) => {
-  let r = ['jcst_setting', ...name.split('_')];
+  let r = ['jcst', 'setting', ...name.split('_')];
   setJcstValue(r, v);
 }
 export default {

@@ -38,6 +38,33 @@ ul {
   padding-left: 15px;
 }
 
+.module-content {
+  & > .el-row {
+    display: flex;
+  }
+  .layout-left:not(.vital-left) {
+    min-height: 28px;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .dept-check {
+      min-height: 34px;
+    }
+  }
+
+  .module-content-list {
+    height: 100%;
+
+    .el-col {
+      border-left: 1px solid #ddd;
+      height: inherit;
+      min-height: 28px;
+    }
+  }
+}
+
 .bg-highlight {
   background-color: red;
 }

@@ -1,12 +1,5 @@
-let state = window['tipbox'];
-let mutations = {};
-for (let k in state) {
-  mutations['tipbox_' + k] = (state, payload) => {
-    state[k] = payload;
-  }
-}
+let state = window['jcst']['tipbox'];
 
 export default {
-  state,
-  mutations
+  state
 }

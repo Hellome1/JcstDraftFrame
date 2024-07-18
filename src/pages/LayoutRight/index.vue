@@ -108,8 +108,8 @@ import EventShow from './event/eventShowV.vue';
 let dom = null, scrollTop = 0;
 const getData = () => {
   let obj = {};
-  for (let k1 in jcst_setting) {
-    let val = jcst_setting[k1];
+  for (let k1 in jcst.setting) {
+    let val = jcst.setting[k1];
     for (let k2 in val) {
       obj[`${k1}_${k2}`] = val[k2];
     }
@@ -123,10 +123,10 @@ const getWatcher = () => {
   for (let k in data) {
     obj[k] = (v) => {
       let k1 = k.split('_')[0], k2 = k.split('_')[1];
-      let ov = jcst_setting[k1][k2];
+      let ov = jcst.setting[k1][k2];
       if ('number' === typeof ov) v = parseInt(v);
       if ('boolean' === typeof ov) console.log(ov, v);
-      jcst_setting[k1][k2] = v;
+      jcst.setting[k1][k2] = v;
     }
   }
   return obj;

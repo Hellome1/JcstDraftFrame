@@ -1,12 +1,5 @@
-let state = window['table'];
-let mutations = {};
-for (let k in state) {
-  mutations['table_' + k] = (state, payload) => {
-    state[k] = payload;
-  }
-}
+let state = window['jcst']['table'];
 
 export default {
-  state: state,
-  mutations: mutations
+  state: state
 }

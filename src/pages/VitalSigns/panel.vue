@@ -62,7 +62,6 @@ export default {
         datas: [],
         clocks: []
       }, clocks = [];
-      console.log(1111);
       for (let k in this.smtz_data) {
         if (!this.checkList.includes(k)) continue;
         let itm = this.smtz_data[k];

@@ -54,11 +54,11 @@ export default {
   methods: {
     getValue() {
       let name = this.itemsShow;
-      return getJcstValue(['jcst_setting', ...name.split('_')]);
+      return getJcstValue(['jcst', 'setting', ...name.split('_')]);
     },
     setValue(v) {
       let name = this.itemsShow;
-      setJcstValue(['jcst_setting', ...name.split('_')], v);
+      setJcstValue(['jcst', 'setting', ...name.split('_')], v);
     },
     handleChange(c, k) {
       if (c && k) {
