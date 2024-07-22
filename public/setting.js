@@ -111,7 +111,35 @@ jcst.setting = {
       pStyle: {
         textAlign: 'center'
       }
-    }
+    },
+    labelClick: {
+      'jcst.modal.dialogVisible': true,
+      'jcst.modal.path': 'components/LisPop/index.vue',
+      'jcst.modal.title': '检验',
+      'jcst.table.post.action': 'MES0023',
+      'jcst.table.column': [
+        {
+          prop: 'inspItemDesc',
+          label: translate.$t('setting.modules.lis.lisNormGrid.inspItemDesc')
+        },
+        {
+          prop: 'inspectionValue',
+          label: translate.$t('setting.modules.lis.lisNormGrid.inspectionValue')
+        },
+        {
+          prop: 'inspResultUnitCode',
+          label: translate.$t('setting.modules.lis.lisNormGrid.inspResultUnitCode')
+        },
+        {
+          prop: 'inspResultRange',
+          label: translate.$t('setting.modules.lis.lisNormGrid.inspResultRange')
+        },
+        {
+          prop: 'inspectionResult',
+          label: translate.$t('setting.modules.lis.lisNormGrid.inspectionResult')
+        }
+      ]
+    },
   },
   surgery: {
     surgeryInfo: []

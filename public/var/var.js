@@ -35,19 +35,17 @@ jcst.modal = {
   width: '80%',
   path: 'components/Table/index.vue',
 };
+jcst.selectedRow = null;
 jcst.table = {
-  tableData: [
-    {
-      date: '2016-05-02',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }
-  ],
+  post: {
+    action: ''
+  },
+  tableData: [],
   column: [
-    {
-      prop: "date",
-      label: "日期",
-      width: "180",
-    }
+    // {
+    //   prop: "date",
+    //   label: "日期",
+    //   width: "180",
+    // }
   ]
 };

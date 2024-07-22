@@ -97,6 +97,16 @@ export function getLis(query = {}) {
   })
 }
 
+export function ajax({action, method = 'post', query = {}}) {
+  return request(
+    handleReq({
+      url: action,
+      method: method,
+      data: query
+    })
+  );
+}
+
 export function getLisNorm() {}
 export function getLoop() {}
 

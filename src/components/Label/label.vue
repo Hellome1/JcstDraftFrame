@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="labelClass" @contextmenu.prevent.stop="contextmenu">
+    <div class="labelClass" @click="handleClick" @contextmenu.prevent.stop="contextmenu">
       <div class="iconArrowOuter" v-if="isArrow">
         <i ref="iLabel" :style="{ left: arrowStyle.left }" :title="timeTitle" class="arrowUpCustom">
           <i :style="{ borderBottomColor: arrowStyle.color }" class="up"></i>
@@ -13,20 +13,7 @@
           {{ MSG.name }}
         </p>
       </TipBox>
-
     </div>
-
-    <!-- 模态框 -->
-    <el-dialog
-      :title="$t('label.loopDialog.title')"
-      :visible.sync="dialogVisible"
-      width="800px"
-      class="loop-modal"
-      @click.native.stop=""
-      >
-      <div v-if="loopLoading">{{$t('label.loopDialog.loadingText')}}</div>
-      <div v-else ref="content">{{$t('label.loopDialog.noDataDesc')}}</div>
-    </el-dialog>
   </div>
 </template>
 
@@ -37,6 +24,10 @@ import { AllLoop } from '@/components/allLoopStaticTest/loop.js';
 export default {
   name: 'lable',
   props: {
+    labelClick: {
+      type: Object,
+      default() { return null; }
+    },
     MSG: {
       type: Object,
       default: function() {
@@ -69,17 +60,13 @@ export default {
         };
       }
     },
-    param: null
+    param: null,
+    row: null
   },
   data() {
     return {
-      detailShow: false,
-      vm: null,
-      vmshow: true,
-      dialogVisible: false,
       loopLoading: false,
-      actionsTip: [],
-      detailDom: null
+      actionsTip: []
     };
   },
   created() {},
@@ -138,6 +125,8 @@ export default {
           }
         }
       }
+
+      if (this.labelClick) this.MSG['pStyle']['cursor'] = 'pointer';
     },
     updateArrowPosition() {
       // 初始化箭头位置以匹配时间
@@ -171,6 +160,13 @@ export default {
         const { url, param, cb } = this.MSG.loop.getParam.call(this, this.MSG.rowData, AllLoop);
         this.loopLoading = true;
         getLoop(url, param).then(cb);
+      }
+    },
+    handleClick() {
+      if (this.labelClick) {
+        console.log('row', this.row);
+        jcst.selectedRow = this.row;
+        handleEvent(this.labelClick);
       }
     }
   }

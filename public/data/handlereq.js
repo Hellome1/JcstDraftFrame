@@ -56,11 +56,21 @@ function getAxiosSetting() {
 
 function handleObjData(param, obj) {
   var from = param.from;
+  let row = jcst.selectedRow;
   if (from === 'vitalsigns') {
     console.log('[vitalsigns req] param', param);
     var extra = handleVitalsignsItems();
     console.log('[vitalsigns req] extra', extra);
     param = Object.assign({}, param, extra);
+  } else if (from === 'MES0023') {
+    console.log('selectedRow', JSON.parse(JSON.stringify(row)));
+    extra = {
+      inspOrdInfo: {
+        hdcInspRptId: row.hdcInspRptId
+      }
+    };
+    param = Object.assign({}, param, extra);
+    console.log('extra', extra, row.ensLogId);
   }
   obj.testData = JCSTTestData[from];
   return param;

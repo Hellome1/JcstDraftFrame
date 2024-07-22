@@ -180,3 +180,10 @@ function lis_data(res) {
     this.resdata = JSON.parse(JSON.stringify(res.data));
   })
 }
+
+function ajax_data(res) {
+  console.log(res);
+  if (res.data) {
+    jcst.table.tableData = res.data;
+  }
+}

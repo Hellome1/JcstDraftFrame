@@ -1,6 +1,6 @@
 <template>
   <div class="module-content">
-    <Label v-if="handledParam" :param="handledParam" @getLisNorm="getLisN" />
+    <Label v-if="handledParam" :labelClick="labelClick" :param="handledParam" :row="param" @getLisNorm="getLisN" />
   </div>
 </template>
 
@@ -16,6 +16,9 @@ export default {
     labelConfig: {
       type: Object,
       required: true
+    },
+    labelClick: {
+      type: Object
     },
     basic: {
       type: Object,
