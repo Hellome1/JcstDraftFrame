@@ -1,12 +1,13 @@
 <template>
   <div>
-    <Head />
+    <Head v-if="dialogVisible"/>
     <hr>
     <Table />
   </div>
 </template>
 
 <script>
+import { inject } from '@/common/vuePrototypeMethods.js';
 import Head from './head.vue';
 import Table from '../Table/index.vue';
 export default {
@@ -14,6 +15,9 @@ export default {
   components: {
     Head,
     Table
+  },
+  computed: {
+    ...inject('modal')
   }
 }
 </script>

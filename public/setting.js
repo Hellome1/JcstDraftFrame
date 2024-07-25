@@ -28,6 +28,7 @@ jcst.setting = {
     handleClick: { // 事件
       'jcst.modal.dialogVisible': true,
       'jcst.modal.title': '过敏信息',
+      'jcst.modal.path': 'components/Table/index.vue',
       'jcst.table.tableData': 'Data.allergyData',
       'jcst.table.column': [
         {
@@ -136,7 +137,8 @@ jcst.setting = {
         },
         {
           prop: 'inspectionResult',
-          label: translate.$t('setting.modules.lis.lisNormGrid.inspectionResult')
+          label: translate.$t('setting.modules.lis.lisNormGrid.inspectionResult'),
+          rule: tableRules.rule1
         }
       ]
     },

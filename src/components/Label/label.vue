@@ -164,7 +164,7 @@ export default {
     },
     handleClick() {
       if (this.labelClick) {
-        console.log('row', this.row);
+        // console.log('[label.vue]set row', this.row);
         jcst.selectedRow = this.row;
         handleEvent(this.labelClick);
       }

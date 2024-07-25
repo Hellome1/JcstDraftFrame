@@ -46,7 +46,9 @@ export default {
       'el-table',
       {
         props: {
-          data: this.tableData
+          data: this.tableData,
+          'row-style': rowO => jcst.rules.$2(rowO.row, this.columns),
+          'cell-style': O => jcst.rules.$3(O, this.columns)
         },
         style: {
           width: '100%'
@@ -58,7 +60,10 @@ export default {
           }
         ]
       },
-      this.columns.map(attrs => h('el-table-column', { attrs: attrs }))
+      this.columns.map(attrs => h(
+        'el-table-column', 
+        { attrs: attrs, scopedSlots: attrs.rule ? { default: props => { return jcst.rules.$1(h, props.row, attrs.rule) } } : {} }
+      ))
     );
   },
   methods: {
