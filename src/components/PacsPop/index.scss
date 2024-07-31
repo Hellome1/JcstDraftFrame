@@ -1,0 +1,54 @@
+.pacspop-items {
+  position: relative;
+}
+.pacspop-item {
+  display: flex;
+  position: relative;
+  height: 200px;
+  box-sizing: border-box;
+  margin-top: 5px;
+
+  .pacspop-item-left {
+    width: 30%;
+    background-color: #ddd;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    padding: 10px;
+
+    .pacspop-a1 {
+      width: 50%;
+      line-height: 40px;
+
+      .pacspop-a1-l {
+        font-weight: bold;
+      }
+    }
+  }
+  .pacspop-item-right {
+    width: 70%;
+    background-color: #eee;
+    padding: 10px;
+
+    .pacspop-a2 {
+      height: 50%;
+      padding: 5px 0;
+
+      .pacspop-a2-t {
+        font-weight: bold;
+      }
+      .cover-scrollbar {
+        height: 100px;
+        overflow: hidden;
+
+        .pacspop-a2-b {
+          max-height: 70px;
+          box-sizing: border-box;
+          padding-right: 15px;
+          width: calc(100% + 15px);
+          overflow: auto;
+        }
+      }
+    }
+  }
+}

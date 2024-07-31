@@ -6,7 +6,7 @@ jcst.setting = {
     leftBgColor: '#f9f9f9', // 颜色
     moduleHeadFontSize: '16px', // 字体大小
     moduleHeadColor: '#000', // 颜色
-    displayModules: ['vitalsigns', 'lis'] // 数组
+    displayModules: ['vitalsigns', 'pacs', 'lis'] // 数组
   },
   header: {
     isShow: true, // 布尔值
@@ -96,7 +96,21 @@ jcst.setting = {
   },
   pacs: {
     pacsTitle: '检查',
-    dateKey: 'examDate'
+    name: 'examItemName',
+    // date: 'examDate',
+    // time: 'examTime',
+    date: 'examAppDate',
+    time: 'examAppTime',
+    leftKey: 'examDeptName',
+    noClassifyText: 'setting.modules.lis.noClassifyText',
+    labelConfig: {
+      isDetail: true
+    },
+    labelClick: {
+      'jcst.modal.dialogVisible': true,
+      'jcst.modal.path': 'components/PacsPop/index.vue',
+      'jcst.modal.title': '检查报告'
+    },
   },
   lis: {
     lisTitle: '检验',

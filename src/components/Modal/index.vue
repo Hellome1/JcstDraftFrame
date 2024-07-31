@@ -35,7 +35,7 @@ export default {
           props: {
             visible: this.dialogVisible,
             title: this.title,
-            modal: false,
+            // modal: false,
             "before-close": () => (this.modal.dialogVisible = false),
           },
           attrs: {

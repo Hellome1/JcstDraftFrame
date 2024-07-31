@@ -13,6 +13,11 @@
   }
 }
 
+// dialog 遮罩屏蔽显示
+.v-modal {
+  display: none;
+}
+
 .module-content-list.el-row {
   display: flex;
 

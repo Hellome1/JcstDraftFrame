@@ -14,7 +14,7 @@
         <el-row class="module-content-list" :class="nullData ? 'nullData' : ''">
           <el-col v-for="(day, i) in showDays" :key="i" :sm="3" :xs="3">
             <div v-for="(item, d) in filteredData" :key="d" :log="false && log(item[date])">
-              <template v-if="curdates[day] === item[date]">
+              <template v-if="curdates[i] === item[date]">
                 <Label v-if="item" :nullData="(nullData = false)" :param="item" :labelClick="labelClick" :basic="labelBasic" :labelConfig="labelConfig" />
               </template>
             </div>

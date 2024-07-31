@@ -8,6 +8,7 @@ Vue.prototype.getDomAbsPosition = function getDomAbsPosition(node) {
     node = node.offsetParent;
     x += node.offsetLeft;
     y += node.offsetTop;
+    if (node.scrollTop) y -= node.scrollTop;
   }
   return { left: x, top: y + offsetHeight };
 };

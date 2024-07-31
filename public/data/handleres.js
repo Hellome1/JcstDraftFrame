@@ -126,10 +126,6 @@ function timeline_surgeryData(res) {
   }
 }
 
-var moduleTimeInfo = {
-  'vitalsigns': {},
-  'lis': {}
-};
 function vitalsigns_data(res) {
   console.log('[vitalsigns res] res', res);
   bus.$emit('vitalsigns', function () {
@@ -170,7 +166,16 @@ function vitalsigns_data(res) {
 }
 
 function pacs_data(res) {
-  console.log('pacs_data_res', res);
+  console.log('[pacs res] pacs_data_res', res);
+  var data = JSON.parse(JSON.stringify(res.data));
+  jcst.datas['pacs'] = data;
+
+  bus.$emit('pacs', function() {
+    this.resdata = data;
+  });
+  bus.$emit('pacspop', function() {
+    this.datas = data;
+  });
 }
 
 function lis_data(res) {
@@ -178,7 +183,7 @@ function lis_data(res) {
 
   bus.$emit('lis', function() {
     this.resdata = JSON.parse(JSON.stringify(res.data));
-  })
+  });
 }
 
 function ajax_data(res) {

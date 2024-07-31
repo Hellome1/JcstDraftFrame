@@ -18,7 +18,14 @@ var TextStyle = {};
 
 var Data = {};
 
+var moduleTimeInfo = {
+  'vitalsigns': {},
+  'pacs': {},
+  'lis': {}
+};
 var jcst = {};
+jcst.selectedRow = null;
+jcst.datas = {};
 jcst.pageSize = {
   timelineRightWidth: 0
 };
@@ -35,7 +42,12 @@ jcst.modal = {
   width: '80%',
   path: 'components/Table/index.vue',
 };
-jcst.selectedRow = null;
+jcst.modal = {
+  dialogVisible: false,
+  title: '检查报告',
+  width: '80%',
+  path: 'components/PacsPop/index.vue',
+};
 jcst.table = {
   post: {
     action: ''
