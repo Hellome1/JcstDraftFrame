@@ -1,6 +1,9 @@
 .pacspop-items {
   position: relative;
 }
+.pacspop-items * {
+  box-sizing: border-box;
+}
 .pacspop-item {
   display: flex;
   position: relative;
@@ -9,7 +12,7 @@
   margin-top: 5px;
 
   .pacspop-item-left {
-    width: 30%;
+    width: calc(30% - 30px);
     background-color: #ddd;
     display: flex;
     position: relative;
@@ -23,6 +26,16 @@
       .pacspop-a1-l {
         font-weight: bold;
       }
+    }
+  }
+  .pacspop-item-middle {
+    width: 30px;
+    padding: 8px 3px;
+    background-color: #e8e8e8;
+    text-align: center;
+
+    .fa {
+      font-size: 18px;
     }
   }
   .pacspop-item-right {

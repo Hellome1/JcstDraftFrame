@@ -19,8 +19,14 @@ export default {
       const pos = this.getDomAbsPosition(tar || root);
       console.log('position', pos);
       let { left, top } = pos;
-      let style = { left: left + 'px', top: top + 'px' };
-      if (this.isFixed) style.position = 'fixed';
+      let style = {};
+      if (this.isFixed) {
+        style.position = 'fixed';
+        let scrollTop = document.documentElement.scrollTop;
+        console.log('scrllTop', scrollTop);
+        top += scrollTop;
+      }
+      style = { left: left + 'px', top: top + 'px' };
       jcst.tipbox.style = style;
       jcst.tipbox.text = this.tipmsg;
       jcst.tipbox.fns = this.fns;

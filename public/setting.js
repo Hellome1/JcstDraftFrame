@@ -158,7 +158,20 @@ jcst.setting = {
     },
   },
   surgery: {
-    surgeryInfo: []
+    surgeryTitle: '手术',
+    surgeryData: [],
+    surgeryInfo: [],
+    name: 'preOperDiagRemark',
+    date: 'operStartDate',
+    labelConfig: {
+      isDetail: true,
+      pStyle: {
+        color: 'white',
+        backgroundColor: '#7bb5d9',
+        border: '1px solid #7bb5d9',
+        textAlign: 'center'
+      }
+    }
   }
 };
 

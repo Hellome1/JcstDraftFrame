@@ -24,6 +24,7 @@ var moduleTimeInfo = {
   'lis': {}
 };
 var jcst = {};
+jcst.currentClickedRow = null;
 jcst.selectedRow = null;
 jcst.datas = {};
 jcst.pageSize = {
@@ -43,7 +44,7 @@ jcst.modal = {
   path: 'components/Table/index.vue',
 };
 jcst.modal = {
-  dialogVisible: false,
+  dialogVisible: true,
   title: '检查报告',
   width: '80%',
   path: 'components/PacsPop/index.vue',

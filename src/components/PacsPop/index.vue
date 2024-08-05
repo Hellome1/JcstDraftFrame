@@ -7,6 +7,11 @@
             <span class="pacspop-a1-l">{{itm['label']}} : </span><span class="pacspop-a1-r">{{data[itm['code']]}}</span>
           </span>
         </div>
+        <div class="pacspop-item-middle">
+          <TipBox tipmsg="点击查看PDF报告" :isFixed="true">
+            <i class="fa fa-file-pdf-o" style="color: #ff5d5d; cursor: pointer" @click="handleClick(data)"></i>
+          </TipBox>
+        </div>
         <div class="pacspop-item-right">
           <div class="pacspop-a2" v-for="(itm, index) in body" :key="index">
             <p class="pacspop-a2-t">{{itm['label']}} : </p>
@@ -108,6 +113,10 @@ export default {
         return itm[name] + itm[date] + itm[time] === selectedRow[name] + selectedRow[date] + selectedRow[time];
       }
       return false;
+    },
+    handleClick(data) {
+      jcst.currentClickedRow = data;
+      let path = getPacsPDFPath();
     }
   }
 }

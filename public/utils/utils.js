@@ -122,3 +122,78 @@ function selectPageFromDate(date) {
 
   return page;
 }
+
+function getPacsPDFPath() {
+  var row = jcst.currentClickedRow || jcst.selectedRow;
+  var rules = [
+    {
+      path: 'http://168.1.1.1/test.html?a={hosOrdId}&b={hosEncId}',
+      condition: 'examDeptName^==^CT室^^examCheckDocName^==^刘波er1^^^examAppDate^==^2022-07-20,2022-07-22'
+    },
+    {
+      path: '{examRptLink}',
+      condition: 'examAppDate^==^2022-07-21'
+    }
+  ];
+  return getPathByRule(rules, row);
+}
+
+function getPathByRule(rules, row) {
+  var sources = [PARAM, row];
+  var path = '';
+  rules.forEach(function(rule) {
+    if (path) return;
+    var isMatch = false;
+    if (rule.condition) {
+      var and_conditions = rule.condition.split('^^^');
+      var and_conditions_isMatch = true;
+      and_conditions.forEach(function(and_condition) {
+        var or_conditions = and_condition.split('^^');
+        var or_conditions_isMatch = false;
+        console.log('or_conditions', or_conditions);
+        or_conditions.forEach(function(condition) {
+          var sarr = condition.split('^');
+          var key = sarr[0], logicstr = sarr[1], val = sarr[2];
+          var result = false;
+          switch (logicstr) {
+            case '==':
+              if (val.indexOf(',') > -1) {
+                result = val.split(',').filter(function(itm) { return row[key] && row[key].indexOf && row[key].indexOf(itm) > -1; }).length > 0;
+              } else {
+                result = row[key] == val;
+              }
+              break;
+            case '!=':
+              if (val.indexOf(',') > -1) {
+                result = val.split(',').filter(function(itm) { return row[key] && row[key].indexOf && row[key].indexOf(itm) > -1; }).length === 0;
+              } else {
+                result = row[key] != val;
+              }
+              break;
+          }
+          console.log('row["' + key + '"]', row[key], result);
+          if (result) or_conditions_isMatch = true; // 或链接只要有一个满足就满足
+        });
+        if (!or_conditions_isMatch) and_conditions_isMatch = false; // 且链接只要有一个不满足就都不满足
+      });
+      isMatch = and_conditions_isMatch;
+    }
+    else isMatch = true;
+    if (isMatch) {
+      var rulePath = rule.path;
+      path = rulePath.replace(/{\w+}/g, function(match) {
+        var matchKey = match.slice(1, match.length - 1);
+        var matchValue = '';
+        sources.forEach(function(source) {
+          if (source && source[matchKey]) {
+            console.log('matchKey', matchKey, source && source[matchKey], source);
+            matchValue = source[matchKey];
+          }
+        });
+        return matchValue;
+      });
+    }
+  });
+  console.log('[utils.js] getPathByRule resule:', path);
+  return path;
+}

@@ -2,8 +2,9 @@
 const dict = {
   'vitalsigns': 'VitalSigns/index.vue',
   'pacs': 'Pacs/index.vue',
-  'lis': 'Lis/index.vue'
-}
+  'lis': 'Lis/index.vue',
+  'surgery': 'Surgery/index.vue'
+};
 export default {
   name: 'dynamicImport',
   props: {
