@@ -1,21 +1,11 @@
 <template>
   <div class="module-content">
-    <el-row v-if="nullData">
-      <el-col :span="leftW" :style="{ backgroundColor: leftBgColor }" class="layout-left"></el-col>
-      <el-col :span="rightW" class="layout-right">
-        <el-empty :description="$t('medicalOrder.noDataDesc')"></el-empty>
-      </el-col>
-    </el-row>
     <Mdc
       ref="mdc"
-      v-show="!nullData"
-      v-for="(item, i) in setting.items"
+      v-for="(item, i) in items"
       :key="i"
       :item="item"
-      :setting="setting"
-      :last="i == setting.items.length - 1 ? true : false"
       :datas="classifyObjFilter[item.code] ? classifyObjFilter[item.code] : []"
-      @nullData="nullData = false"
     />
   </div>
 </template>
@@ -28,16 +18,9 @@ export default {
   components: {
     Mdc
   },
-  props: {
-    setting: {
-      type: Object,
-      required: true
-    }
-  },
   data() {
     return {
       datas: [],
-      nullData: true,
       keyArr: [],
       classifyObj: {},
       classifyObjFilter: {},
@@ -50,9 +33,7 @@ export default {
     };
   },
   watch: {
-    tlCruSDate: function() {
-      this.nullData = true;
-    }
+    
   },
 
   mounted() {},
@@ -65,11 +46,13 @@ export default {
   },
 
   computed: {
-    ...inject('layout', 'timeline')
+    ...inject('layout', 'timeline', 'medicalOrder')
   },
 
   methods: {
-    
+    busOn() {
+      bus.$on('medicalOrder', cb => (cb && cb.call(this)));
+    }
   }
 };
 </script>

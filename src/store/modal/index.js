@@ -1,5 +1,4 @@
 let state = window['jcst']['modal'];
-let mutations = {};
 state.main = function (h) {
   return h(
     'span',
@@ -41,13 +40,7 @@ state.footer = function(h) {
     ]
   )
 }
-for (let k in state) {
-  mutations['modal_' + k] = (state, payload) => {
-    state[k] = payload;
-  }
-}
 
 export default {
-  state: state,
-  mutations: mutations
+  state: state
 }

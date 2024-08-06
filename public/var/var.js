@@ -44,10 +44,16 @@ jcst.modal = {
   path: 'components/Table/index.vue',
 };
 jcst.modal = {
-  dialogVisible: true,
+  dialogVisible: false,
   title: '检查报告',
   width: '80%',
   path: 'components/PacsPop/index.vue',
+};
+jcst.modalTwo = {
+  dialogVisible: false,
+  title: '链接',
+  width: '80%',
+  path: 'components/Iframe/index.vue',
 };
 jcst.table = {
   post: {
@@ -61,6 +67,10 @@ jcst.table = {
     //   width: "180",
     // }
   ]
+};
+jcst.iframe = {
+  src: '',
+  height: '800px'
 };
 var tableRules = {};
 tableRules.rule1 = {

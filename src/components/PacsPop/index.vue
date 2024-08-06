@@ -117,6 +117,8 @@ export default {
     handleClick(data) {
       jcst.currentClickedRow = data;
       let path = getPacsPDFPath();
+      jcst.iframe['src'] = path;
+      jcst.modalTwo.dialogVisible = true;
     }
   }
 }

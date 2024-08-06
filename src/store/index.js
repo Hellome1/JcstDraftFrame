@@ -7,8 +7,10 @@ import layoutRight from './layoutRight/index.js';
 
 import layout from './layout/index.js';
 import modal from './modal/index.js';
+import modalTwo from './modalTwo/index.js';
 import table from './table/index.js';
 import tipbox from './tipbox/index.js';
+import iframe from './iframe/index.js';
 
 import header from './pages/header.js';
 import timeline from './pages/timeline.js';
@@ -33,8 +35,10 @@ export default new Vuex.Store({
     layoutRight,
     layout,
     modal,
+    modalTwo,
     table,
     tipbox,
+    iframe,
     header,
     timeline,
     surgery,

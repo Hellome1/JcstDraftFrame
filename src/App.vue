@@ -15,6 +15,7 @@
 
         <div class="common">
           <Modal />
+          <ModalTwo />
           <TipBoxShow />
           <HighLightBox />
         </div>
