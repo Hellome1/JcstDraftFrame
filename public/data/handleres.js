@@ -52,8 +52,10 @@ function header_userInfo() {
 }
 
 function header_allergyData(res) {
-  Data['allergyData'] = res.data;
-  jcst.setting.header.allergyData = res.data;
+  if (res && res.data) {
+    Data['allergyData'] = res.data;
+    jcst.setting.header.allergyData = res.data;
+  }
 }
 
 function timeline_timelineData(res) {
@@ -101,6 +103,7 @@ function timeline_surgeryData(res) {
   jcst.setting.surgery.surgeryData = uniqueRes;
   var surgeryInfo = handleSurgeryData(uniqueRes);
   jcst.setting.surgery.surgeryInfo = surgeryInfo;
+  if (surgeryInfo.length) moduleTimeInfo['surgery'] = { 0: surgeryInfo.map(function(itm) { return itm.surgeryDate }) };
   getTimelineDays();
 
   function uniqueData(data) {

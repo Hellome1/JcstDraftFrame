@@ -6,7 +6,7 @@ jcst.setting = {
     leftBgColor: '#f9f9f9', // 颜色
     moduleHeadFontSize: '16px', // 字体大小
     moduleHeadColor: '#000', // 颜色
-    displayModules: ['vitalsigns', 'pacs', 'lis'] // 数组
+    displayModules: ['vitalsigns', 'pacs', 'lis', 'surgery'] // 数组
   },
   header: {
     isShow: true, // 布尔值
@@ -108,7 +108,7 @@ jcst.setting = {
     },
     labelClick: {
       'jcst.modal.dialogVisible': true,
-      'jcst.modal.path': 'components/PacsPop/index.vue',
+      'jcst.modal.path': 'pages/Pacs/PacsPop/index.vue',
       'jcst.modal.title': '检查报告'
     },
   },
@@ -129,7 +129,7 @@ jcst.setting = {
     },
     labelClick: {
       'jcst.modal.dialogVisible': true,
-      'jcst.modal.path': 'components/LisPop/index.vue',
+      'jcst.modal.path': 'pages/Lis/LisPop/index.vue',
       'jcst.modal.title': '检验',
       'jcst.table.post.action': 'MES0023',
       'jcst.table.column': [
@@ -171,6 +171,11 @@ jcst.setting = {
         border: '1px solid #7bb5d9',
         textAlign: 'center'
       }
+    },
+    labelClick: {
+      'jcst.modal.dialogVisible': true,
+      'jcst.modal.path': 'pages/Surgery/SurgeryPop/index.vue',
+      'jcst.modal.title': '手术详情'
     }
   }
 };

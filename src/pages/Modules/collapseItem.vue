@@ -20,7 +20,8 @@ import { inject } from '@/common/vuePrototypeMethods.js';
 const tipdict = {
   'vitalsigns': '定位到生命体征位置',
   'pacs': '定位到检查位置',
-  'lis': '定位到检验位置'
+  'lis': '定位到检验位置',
+  'surgery': '定位到手术位置'
 };
 export default {
   name: 'collapseItem',
@@ -45,6 +46,7 @@ export default {
       for (let k in timeinfo) {
         r = true;
       }
+      console.log('moduleTimeInfo', moduleTimeInfo, this.name, r);
       return r;
     }
   },

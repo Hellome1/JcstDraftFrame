@@ -9,7 +9,7 @@
 <script>
 import { inject } from '@/common/vuePrototypeMethods.js';
 import Head from './head.vue';
-import Table from '../Table/index.vue';
+import Table from '@/components/Table/index.vue';
 export default {
   name: 'LisPop',
   components: {

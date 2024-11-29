@@ -34,7 +34,7 @@ export default {
   name: 'pacsPop',
   data() {
     return {
-      datas: jcst.datas['pacs'] || [],
+      datas: [],
       head: [
         {
           label: '项目名称',

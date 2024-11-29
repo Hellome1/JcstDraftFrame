@@ -44,7 +44,7 @@ function getVisit(query = {}) {
   })
 }
 
-function getSurgery(query = {}) {
+function getSurgery(query = { from: 'surgery' }) {
   request(
     handleReq({
       url: 'MES0020',

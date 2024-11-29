@@ -21,7 +21,8 @@ var Data = {};
 var moduleTimeInfo = {
   'vitalsigns': {},
   'pacs': {},
-  'lis': {}
+  'lis': {},
+  'surgery': {}
 };
 var jcst = {};
 jcst.currentClickedRow = null;
@@ -47,7 +48,7 @@ jcst.modal = {
   dialogVisible: false,
   title: '检查报告',
   width: '80%',
-  path: 'components/PacsPop/index.vue',
+  path: 'pages/Pacs/PacsPop/index.vue',
 };
 jcst.modalTwo = {
   dialogVisible: false,
