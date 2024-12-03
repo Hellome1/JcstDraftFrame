@@ -28,6 +28,9 @@ const getKey = (arr) => {
       if (v === dict[k]) key = k;
     }
     return key;
+  }).sort((a, b) => {
+    let aI = displayModules.indexOf(a), bI = displayModules.indexOf(b);
+    return aI - bI;
   })
 }
 export default {
@@ -46,6 +49,7 @@ export default {
   watch: {
     checkList() {
       jcst_layout.displayModules = getKey(this.checkList);
+      console.log('jcst_layout.displayModules', this.cp(jcst_layout.displayModules));
     }
   },
   computed: {

@@ -15,7 +15,7 @@
           <el-col v-for="(day, i) in showDays" :key="i" :sm="3" :xs="3">
             <div v-for="(item, d) in filteredData" :key="d">
               <template v-if="curdates[i] === item[date]">
-                <Label v-if="item" :param="item" :labelClick="labelClick" :basic="labelBasic" :labelConfig="labelConfig" />
+                <Label v-if="item" :param="item" :labelClick="labelClick" :basic="{ name, date, time }" :labelConfig="labelConfig" />
               </template>
             </div>
           </el-col>
@@ -56,14 +56,6 @@ export default {
     ...inject('layout', 'timeline', 'pacs'),
     curdates() {
       return this.curdays.map(d => d.date);
-    },
-    labelBasic() {
-      const { name, date, time } = this;
-      return {
-        name,
-        date,
-        time
-      };
     },
     dept() {
       var codeKey = this.leftKey, descKey = this.leftKey;

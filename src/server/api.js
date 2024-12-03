@@ -70,6 +70,20 @@ export function getVitals(query = {}) {
   })
 }
 
+export function getMedicalOrder(query = { from: 'medicalOrder' }) {
+  request(
+    handleReq({
+      url: 'MES005',
+      method: 'post',
+      data: query
+    })
+  ).then(res => {
+    medicalOrder_data(res);
+  }).catch(e => {
+    throw e;
+  })
+}
+
 export function getPacs(query = {}) {
   request(
     handleReq({
@@ -94,6 +108,30 @@ export function getLis(query = {}) {
     lis_data(res);
   }).catch(e => {
     throw e;
+  })
+}
+
+export function getSurgeryDetail(query = { from: 'surgeryDetail' }) {
+  request(
+    handleReq({
+      url: 'MES0021',
+      method: 'post',
+      data: query
+    })
+  ).then(res => {
+    surgery_data_detail(res);
+  })
+}
+
+export function getConsult(query = { from: 'consult' }) {
+  request(
+    handleReq({
+      url: 'MES0017',
+      method: 'post',
+      data: query
+    })
+  ).then(res => {
+    consult_data(res);
   })
 }
 

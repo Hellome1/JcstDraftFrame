@@ -12,7 +12,11 @@ export default {
       type: Object,
       required: true
     },
-    setting: {
+    basic: {
+      type: Object,
+      required: true
+    },
+    TDlineConfig: {
       type: Object,
       required: true
     }
@@ -31,22 +35,35 @@ export default {
   methods: {
     handleData(data) {
       let param = {};
+      let TDlineConfig = Object.assign({}, this.TDlineConfig, this.basic);
       if (data.isHighlight) param.isHighlight = true;
-      for (let key in this.setting.TDlineConfig) {
-        if (data[this.setting.TDlineConfig[key]]) {
-          param[key] = data[this.setting.TDlineConfig[key]];
-        } else if (typeof this.setting.TDlineConfig[key] == 'string' && this.setting.TDlineConfig[key].indexOf(' + ') > -1) {
+      for (let key in TDlineConfig) {
+        if (data[TDlineConfig[key]]) {
+          param[key] = data[TDlineConfig[key]];
+        } else if (typeof TDlineConfig[key] == 'string' && TDlineConfig[key].indexOf(' + ') > -1) {
           let value = '';
-          this.setting.TDlineConfig[key].split(' + ').forEach(item => {
+          TDlineConfig[key].split(' + ').forEach(item => {
             value += data[item];
           });
           param[key] = value;
         } else {
-          param[key] = this.setting.TDlineConfig[key];
+          param[key] = TDlineConfig[key];
         }
       }
       param.rowData = data;
       // console.log(param);
+      if (!param.config) {
+        param.config = {
+          fontLight: false,
+          isDetail: false,
+          titleCfg: {
+            isTitle: true,
+            titleStyle: {
+              color: '#84aaca'
+            }
+          }
+        };
+      }
       return param;
     }
   }

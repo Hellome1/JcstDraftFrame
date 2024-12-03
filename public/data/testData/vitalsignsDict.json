@@ -1,0 +1,241 @@
+{
+  "code": 200,
+  "msg": "操作成功",
+  "data": [
+    {
+      "vitalSignId": "1524699596295061505",
+      "vitalCode": "68",
+      "vitalDesc": "呼吸",
+      "vitalUnit": "次/分",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596303450114",
+      "vitalCode": "69",
+      "vitalDesc": "腋温",
+      "vitalUnit": "℃",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596303450115",
+      "vitalCode": "70",
+      "vitalDesc": "收缩压",
+      "vitalUnit": "mmHg",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596303450116",
+      "vitalCode": "71",
+      "vitalDesc": "舒张压",
+      "vitalUnit": "mmHg",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596303450117",
+      "vitalCode": "72",
+      "vitalDesc": "大便次数",
+      "vitalUnit": "次",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596303450118",
+      "vitalCode": "73",
+      "vitalDesc": "体重",
+      "vitalUnit": "KG",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596303450119",
+      "vitalCode": "74",
+      "vitalDesc": "身高",
+      "vitalUnit": "cm",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596303450120",
+      "vitalCode": "75",
+      "vitalDesc": "总入量",
+      "vitalUnit": "ml",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596303450121",
+      "vitalCode": "76",
+      "vitalDesc": "总出量",
+      "vitalUnit": "ml",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596303450122",
+      "vitalCode": "77",
+      "vitalDesc": "物理降温",
+      "vitalUnit": "℃",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596303450124",
+      "vitalCode": "79",
+      "vitalDesc": "心率",
+      "vitalUnit": "次/分",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596307644417",
+      "vitalCode": "80",
+      "vitalDesc": "血氧饱和度",
+      "vitalUnit": "",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596307644418",
+      "vitalCode": "81",
+      "vitalDesc": "Barthel评分",
+      "vitalUnit": "",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596307644419",
+      "vitalCode": "82",
+      "vitalDesc": "压疮风险评估",
+      "vitalUnit": "",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596307644420",
+      "vitalCode": "84",
+      "vitalDesc": "坠床风险评估",
+      "vitalUnit": "",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596307644421",
+      "vitalCode": "85",
+      "vitalDesc": "疼痛评分",
+      "vitalUnit": "",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596307644422",
+      "vitalCode": "86",
+      "vitalDesc": "肛温",
+      "vitalUnit": "℃",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596316033026",
+      "vitalCode": "91",
+      "vitalDesc": "尿量",
+      "vitalUnit": "ml",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596316033027",
+      "vitalCode": "98",
+      "vitalDesc": "跌倒风险评估",
+      "vitalUnit": "",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596316033028",
+      "vitalCode": "101",
+      "vitalDesc": "空腹血糖",
+      "vitalUnit": "",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596316033029",
+      "vitalCode": "102",
+      "vitalDesc": "早餐后",
+      "vitalUnit": "",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596316033030",
+      "vitalCode": "103",
+      "vitalDesc": "午餐前",
+      "vitalUnit": "",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596316033031",
+      "vitalCode": "104",
+      "vitalDesc": "午餐后",
+      "vitalUnit": "",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596316033032",
+      "vitalCode": "105",
+      "vitalDesc": "晚餐前",
+      "vitalUnit": "",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596316033033",
+      "vitalCode": "106",
+      "vitalDesc": "晚餐后",
+      "vitalUnit": "",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596316033034",
+      "vitalCode": "107",
+      "vitalDesc": "睡前",
+      "vitalUnit": "",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596316033035",
+      "vitalCode": "108",
+      "vitalDesc": "夜间",
+      "vitalUnit": "",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596316033036",
+      "vitalCode": "109",
+      "vitalDesc": "随机",
+      "vitalUnit": "",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596316033037",
+      "vitalCode": "121",
+      "vitalDesc": "呕吐",
+      "vitalUnit": "",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596316033038",
+      "vitalCode": "122",
+      "vitalDesc": "人工",
+      "vitalUnit": "",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596316033039",
+      "vitalCode": "123",
+      "vitalDesc": "脐带",
+      "vitalUnit": "",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596316033040",
+      "vitalCode": "124",
+      "vitalDesc": "母乳",
+      "vitalUnit": "",
+      "vitalStatus": "1"
+    },
+    {
+      "vitalSignId": "1524699596324421634",
+      "vitalCode": "67",
+      "vitalDesc": "脉搏",
+      "vitalUnit": "次/分",
+      "vitalStatus": "1"
+    }
+  ],
+  "draw": 1,
+  "pageSize": 100,
+  "pages": 1,
+  "recordsTotal": 34
+}

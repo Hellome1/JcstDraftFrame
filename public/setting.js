@@ -6,7 +6,7 @@ jcst.setting = {
     leftBgColor: '#f9f9f9', // 颜色
     moduleHeadFontSize: '16px', // 字体大小
     moduleHeadColor: '#000', // 颜色
-    displayModules: ['vitalsigns', 'pacs', 'lis', 'surgery'] // 数组
+    displayModules: ['vitalsigns', 'medicalOrder', 'pacs', 'lis', 'surgery', 'consult'] // 数组
   },
   header: {
     isShow: true, // 布尔值
@@ -94,6 +94,22 @@ jcst.setting = {
       }
     ]
   },
+  medicalOrder: {
+    medicalOrderTitle: '用药医嘱',
+    name: 'orderName',
+    date: 'orderDate',
+    time: 'orderTime',
+    stopDate: 'ordStopDate',
+    classifyKey: 'ordPriCode',
+    labelConfig: {
+      isDetail: true
+    },
+    TDlineConfig: {
+      title: 'medUsageCode + medFreqCode',
+      stopDate: 'ordStopDate',
+      stopTime: 'ordStopTime'
+    }
+  },
   pacs: {
     pacsTitle: '检查',
     name: 'examItemName',
@@ -177,6 +193,17 @@ jcst.setting = {
       'jcst.modal.path': 'pages/Surgery/SurgeryPop/index.vue',
       'jcst.modal.title': '手术详情'
     }
+  },
+  consult: {
+    consultTitle: '会诊',
+    name: 'consulDesc',
+    date: 'ecrDate',
+    time: 'ecrTime',
+    leftKey: 'ecrLocDesc',
+    noClassifyText: 'setting.modules.consult.noClassifyText',
+    labelConfig: {
+      isDetail: true
+    }
   }
 };
 
@@ -196,7 +223,7 @@ function getJcstValue(keys) {
   var curObj = window;
   var lastKey = keys[keys.length - 1], restKey = keys.slice(0, keys.length - 1);
   console.log('getJcstValue', lastKey, restKey);
-  restKey.forEach(function(key) {
+  restKey.forEach(function (key) {
     curObj = curObj[key]
   });
   return curObj[lastKey];
@@ -206,7 +233,7 @@ function setJcstValue(keys, val) {
   var curObj = window;
   var lastKey = keys[keys.length - 1], restKey = keys.slice(0, keys.length - 1);
   console.log('setJcstValue', lastKey, restKey);
-  restKey.forEach(function(key) {
+  restKey.forEach(function (key) {
     curObj = curObj[key]
   });
   curObj[lastKey] = val;

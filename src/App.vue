@@ -71,4 +71,8 @@ export default {
   }
 };
 </script>
-<style lang="css"></style>
+<style lang="scss">
+#app {
+  padding-bottom: 10px;
+}
+</style>

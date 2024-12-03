@@ -5,7 +5,7 @@
       <div class="func-area">
         <div class="loca-icon" v-if="showLocaIcon">
           <TipBox :tipmsg="tipmsg">
-            <span class="tl-icon" @click.stop="handleClickIconBox"> L </span>
+            <span class="tl-icon" @click.stop="handleClickIconBox"> {{word}} </span>
           </TipBox>
         </div>
       </div>
@@ -19,9 +19,19 @@ import { inject } from '@/common/vuePrototypeMethods.js';
 
 const tipdict = {
   'vitalsigns': '定位到生命体征位置',
+  'medicalOrder': '定位到用药医嘱位置',
   'pacs': '定位到检查位置',
   'lis': '定位到检验位置',
-  'surgery': '定位到手术位置'
+  'surgery': '定位到手术位置',
+  'consult': '定位到会诊位置'
+};
+const wordDict = {
+  'vitalsigns': '生',
+  'medicalOrder': '药',
+  'pacs': '查',
+  'lis': '验',
+  'surgery': '手',
+  'consult': '会'
 };
 export default {
   name: 'collapseItem',
@@ -34,7 +44,8 @@ export default {
     const tipmsg = tipdict[name];
     return {
       timeinfo: moduleTimeInfo[name],
-      tipmsg
+      tipmsg,
+      word: wordDict[name] || 'L'
     }
   },
   computed: {

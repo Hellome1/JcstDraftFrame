@@ -1,6 +1,6 @@
 <template>
   <el-row>
-    <el-col class="layout-left" :span="layout.leftW" :style="{ backgroundColor: layout.leftBgColor }">
+    <el-col class="layout-left" :span="leftW" :style="{ backgroundColor: leftBgColor }">
       <div class="dept-check">
         {{ item.desc }}
         <el-checkbox-group v-model="checkDept" size="mini">
@@ -10,20 +10,20 @@
         </el-checkbox-group>
       </div>
     </el-col>
-    <el-col :span="layout.rightW" class="layout-right">
+    <el-col :span="rightW" class="layout-right">
       <el-row v-if="item.display == 'list'" class="module-content-list">
-        <el-col v-for="day in layout.showDays" :key="day" :sm="3" :xs="3" class="">
-          <div v-for="(data, d) in filDatas" :key="data[setting.labelConfig.name] + (data.isHighlight ? '1' + d : d)">
-            <template v-if="data[setting.codeInData] === item.code && getDate(day) === data[setting.dateKey]">
-              <Label :nullData="(nullData = false)" :param="data" :setting="setting" :right="day > 5 ? true : false" />
+        <el-col v-for="(day, i) in showDays" :key="day" :sm="3" :xs="3" class="">
+          <div v-for="(data, d) in filDatas" :key="data[name] + (data.isHighlight ? '1' + d : d) + curFirstDate">
+            <template v-if="data[classifyKey] === item.code && curdates[i] === data[date]">
+              <Label :nullData="(nullData = false)" :basic="{ name, date, time }" :labelConfig="labelConfig" :param="data" />
             </template>
           </div>
         </el-col>
       </el-row>
       <div v-if="item.display == 'line'" class="module-content-line">
-        <div v-for="(data, d) in filDatas" :key="data[setting.TDlineConfig.name] + data[setting.TDlineConfig.startDate] + (data.isHighlight ? '1' + d : d) + tlCruSDate">
-          <template v-if="data[setting.codeInData] === item.code && isShow(data)">
-            <TDline :nullData="(nullData = false)" :data="data" :setting="setting" />
+        <div v-for="(data, d) in filDatas" :key="data[name] + data[date] + (data.isHighlight ? '1' + d : d) + curFirstDate">
+          <template v-if="data[classifyKey] === item.code && isShow(data)">
+            <TDline :nullData="(nullData = false)" :basic="{ name, startDate: date, startTime: time }" :TDlineConfig="TDlineConfig" :data="data" />
           </template>
         </div>
       </div>
@@ -42,20 +42,12 @@ export default {
     Label
   },
   props: {
-    setting: {
-      type: Object,
-      required: true
-    },
     item: {
       required: true
     },
     datas: {
       type: Array,
       required: true
-    },
-    last: {
-      type: Boolean,
-      default: false
     }
   },
   data() {
@@ -67,7 +59,12 @@ export default {
     };
   },
   watch: {
-    
+    curdates() {
+      this.classifyMed();
+    },
+    checkDept() {
+      this.filter();
+    }
   },
 
   mounted() {},
@@ -75,14 +72,70 @@ export default {
   updated() {},
 
   created() {
-    
+    console.log('this.item', this.cp(this.item));
+    this.classifyMed();
   },
 
   computed: {
-    ...inject('layout', 'timeline', 'medicalOrder')
+    ...inject('layout', 'timeline', 'medicalOrder'),
+    curdates() {
+      return this.curdays.map(d => d.date);
+    },
+    curFirstDate() {
+      return this.curdates[0];
+    }
   },
 
-  methods: {}
+  methods: {
+    classifyMed() {
+      let arr = [];
+      let deptArr = [];
+      this.datas.forEach(item => {
+        let push = false;
+        if (this.item.display === 'list' && this.curdates.filter(date => date === item[this.date]).length) push = true;
+        if (this.item.display === 'line' && this.isShow(item)) push = true;
+        for (let i = 0; i < arr.length; i++) {
+          if (item[this.classifyKey] == arr[i].desc) push = false;
+        }
+        if (push) {
+          deptArr.push(item[this.classifyKey]);
+          arr.push({
+            code: item[this.classifyKey],
+            desc: item[this.classifyKey]
+          });
+        }
+      });
+      
+      this.checkDept = deptArr;
+      this.dept = arr;
+    },
+    filter() {
+      let arr = [];
+      this.datas.forEach(m => {
+        let push = false;
+        this.checkDept.forEach(item => {
+          if (item == m[this.classifyKey]) push = true;
+        });
+        if (push) {
+          arr.push(m);
+        }
+      });
+
+      console.log('filDatas', arr);
+      this.filDatas = arr;
+    },
+    isShow(item) {
+      let curdates = this.curdates;
+      let startDate = curdates[0], endDate = curdates[curdates.length - 1];
+      let diffS_1 = dayjs(item[this.date]).diff(endDate);
+      let diffE_2 = dayjs(item[this.stopDate]).diff(startDate);
+      // console.log('diffE_2', diffE_2, item[this.stopDate]);
+      if (diffS_1 <= 0 && diffE_2 >= 0) {
+        return true;
+      }
+      return false;
+    }
+  }
 };
 </script>
 <style lang="scss" scoped></style>

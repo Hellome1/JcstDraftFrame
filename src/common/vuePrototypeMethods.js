@@ -10,18 +10,11 @@ Vue.prototype.getDomAbsPosition = function getDomAbsPosition(node) {
     y += node.offsetTop;
     if (node.scrollTop) y -= node.scrollTop;
   }
-  return { left: x, top: y + offsetHeight };
+  return { left: x, top: y + offsetHeight, offsetHeight };
 };
 Vue.prototype.$t = translate.$t;
 Vue.prototype.weekContract = translate.weekContract;
-Vue.prototype.inShowingDateRangeTimeline = (date) => {
-  let tlDates = store.state.tlDates;
-  let flag = tlDates.filter(itm => dayjs(itm).diff(date, 'day') === 0).length > 0;
-  return flag;
-}
-Vue.prototype.getDate = (i) => {
-  return store.state.tlDates[i - 1];
-}
+
 Vue.prototype.log = (...args) => {
   const nargs = args.map(arg => 'object' === typeof arg ? JSON.parse(JSON.stringify(arg)) : arg );
   console.log('[from main.js 38]', ...nargs);

@@ -1,5 +1,5 @@
 <template>
-  <div class="glb-tip-box" :style="style" v-show="text">
+  <div class="glb-tip-box" ref="root" :style="useStyle" v-show="text">
     <p class="tip-mian">{{text}}</p>
     <ul class="tip-fns">
       <li class="tip-fn-item" v-for="(fn, i) in fns" :key="fn">{{ getFnText(i, fn) }}</li>
@@ -11,6 +11,19 @@
 import { inject } from '@/common/vuePrototypeMethods.js';
 export default {
   name: 'TipBox',
+  data() {
+    return {
+      useStyle: {}
+    }
+  },
+  watch: {
+    style(value) {
+      this.useStyle = value;
+    },
+    text() {
+      this.$nextTick(() => this.reComp())
+    }
+  },
   computed: {
     ...inject('tipbox')
   },
@@ -18,6 +31,21 @@ export default {
     getFnText(index, fn) {
       let tmp = '{order}、{fn}'
       return tmp.replace('{order}', index + 1).replace('{fn}', fn);
+    },
+    reComp() {
+      let style = this.style, offsetHeight = this.offsetHeight;
+      let pageHeight = document.documentElement.offsetHeight;
+      let { left, top } = style;
+      let topNum = parseInt(top);
+      let rootDom = this.$refs.root;
+      let rootDomHeight = rootDom && rootDom.offsetHeight || 0;
+      if (topNum + rootDomHeight > pageHeight) {
+        top = (topNum - offsetHeight - rootDomHeight) + 'px';
+      }
+      this.useStyle = { left, top };
+      if (rootDomHeight > 70) {
+        this.useStyle = { top: (parseInt(top) + 30) + 'px', right: 0 };
+      }
     }
   }
 }

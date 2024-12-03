@@ -18,7 +18,7 @@ export default {
       const tar = this.$slots.default[0] && this.$slots.default[0].elm;
       const pos = this.getDomAbsPosition(tar || root);
       console.log('position', pos);
-      let { left, top } = pos;
+      let { left, top, offsetHeight } = pos;
       let style = {};
       if (this.isFixed) {
         style.position = 'fixed';
@@ -27,6 +27,7 @@ export default {
         top += scrollTop;
       }
       style = { left: left + 'px', top: top + 'px' };
+      jcst.tipbox.offsetHeight = offsetHeight;
       jcst.tipbox.style = style;
       jcst.tipbox.text = this.tipmsg;
       jcst.tipbox.fns = this.fns;

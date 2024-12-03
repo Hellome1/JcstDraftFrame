@@ -1,31 +1,12 @@
 <template>
   <div ref="TDline_C" class="TDline_C" :class="DT.config.fontLight ? 'light' : ''" :style="initStyleObj.leftVal">
-    <p ref="pMsg_TDline" class="msg_outer" :style="msg_outer_style" @mouseenter="handleMouseenter" @mouseleave="handleMouseleave" @contextmenu.prevent.stop="handleContextmenu" :class="pRight ? 'pRight' : ''">
-      <span class="content">{{ DT.name }}</span>
-      <span class="title" v-if="isTitle" :style="titleStyle">{{ DT.title }}</span>
-      <span class="time">{{ time }}</span>
-    </p>
-    <div
-      ref="detailPosi" 
-      style="position: absolute; left: 0; top: 0;"
-    >
-    </div>
-    <div
-      ref="detail"
-      v-if="isDetail"
-      class="detail_show"
-      v-show="showDetail"
-      :class="rightOrBreak ? 'right' : ''"
-      style="right: auto;"
-      :style="rightOrBreak ? null : DTStyle"
-    >
-      <div class="borderOut">
+    <TipBox :tipmsg="DT.name + DT.title + time">
+      <p ref="pMsg_TDline" class="msg_outer" :style="msg_outer_style" :class="pRight ? 'pRight' : ''">
         <span class="content">{{ DT.name }}</span>
         <span class="title" v-if="isTitle" :style="titleStyle">{{ DT.title }}</span>
-        <p v-if="DT.loop" style="font-size: 12px;"> 操作提示：右键查看闭环</p>
-      </div>
-      <!-- <span class="time">{{ time }}</span> -->
-    </div>
+        <span class="time">{{ time }}</span>
+      </p>
+    </TipBox>
     <div class="iconOuter" :style="initStyleObj.width">
       <i :class="initStyleObj.left >= 0 ? 'startPoint' : 'startPoint zero'" ></i>
       <div class="center"></div>
@@ -46,10 +27,9 @@
 </template>
 
 <script>
-
+import { inject } from '@/common/vuePrototypeMethods.js';
 
 export default {
-  inject: ['layout'],
   components: {},
   props: {
     DT: {
@@ -87,7 +67,6 @@ export default {
       end: this.DT.stopDate + ' ' + this.DT.stopTime,
       pRight: false,
       showDetail: false,
-      break: false,
       dialogVisible: false,
       loopLoading: false,
       detailDom: null
@@ -106,22 +85,24 @@ export default {
   created() {},
 
   computed: {
+    ...inject('pageSize', 'layout', 'timeline'),
+    curdates() {
+      return this.curdays.map(d => d.date);
+    },
     time: function() {
       return '(' + this.start + '至' + this.end + ')';
     },
     initStyleObj: function() {
       let order = this.getOrder(this.DT.startDate);
       let timeDuration = this.getTimeDuration();
-      let width = (timeDuration / (this.layout.showDays * 24 * 60 * 60)) * this.$store.state.tlW;
+      let width = (timeDuration / (this.showDays * 24 * 60 * 60)) * this.timelineRightWidth;
       let left = this.getLeftVal(order);
       let height = null;
       width = left < 0 ? width + left : width;
-      // console.log(left);
+      // console.log('initStyleObj', order, left);
       this.$nextTick(() => {
-        if (this.$refs.pMsg_TDline.offsetHeight > 60) {
+        if (this.$refs.pMsg_TDline.offsetHeight > 30) {
           this.pRight = true;
-        } else if (this.$refs.pMsg_TDline.offsetHeight > 30) {
-          this.break = true;
         }
       });
       return {
@@ -141,9 +122,6 @@ export default {
     isDetail: function() {
       return this.DT.config.isDetail;
     },
-    rightOrBreak: function() {
-      return this.pRight || this.break;
-    },
     DTStyle: function() {
       return { left: this.initStyleObj.left < 0 ? 0 : Math.round(this.initStyleObj.left) + 'px' }
     }
@@ -151,8 +129,7 @@ export default {
 
   methods: {
     getOrder: function(date) {
-      let order = dayjs(date).diff(this.$store.state.tlCruSDate, 'day');
-      // console.log(date, this.$store.state.tlCruSDate, order);
+      let order = dayjs(date).diff(this.curdates[0], 'day');
       return order + 1;
     },
     getTimeDuration: function() {
@@ -163,7 +140,7 @@ export default {
     },
     getLeftVal: function(order) {
       // let w = this.$store.state.timeSection.lengthOfTimesection;
-      let w = this.$store.state.tlW / this.layout.showDays;
+      let w = this.timelineRightWidth / this.showDays;
       let dateTimes = this.DT.startDate + ' ' + this.DT.startTime;
       let dateTimeSt = this.DT.startDate + ' ' + '00:00:00';
       let transSec = dayjs(dateTimes).unix() - dayjs(dateTimeSt).unix();
@@ -171,27 +148,6 @@ export default {
       let left = preLeft + (order - 1) * w;
       // console.log(left);
       return left;
-    },
-    handleMouseenter() {
-      this.showDetail = true;
-      
-      this.$nextTick(() => {
-        const posi = this.$refs.detailPosi;
-        const detail = this.$refs.detail;
-        if (!this.detailDom) this.detailDom = detail;
-        if (this.detailDom) {
-          let dom = this.detailDom;
-          if (dom.className.indexOf('right') > -1) {
-            setTimeout(() => {
-              let w = dom.offsetWidth, left = this.initStyleObj.left;
-              dom.style.left = parseInt(left - w) + 'px';
-              if (Dicts.logDict['[TDline.vue 182]']) console.log('[TDline.vue 182]', this.detailDom, w, left);
-            }, 0);
-          }
-          const { x, y } = getDomAbsPosition(posi);
-          this.$store.commit('set_tipBox', { x, y, isShow: true, el: this.detailDom });
-        }
-      });
     }
   }
 };

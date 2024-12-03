@@ -2,7 +2,7 @@
   <div class="surgery-pop-index">
     <el-card shadow="hover">
       <div slot="header" class="clearfix">
-        <h3 class="detail_header">{{ detail.operationDesc }}</h3>
+        <h3 class="detail_header">{{ surgeryDetail.operationDesc }}</h3>
       </div>
       <!-- <div class="detail_item">
         <strong>手术类型</strong>
@@ -18,15 +18,15 @@
       </div> -->
       <div class="detail_item">
         <strong>手术级别</strong>
-        <span>{{ detail.operationLevel }}</span>
+        <span>{{ surgeryDetail.operationLevel }}</span>
       </div>
       <div class="detail_item">
         <strong>手术状态</strong>
-        <span>{{ detail.operationStatus }}</span>
+        <span>{{ surgeryDetail.operationStatus }}</span>
       </div>
       <div class="detail_item">
         <strong>手术部位</strong>
-        <span>{{ detail.operationPosition }}</span>
+        <span>{{ surgeryDetail.operationPosition }}</span>
       </div>
       <div class="detail_item">
         <strong>手术开始日期</strong>
@@ -46,7 +46,7 @@
       </div>
       <div class="detail_item">
         <strong>手术医生</strong>
-        <span>{{ detail.operDocName }}</span>
+        <span>{{ surgeryDetail.operDocName }}</span>
       </div>
     </el-card>
   </div>
@@ -54,13 +54,27 @@
 
 <script>
 import { inject } from '@/common/vuePrototypeMethods.js';
+import { getSurgeryDetail } from '@/server/api.js';
 export default {
   name: 'SurgeryPopIndex',
+  data() {
+    return {
+      surgeryDetail: {}
+    }
+  },
   computed: {
     ...inject('surgery'),
     detail() {
       return this.surgeryData[0];
     }
+  },
+  created() {
+    bus.$on('surgeryPop', cb => {
+      cb && cb.call(this);
+    });
+    getSurgeryDetail();
+  },
+  methods: {
   }
 };
 </script>

@@ -197,6 +197,54 @@ function ajax_data(res) {
   }
 }
 
-function surgery_data(res) {
-  console('surgery_data', res);
+function surgery_data_detail(res) {
+  bus.$emit('surgeryPop', function() {
+    this.surgeryDetail = res && res.data && res.data[0] || {};
+  });
+}
+
+function consult_data(res) {
+  bus.$emit('consult', function() {
+    this.loading = false;
+    var data = res && res.data;
+    if (data) {
+      this.datas = data;
+      this.setDept(data);
+      moduleTimeInfo['consult'] = {
+        0: [data[0][this.date]]
+      }
+    }
+  });
+}
+
+function medicalOrder_data(res) {
+  console.log('medicalOrder_data', res);
+  bus.$emit('medicalOrder', function() {
+    var items = [];
+    res && res.data && res.data.forEach(function(itm) {
+      var code = itm.ordPriCode, desc = itm.ordPriDesc;
+      var isLong = desc.indexOf('长期') > -1;
+      var obj = {
+        codes: [ code ],
+        code: code,
+        desc: desc,
+        isLong: isLong,
+        display: isLong ? 'line' : 'list'
+      };
+      var inItem = items.filter(function(nitm) { return nitm.desc === desc; })[0];
+      if (inItem) {
+        if (!inItem.codes.includes(code)) inItem.codes.push(code);
+      } else {
+        items.push(obj);
+      }
+    });
+
+    if (res && res.data && res.data[0]) {
+      moduleTimeInfo['medicalOrder'] = {
+        0: [res.data[0][this.date]]
+      }
+    }
+    this.items = items;
+    this.datas = this.handleData(res.data);
+  })
 }

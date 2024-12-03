@@ -20,9 +20,11 @@ var Data = {};
 
 var moduleTimeInfo = {
   'vitalsigns': {},
+  'medicalOrder': {},
   'pacs': {},
   'lis': {},
-  'surgery': {}
+  'surgery': {},
+  'consult': {}
 };
 var jcst = {};
 jcst.currentClickedRow = null;
@@ -33,6 +35,7 @@ jcst.pageSize = {
 };
 jcst.tipbox = {
   style: { left: '100px', top: '150px' },
+  offsetHeight: 0,
   text: '',
   fns: [
     '左键点击实现功能'
