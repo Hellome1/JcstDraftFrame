@@ -27,7 +27,7 @@
   "setting.modules.lis.lisNormGrid.inspectionValue": "结果",
   "setting.modules.lis.lisNormGrid.inspResultUnitCode": "单位",
   "setting.modules.lis.lisNormGrid.inspResultRange": "参考范围",
-  "setting.modules.lis.lisNormGrid.inspectionResult": "异常标志",
+  "setting.modules.lis.lisNormGrid.inspAbnoFlag": "异常标志",
   "setting.modules.lis.labelConfig.popUpWindow.subTitles[0].left": "报告号",
   "setting.modules.lis.labelConfig.popUpWindow.subTitles[1].left": "检验科室",
   "setting.modules.lis.labelConfig.popUpWindow.subTitles[2].left": "检验医生",

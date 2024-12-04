@@ -61,7 +61,8 @@ jcst.modalTwo = {
 };
 jcst.table = {
   post: {
-    action: ''
+    action: '',
+    from: ''
   },
   tableData: [],
   column: [
@@ -78,9 +79,9 @@ jcst.iframe = {
 };
 var tableRules = {};
 tableRules.rule1 = {
-  key: 'inspectionResult',
+  key: 'inspAbnoFlag',
   rowColor: '#fff1f0',
-  replaces: ['阳性|↑|0', 'B型||1'],
+  replaces: ['H|↑|0', 'L|↓|1'],
   cellStyles: [
     {
       color: '#e44b3b',
@@ -108,7 +109,7 @@ jcst.rules = {
       var r1 = r.split('|')[0], r2 = r.split('|')[1];
       if (r2) result = result.replace(r1, r2);
     });
-    return h('span', {}, result)
+    return h('span', {}, result);
   },
   $2: function(row, columns) {
     var style = {};

@@ -84,7 +84,7 @@ export function getMedicalOrder(query = { from: 'medicalOrder' }) {
   })
 }
 
-export function getPacs(query = {}) {
+export function getPacs(query = { from: 'pacs' }) {
   request(
     handleReq({
       url: 'MES0012',
@@ -97,7 +97,22 @@ export function getPacs(query = {}) {
     throw e;
   })
 }
-export function getLis(query = {}) {
+
+export function getLis(query = { from: 'lis' }) {
+  request(
+    handleReq({
+      url: 'MES0024',
+      method: 'post',
+      data: query
+    })
+  ).then(res => {
+    lis_data(res);
+  }).catch(e => {
+    throw e;
+  })
+}
+
+export function getLisnorm(query = { from: 'lisnorm' }) {
   request(
     handleReq({
       url: 'MES0024',

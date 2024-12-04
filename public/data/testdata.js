@@ -5,6 +5,7 @@ var useTestData = {
   'medicalOrder': true,
   'pacs': true,
   'lis': true,
+  'lisnorm': true,
   'surgery': true,
   'surgeryDetail': true,
   'consult': true

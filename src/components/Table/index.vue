@@ -39,6 +39,9 @@ export default {
     },
     action() {
       return this.table.post.action;
+    },
+    from() {
+      return this.table.post.from;
     }
   },
   render: function (h) {
@@ -46,6 +49,7 @@ export default {
       'el-table',
       {
         props: {
+          height: '500',
           data: this.tableData,
           'row-style': rowO => jcst.rules.$2(rowO.row, this.columns),
           'cell-style': O => jcst.rules.$3(O, this.columns)
@@ -70,7 +74,7 @@ export default {
     ajax() {
       if (!this.action) return;
       this.loading = true;
-      ajax({ action: this.action, query: { from: this.action } }).then(res => {
+      ajax({ action: this.action, query: { from: this.from || this.action } }).then(res => {
         ajax_data(res);
         this.loading = false;
       }).catch(e => { this.loading = false; throw e; });

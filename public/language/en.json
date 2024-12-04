@@ -26,7 +26,7 @@
   "setting.modules.lis.lisNormGrid.inspectionValue": "Result",
   "setting.modules.lis.lisNormGrid.inspResultUnitCode": "Unit",
   "setting.modules.lis.lisNormGrid.inspResultRange": "Reference Range",
-  "setting.modules.lis.lisNormGrid.inspectionResult": "Abnormal Flag",
+  "setting.modules.lis.lisNormGrid.inspAbnoFlag": "Abnormal Flag",
   "setting.modules.lis.labelConfig.popUpWindow.subTitles[0].left": "Report Number",
   "setting.modules.lis.labelConfig.popUpWindow.subTitles[1].left": "Inspection Department",
   "setting.modules.lis.labelConfig.popUpWindow.subTitles[2].left": "Inspection Doctor",

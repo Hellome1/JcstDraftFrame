@@ -49,7 +49,7 @@ export default {
 
   created() {
     this.busOn();
-    getPacs({ from: 'pacs' });
+    getPacs();
   },
 
   computed: {

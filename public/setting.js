@@ -148,6 +148,7 @@ jcst.setting = {
       'jcst.modal.path': 'pages/Lis/LisPop/index.vue',
       'jcst.modal.title': '检验',
       'jcst.table.post.action': 'MES0023',
+      'jcst.table.post.from': 'lisnorm',
       'jcst.table.column': [
         {
           prop: 'inspItemDesc',
@@ -166,8 +167,8 @@ jcst.setting = {
           label: translate.$t('setting.modules.lis.lisNormGrid.inspResultRange')
         },
         {
-          prop: 'inspectionResult',
-          label: translate.$t('setting.modules.lis.lisNormGrid.inspectionResult'),
+          prop: 'inspAbnoFlag',
+          label: translate.$t('setting.modules.lis.lisNormGrid.inspAbnoFlag'),
           rule: tableRules.rule1
         }
       ]

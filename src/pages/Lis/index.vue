@@ -51,7 +51,7 @@ export default {
 
   created() {
     this.busOn();
-    getLis({ from: 'lis' });
+    getLis();
   },
 
   computed: {

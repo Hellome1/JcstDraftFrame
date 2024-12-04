@@ -23,7 +23,9 @@ export default {
   },
   render: function (h) {
     const showLiveSetting = this.layout.showLiveSetting;
-    const style = {};
+    const style = {
+      marginTop: '-50px'
+    };
     if (showLiveSetting) {
       style.width = '66.7%';
       style.right = 'auto';
