@@ -117,7 +117,7 @@ export default {
       let dpArr = [];
       let checkArr = [];
       dataArr.forEach(m => {
-        m.consulDesc = m.ecrUserDesc + ' ' + m.ecrDate + ' ' + m.ecrTime + ' ' + m.ecPurpose;
+        // m.consulDesc = m.ecrUserDesc + ' ' + m.ecrDate + ' ' + m.ecrTime + ' ' + m.ecPurpose;
         if (m[this.leftKey] === '') m[this.leftKey] = $t(this.noClassifyText);
       });
       dataArr.forEach(m => {

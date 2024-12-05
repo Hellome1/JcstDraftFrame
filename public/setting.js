@@ -6,7 +6,7 @@ jcst.setting = {
     leftBgColor: '#f9f9f9', // 颜色
     moduleHeadFontSize: '16px', // 字体大小
     moduleHeadColor: '#000', // 颜色
-    displayModules: ['vitalsigns', 'medicalOrder', 'pacs', 'lis', 'surgery', 'consult'] // 数组
+    displayModules: ['vitalsigns', 'nursing', 'medicalOrder', 'pacs', 'lis', 'surgery', 'consult'] // 数组
   },
   header: {
     isShow: true, // 布尔值
@@ -94,6 +94,10 @@ jcst.setting = {
       }
     ]
   },
+  nursing: {
+    nursingTitle: '护理信息',
+    showAllItems: false
+  },
   medicalOrder: {
     medicalOrderTitle: '用药医嘱',
     name: 'orderName',
@@ -105,7 +109,7 @@ jcst.setting = {
       isDetail: true
     },
     TDlineConfig: {
-      title: 'medUsageCode + medFreqCode',
+      title: '{medUsageDesc} {medFreqDesc}',
       stopDate: 'ordStopDate',
       stopTime: 'ordStopTime'
     }
@@ -197,7 +201,7 @@ jcst.setting = {
   },
   consult: {
     consultTitle: '会诊',
-    name: 'consulDesc',
+    name: '{ecrUserDesc} {ecrDate} {ecrTime} {ecPurpose}',
     date: 'ecrDate',
     time: 'ecrTime',
     leftKey: 'ecrLocDesc',

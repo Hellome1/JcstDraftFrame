@@ -63,6 +63,10 @@ function handleObjData(param, obj) {
     extra = handleVitalsignsItems();
     console.log('[vitalsigns req] extra', extra);
     param = Object.assign({}, param, extra);
+  } else if (from === 'vitalsignsNursing') {
+    extra = handleNursingVitalsignsItems();
+    console.log('[vitalsignsNursing req] extra', extra);
+    param = Object.assign({}, param, extra);
   } else if (from === 'MES0023') {
     console.log('selectedRow', JSON.parse(JSON.stringify(row)));
     extra = {
@@ -145,7 +149,10 @@ function handleVitalsignsItems() {
     smtzfield.data.forEach(function(el) {
       var vitalCode = el.vitalCode, vitalDesc = el.vitalDesc;
       var descs = desc.map(function(d){ return translate.$t(d); });
-      if (descs.includes(vitalDesc)) code.push(vitalCode);
+      if (descs.includes(vitalDesc)) {
+        code.push(vitalCode);
+        el.isVitalsigns = true;
+      }
     });
     items[code[0]] = { module: item, code: code };
   });
@@ -155,4 +162,32 @@ function handleVitalsignsItems() {
     this.max_scale = max_scale;
   });
   return { vitalSignInfo: { vitalSignMeasItemCode: Object.keys(items) } };
+}
+
+function handleNursingVitalsignsItems() { // 必须保证生命体征请求在这之前
+  var nursingCodes = [], allItems = [], nursingItems = {};
+  smtzfield.data.forEach(function(el) {
+    var vitalCode = el.vitalCode, vitalDesc = el.vitalDesc,
+    vitalUnit = el.vitalUnit, vitalGroup = el.vitalGroup, isVitalsigns = el.isVitalsigns;
+    if (!isVitalsigns) {
+      nursingCodes.push(vitalCode);
+      allItems.push({
+        desc: vitalDesc,
+        unit: vitalUnit,
+        code: vitalCode,
+        vitalGroup,
+      });
+      nursingItems[vitalCode] = {
+        desc: vitalDesc,
+        unit: vitalUnit,
+        code: vitalCode,
+        data: []
+      };
+    }
+  });
+  bus.$emit('nursing', function() {
+    this.allItems = allItems;
+    this.nursingItems = nursingItems;
+  });
+  return { vitalSignInfo: { vitalSignMeasItemCode: nursingCodes } };
 }

@@ -2,7 +2,6 @@
   <div class="module-content">
     <Mdc
       ref="mdc"
-      style="border-top: 1px solid #eee;"
       v-for="(item, i) in items"
       :key="i"
       :item="item"

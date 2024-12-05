@@ -44,11 +44,16 @@ var translate = {
     return res;
   },
   init: function () {
-    var contract = translate.req({
-      url: isProduction ? '/EMR/emrviewdoctor/scripts/event/PVIN/language/' + translate.lang + '.json' : './language/' + translate.lang + '.json'
-    });
+    var contract = {};
+    try {
+      contract = translate.req({
+        url: isProduction ? './language/' + translate.lang + '.json' : './language/' + translate.lang + '.json'
+      });
+    } catch (e) {
+      console.error('[translate 53]:', e);
+    }
 
-    translate.contract = contract;
+    translate.contract = contract || {};
     return true;
   }
 }

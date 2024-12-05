@@ -40,12 +40,11 @@ export default {
       for (let key in TDlineConfig) {
         if (data[TDlineConfig[key]]) {
           param[key] = data[TDlineConfig[key]];
-        } else if (typeof TDlineConfig[key] == 'string' && TDlineConfig[key].indexOf(' + ') > -1) {
-          let value = '';
-          TDlineConfig[key].split(' + ').forEach(item => {
-            value += data[item];
+        } else if (/{\w+}/.test(TDlineConfig[key])) {
+          param[key] = TDlineConfig[key].replace(/{\w+}/ig, (match, index) => {
+            let key = match.replace(/{|}/g, '');
+            return data[key];
           });
-          param[key] = value;
         } else {
           param[key] = TDlineConfig[key];
         }

@@ -2,6 +2,7 @@
 const dict = {
   'vitalsigns': 'VitalSigns/index.vue',
   'medicalOrder': 'MedicalOrder/index.vue',
+  'nursing': 'Nursing/index.vue',
   'pacs': 'Pacs/index.vue',
   'lis': 'Lis/index.vue',
   'surgery': 'Surgery/index.vue',

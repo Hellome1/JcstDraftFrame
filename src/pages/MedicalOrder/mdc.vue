@@ -72,7 +72,6 @@ export default {
   updated() {},
 
   created() {
-    console.log('this.item', this.cp(this.item));
     this.classifyMed();
   },
 
@@ -121,7 +120,7 @@ export default {
         }
       });
 
-      console.log('filDatas', arr);
+      // console.log('filDatas', arr);
       this.filDatas = arr;
     },
     isShow(item) {

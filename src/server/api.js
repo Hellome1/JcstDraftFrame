@@ -56,7 +56,7 @@ function getSurgery(query = { from: 'surgery' }) {
   })
 }
 
-export function getVitals(query = {}) {
+export function getVitals(query = {}, cb) {
   request(
     handleReq({
       url: 'MES0014',
@@ -64,7 +64,7 @@ export function getVitals(query = {}) {
       data: query
     })
   ).then(res => {
-    vitalsigns_data(res);
+    cb ? cb(res) : vitalsigns_data(res);
   }).catch(e => {
     throw e;
   })

@@ -1,6 +1,7 @@
 var useTestData = {
   'vitalsignsDict': true,
   'vitalsigns': true,
+  'vitalsignsNursing': true,
   'timeline': true,
   'medicalOrder': true,
   'pacs': true,
@@ -16,7 +17,7 @@ var JCSTTestData = {};
   for (var k in useTestData) {
     if (useTestData[k]) {
       JCSTTestData[k] = xmlreq({
-        url: '/data/testData/' + k + '.json'
+        url: './data/testData/' + k + '.json'
       });
     }
   }

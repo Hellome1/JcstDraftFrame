@@ -153,20 +153,28 @@ function vitalsigns_data(res) {
     this.smtz_data = smtz_data;
     this.plotPoint();
     console.log('[vitalsigns res] moduleTimeInfo', moduleTimeInfo);
-
-    function setVitalTimes(data_trans, name) {
-      var dates = [];
-      data_trans.map(function (itm) {
-        return itm.date;
-      }).sort(function (a, b) { return dayjs(a).diff(b) })
-        .forEach(function (itm) {
-          if (!dates.includes(itm)) dates.push(itm);
-        });
-      let timeinfo = JSON.parse(JSON.stringify(moduleTimeInfo['vitalsigns']));
-      timeinfo[name] = dates;
-      moduleTimeInfo['vitalsigns'] = timeinfo;
-    }
   });
+}
+function setVitalTimes(data_trans, name) {
+  var dates = [];
+  data_trans.map(function (itm) {
+    return itm.date;
+  }).sort(function (a, b) { return dayjs(a).diff(b) })
+    .forEach(function (itm) {
+      if (!dates.includes(itm)) dates.push(itm);
+    });
+  let timeinfo = JSON.parse(JSON.stringify(moduleTimeInfo['vitalsigns']));
+  timeinfo[name] = dates;
+  moduleTimeInfo['vitalsigns'] = timeinfo;
+}
+
+function nursing_data(res) {
+  console.log('nursing_data', res);
+  bus.$emit('nursing', function() {
+    this.data = res && res.data && res.data[0] || {};
+    console.log('this.nursing_data', this.cp(this.data));
+    this.handleData();
+  })
 }
 
 function pacs_data(res) {

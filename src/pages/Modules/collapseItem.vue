@@ -57,7 +57,7 @@ export default {
       for (let k in timeinfo) {
         r = true;
       }
-      console.log('moduleTimeInfo', moduleTimeInfo, this.name, r);
+      // console.log('moduleTimeInfo', moduleTimeInfo, this.name, r);
       return r;
     }
   },

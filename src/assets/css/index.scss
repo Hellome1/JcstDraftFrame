@@ -41,6 +41,7 @@ ul {
 .module-content {
   & > .el-row {
     display: flex;
+    border-top: 1px solid #ddd;
   }
   .layout-left:not(.vital-left) {
     min-height: 28px;

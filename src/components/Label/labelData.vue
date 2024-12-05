@@ -1,12 +1,12 @@
 <template>
   <div class="module-content">
-    <Label v-if="handledParam" :labelClick="labelClick" :param="handledParam" :row="param" @getLisNorm="getLisN" />
+    <Label v-if="handledParam" :labelClick="labelClick" :param="handledParam" :row="param" />
   </div>
 </template>
 
 <script>
 import Label from '@/components/Label/label.vue';
-import { getLisNorm } from '@/server/api';
+
 export default {
   name: 'labelData',
   components: {
@@ -50,11 +50,22 @@ export default {
 
   computed: {
     handledParam() {
-      return this.handleData(this.param, Object.assign({}, this.labelConfig, this.basic));
+      return this.handleData(this.param, this.handleBasic());
     }
   },
 
   methods: {
+    handleBasic() {
+      let basic = this.cp(this.basic);
+      let { name } = basic;
+      if (/{\w+}/.test(name)) {
+        basic.name = name.replace(/{\w+}/gi, (match, index) => {
+          let key = match.replace(/{|}/g, '');
+          return this.param[key];
+        });
+      }
+      return Object.assign({}, this.labelConfig, basic);
+    },
     // 处理数据，返回经过筛选的数据
     handleData(data, opt = {}) {
       let labelParam = {};
@@ -97,57 +108,6 @@ export default {
       pStyle.color = color;
       nconfig.pStyle = pStyle;
       return nconfig;
-    },
-    // 请求并处理数据
-    getLisN(vm) {
-      let hosIdk = this.setting.lisNormId || 'hosInspRptId';
-      let hosId = this.param['businessFieldCode'] + '_' + this.param[hosIdk];
-      getLisNorm({
-        rows: 50,
-        page: 1,
-        inspOrdInfo: {
-          hdcInspRptId: hosId
-        }
-      }).then(res => {
-        let lis = this.handleLisN(res.data);
-        this.$set(vm, 'lisNorm', lis);
-      });
-    },
-    // 处理检验数据
-    handleLisN(data) {
-      // console.log(data);
-      let lis = {
-        tableData: [],
-        row: this.setting.lisNormGrid
-      };
-      let gridAbnormal = this.setting.gridAbnormal;
-      data.forEach(item => {
-        let tbi = {};
-        for (let key in lis.row) {
-          lis.row[key] = this.$t(lis.row[key]);
-          let val = item[key];
-          if (key == gridAbnormal.key) {
-            for (let i = 0; i < gridAbnormal.replaces.length; i++) {
-              if (val.toLowerCase() == gridAbnormal.replaces[i].split('|')[0]) {
-                val = gridAbnormal.replaces[i].split('|')[1];
-                break;
-              }
-            }
-          }
-          tbi[key] = val;
-        }
-        lis.tableData.push(tbi);
-      });
-
-      // 携带异常位置
-      let index = -1;
-      for (let key in lis.row) {
-        index++;
-        if (key == gridAbnormal.key) break;
-      }
-      lis.abnIndex = index;
-
-      return lis;
     }
   }
 };

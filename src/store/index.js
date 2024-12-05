@@ -16,6 +16,7 @@ import header from './pages/header.js';
 import timeline from './pages/timeline.js';
 import surgery from './pages/surgery.js';
 import vitalsigns from './pages/vitalsigns.js';
+import nursing from './pages/nursing.js';
 import medicalOrder from './pages/medicalOrder.js';
 import pacs from './pages/pacs.js';
 import lis from './pages/lis.js';
@@ -45,6 +46,7 @@ export default new Vuex.Store({
     timeline,
     surgery,
     vitalsigns,
+    nursing,
     medicalOrder,
     pacs,
     lis,
