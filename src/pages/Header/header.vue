@@ -5,7 +5,7 @@
         <div class="header-l-f-left">
           <div class="hospital">
             <div class="hos-logo">
-              <img :src="require('@/assets/img/hosLogo.png')" alt="" />
+              <img :src="isProd ? '/EMR/emrviewdoctor/resources/image/logo-hos.png' : require('@/assets/img/hosLogo.png')" alt="" />
             </div>
             <div class="hos-right">
               <div class="product" shape="product">
@@ -48,9 +48,14 @@ import { inject } from '@/common/vuePrototypeMethods.js';
 
 export default {
   name: 'jcstheader',
+  data() {
+    return {
+      isProd: isProduction
+    }
+  },
   watch: {
     allergyData(value) {
-      if (value) this.showModal();
+      if (value.length) this.showModal();
     }
   },
   computed: {

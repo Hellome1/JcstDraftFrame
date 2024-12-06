@@ -44,7 +44,12 @@ FIELD.userInfo = {
   dept: 'Dept'
 }
 function header_userInfo() {
-  var userInfo = {};
+  // var userInfo = {};
+  var userInfo = {
+	  name: '测试用户',
+	  group: '研发人员',
+	  dept: '正在使用测试用户'
+  };
   var field = FIELD.userInfo, style = TextStyle.userInfo;
   fetchField(userInfo, field, PARAM);
   addTextStyle(userInfo, style);

@@ -42,10 +42,10 @@ function getParam() {
 function getAxiosSetting() {
   var testSystemCode = 'CDRMP';
   var testToken = 'mediway_eyJhbGciOiJIUzI1NiJ9.eyJ0b2tlbi10eXBlIjoiYWNjZXNzX3Rva2VuIiwiZXhwIjoxNzEzNzczMjMzLCJ1c2VyIjoie1wib3JnTmFtZVwiOlwiXCIsXCJyb2xlSWRcIjpcIjM3NmMyOTk3NWQ0NmQ0ZjcxMmNlOTZkMzczYzkxNjc5XCIsXCJ1c2VySWRcIjpcIjJcIixcInVzZXJDb2RlXCI6XCJcIixcImluc3RJZFwiOlwiMTAwODZcIixcImxvZ2luTmFtZVwiOlwiYWRtaW5cIixcInJvbGVDb2RlXCI6XCJhZG1pbmlzdHJhdG9yXCIsXCJ0ZW5hbnRJZFwiOlwiXCIsXCJyb2xlTmFtZVwiOlwi6LaF57qn566h55CG5ZGYXCIsXCJuYW1lXCI6XCJhZG1pblwiLFwiaW5pdExvZ2luVGltZVwiOjE3MTM3Njk2MzMyNjEsXCJncmFudFR5cGVcIjpcInBhc3N3b3JkXCIsXCJpbnN0TmFtZVwiOlwiXCJ9IiwianRpIjoiT0dabE1HWTBNalV0WTJJd1ppMDBPRE5tTFRoak9HWXROamd4T0RKak9XUmlNMkkyIn0.sYiJ_I__5Gm7FHgIc8G1o6eCJ-h9oocZlOMrcwmj1-E';
-  var ThirdToken = compSession.getItem('ThirdToken') || (isProduction ? '' : testToken);
+  var ThirdToken = compSession.getItem('ThirdToken') || (isProduction ? testToken : testToken);
   return {
     headers: {
-      'System': compSession.getItem('SystemCode') || (isProduction ? '' : testSystemCode),
+      'System': compSession.getItem('SystemCode') || (isProduction ? testSystemCode : testSystemCode),
       'Third-Authorization': 'Bearer ' + ThirdToken
     },
     param: {
@@ -126,7 +126,7 @@ function handleReq(obj) {
     for (var k in exclude) {
       if (k in basic) delete basic[k]
     }
-    basicParams = { params: { data: basic }, rows: rows, page: page };
+    basicParams = { params: { data: basic }, rows: rows, page: page, version: '2', roleId: compSession.getItem('MSRoleId') || '1' };
 
     return qs_stringify(basicParams);
   }
