@@ -1,5 +1,5 @@
 <template>
-  <div class="timeline">
+  <div class="timeline tlrootref">
     <el-row class="timeline-total">
       <el-col class="tl-select" :span="leftW" shape="leftW">
         <div class="tl-top">
@@ -68,6 +68,10 @@ import { inject } from '@/common/vuePrototypeMethods.js';
 function s() {
   let domr = document.querySelector('.tl-list');
   jcst.pageSize.timelineRightWidth = parseFloat(window.getComputedStyle(domr).getPropertyValue('width'));
+  let tlroot = document.querySelector('.tlrootref');
+  let moduleroot = document.querySelector('.modulerootindexref');
+  let modulerootw = moduleroot.offsetWidth;
+  tlroot.style.width = (modulerootw - 2) + 'px';
 }
 
 export default {

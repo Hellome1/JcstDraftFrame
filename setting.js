@@ -63,6 +63,17 @@ jcst.setting = {
       });
     }
   },
+  nursing: { // 护理信息,
+    showAllItems: false, // 是否显示所有的护理项 [默认只显示有数据的项]
+    nursing_data: function (res) { // 数据处理
+      console.log('nursing_data', res);
+      bus.$emit('nursing', function() {
+        this.data = res && res.data && res.data[0] || {};
+        console.log('this.nursing_data', this.cp(this.data));
+        this.handleData();
+      })
+    }
+  },
   medicalOrder: { // 用药医嘱
     name: 'orderName', // 用药医嘱名称依据
     date: 'orderDate', // 用药医嘱时间依据-日期

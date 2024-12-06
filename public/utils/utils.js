@@ -8,7 +8,8 @@ function compliantSession() {
 
 function fetchField(tar, field, data) {
   for (var k in field) {
-    tar[k] = data[field[k]];
+    if (data[field[k]]) tar[k] = decodeURIComponent(data[field[k]]);
+    else if (!(k in tar)) tar[k] = '';
   }
 }
 

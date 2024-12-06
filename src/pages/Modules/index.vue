@@ -1,9 +1,5 @@
 <template>
-  <el-collapse v-model="activeNames">
-    <!-- <CollapseItem name="1" titleText="生命体征">
-      <VitalSigns class="vitalSigns"/>
-    </CollapseItem> -->
-
+  <el-collapse v-model="activeNames" class="modulerootindexref">
     <CollapseItem v-for="m in modules" :key="m.name" :name="m.name" :titleText="m.text" shape="displayModules">
       <DynamicImport :name="m.name" />
     </CollapseItem>

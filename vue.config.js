@@ -22,7 +22,7 @@ module.exports = {
   devServer: {
     
   },
-  outputDir: 'dist/JCST',
+  outputDir: 'dist/EMRJCST',
   publicPath: process.env.NODE_ENV === 'production' ? '/EMR/EMRJCST/' : '/',
   // outputDir: 'dist/PVIN',
   // publicPath: process.env.NODE_ENV === 'production' ? '/EMR/emrviewdoctor/scripts/event/PVIN/' : '/'

@@ -2,22 +2,30 @@
   <div id="app">
     <el-row>
       <el-col :span="showLiveSetting ? 16 : 24" :style="isShow ? { position: 'relative' } : { position: 'relative', top: '-56px' }">
-        <el-container :style="isEmbeded || showLiveSetting ? { position: 'relative' } : ''">
-          <el-header class="header clear" :style="isEmbeded || showLiveSetting ? { position: 'absolute', top: 0, left: 0 } : ''">
-            <Header v-if="isShow"></Header>
-            <Timeline />
-          </el-header>
+        <div class="tipbox-scroll-ignore">
+          <el-container :style="isEmbeded || showLiveSetting ? { position: 'relative' } : ''">
+            <el-header class="header clear" :style="isEmbeded || showLiveSetting ? { position: 'absolute', top: 0, left: 0 } : ''">
+              <Header v-if="isShow"></Header>
+              <Timeline />
+            </el-header>
 
-          <el-main class="main">
-            <Modules />
-          </el-main>
-        </el-container>
+            <el-main class="main">
+              <Modules />
+            </el-main>
+          </el-container>
 
-        <div class="common">
-          <Modal />
-          <ModalTwo />
-          <TipBoxShow />
-          <HighLightBox />
+          <div class="common">
+            <Modal />
+            <ModalTwo />
+            <TipBoxShow />
+            <HighLightBox />
+          </div>
+        </div>
+
+        <div id="patient_view-footer">
+          <!-- <img style="width: auto; height: 11px;display: inline-block;margin-bottom: 4px; vertical-align: middle" id="btlogoimg" src="/EMR/emrviewdoctor/resources/image/btlogo.png"> -->
+          <img style="width: auto; height: 11px;display: inline-block;margin-bottom: 4px; vertical-align: middle" id="btlogoimg" src="/btlogo.png">
+          ©东华医为科技有限公司版权所有2024 临床数据中心患者集成视图PatiView R2.4
         </div>
       </el-col>
       <el-col v-if="showLiveSetting" :span="showLiveSetting ? 8 : 0">
@@ -72,7 +80,9 @@ export default {
 };
 </script>
 <style lang="scss">
-#app {
-  padding-bottom: 10px;
+.tipbox-scroll-ignore {
+  position: relative;
+  height: calc(100vh - 24px);
+  overflow: auto;
 }
 </style>

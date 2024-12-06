@@ -48,6 +48,11 @@ import { inject } from '@/common/vuePrototypeMethods.js';
 
 export default {
   name: 'jcstheader',
+  watch: {
+    allergyData(value) {
+      if (value) this.showModal();
+    }
+  },
   computed: {
     ...inject('layout', 'header'),
   },
@@ -56,6 +61,7 @@ export default {
   },
   methods: {
     showModal() {
+      if (jcst.modal.dialogVisible) return;
       handleEvent(this.handleClick)
     }
   }

@@ -39,11 +39,15 @@ export default {
       let topNum = parseInt(top);
       let rootDom = this.$refs.root;
       let rootDomHeight = rootDom && rootDom.offsetHeight || 0;
-      if (topNum + rootDomHeight > pageHeight) {
+      let rootDomWidth = rootDom && rootDom.offsetWidth || 0;
+      
+      let tipIgnore = document.querySelector('.tipbox-scroll-ignore');
+      let tipScroll = tipIgnore.scrollTop;
+      if (topNum + rootDomHeight - tipScroll > pageHeight - 24) {
         top = (topNum - offsetHeight - rootDomHeight) + 'px';
       }
       this.useStyle = { left, top };
-      if (rootDomHeight > 70) {
+      if (rootDomHeight > 70 && rootDomHeight > rootDomWidth / 4) {
         this.useStyle = { top: (parseInt(top) + 30) + 'px', right: 0 };
       }
     }

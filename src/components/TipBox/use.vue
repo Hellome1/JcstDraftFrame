@@ -23,8 +23,11 @@ export default {
       if (this.isFixed) {
         style.position = 'fixed';
         let scrollTop = document.documentElement.scrollTop;
-        console.log('scrllTop', scrollTop);
-        top += scrollTop;
+        
+        let tipIgnore = document.querySelector('.tipbox-scroll-ignore');
+        let tipScroll = tipIgnore.scrollTop;
+        console.log('scrllTop', tipScroll);
+        top += tipScroll;
       }
       style = { left: left + 'px', top: top + 'px' };
       jcst.tipbox.offsetHeight = offsetHeight;

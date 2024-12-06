@@ -8,7 +8,10 @@ Vue.prototype.getDomAbsPosition = function getDomAbsPosition(node) {
     node = node.offsetParent;
     x += node.offsetLeft;
     y += node.offsetTop;
-    if (node.scrollTop) y -= node.scrollTop;
+    if (node.scrollTop && node.className != 'tipbox-scroll-ignore') {
+    // if (node.scrollTop) {
+      y -= node.scrollTop;
+    }
   }
   return { left: x, top: y + offsetHeight, offsetHeight };
 };
