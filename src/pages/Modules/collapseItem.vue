@@ -48,11 +48,21 @@ export default {
       word: wordDict[name] || 'L'
     }
   },
+  watch: {
+    showLocaIcon(value) {
+      if (value) {
+        loc_moduleTimeInfo(this.name);
+      }
+    }
+  },
   computed: {
     ...inject('layout'),
+    moduleTimeInfo() {
+      return this.$store.state.moduleTimeInfo;
+    },
     showLocaIcon() {
       let r = false;
-      let { moduleTimeInfo } = this.$store.state;
+      let moduleTimeInfo = this.moduleTimeInfo;
       let timeinfo = moduleTimeInfo[this.name];
       for (let k in timeinfo) {
         r = true;

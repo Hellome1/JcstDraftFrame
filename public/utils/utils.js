@@ -124,6 +124,25 @@ function selectPageFromDate(date) {
   return page;
 }
 
+var curLocModuleTimeInfoIndex = 99;
+function loc_moduleTimeInfo(name) {
+  var orderList = jcst_layout.displayModules;
+  var index = orderList.indexOf(name);
+  if (index == -1) index = 9;
+  if (index < curLocModuleTimeInfoIndex) {
+    curLocModuleTimeInfoIndex = index;
+    var t = moduleTimeInfo[name];
+    if (t) {
+      var date = '';
+      for (var k in t) {
+        if (!date) date = t[k] && t[k][0];
+      }
+      // console.log('[utils.js 140] loc:', name, date);
+      date && selectPageFromDate(date);
+    }
+  }
+}
+
 function getPacsPDFPath() {
   var row = jcst.currentClickedRow || jcst.selectedRow;
   var rules = [

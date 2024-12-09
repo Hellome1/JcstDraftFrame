@@ -214,7 +214,7 @@ jcst.setting = {
 
 function handleEvent(obj) {
   var jsonObj = JSON.parse(JSON.stringify(obj));
-  console.log('setting.js 85', jsonObj);
+  console.log('[setting.js 217] handleEvent:', jsonObj);
   for (var k in jsonObj) {
     var keys = k.split('.'), val = jsonObj[k];
     if (val.indexOf && val.indexOf('Data.') === 0) {
@@ -227,7 +227,7 @@ function handleEvent(obj) {
 function getJcstValue(keys) {
   var curObj = window;
   var lastKey = keys[keys.length - 1], restKey = keys.slice(0, keys.length - 1);
-  console.log('getJcstValue', lastKey, restKey);
+  // console.log('getJcstValue', lastKey, restKey);
   restKey.forEach(function (key) {
     curObj = curObj[key]
   });
@@ -237,7 +237,7 @@ function getJcstValue(keys) {
 function setJcstValue(keys, val) {
   var curObj = window;
   var lastKey = keys[keys.length - 1], restKey = keys.slice(0, keys.length - 1);
-  console.log('setJcstValue', lastKey, restKey);
+  // console.log('setJcstValue', lastKey, restKey);
   restKey.forEach(function (key) {
     curObj = curObj[key]
   });
