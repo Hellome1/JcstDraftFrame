@@ -17,35 +17,35 @@
         <span>{{ cur_sugerapp.preOperDiagRemark }}</span>
       </div> -->
       <div class="detail_item">
-        <strong>手术级别</strong>
+        <strong>{{ $t('surgery.dialog.item[1]') }}</strong>
         <span>{{ surgeryDetail.operationLevel }}</span>
       </div>
       <div class="detail_item">
-        <strong>手术状态</strong>
+        <strong>{{ $t('surgery.dialog.item[2]') }}</strong>
         <span>{{ surgeryDetail.operationStatus }}</span>
       </div>
       <div class="detail_item">
-        <strong>手术部位</strong>
+        <strong>{{ $t('surgery.dialog.item[3]') }}</strong>
         <span>{{ surgeryDetail.operationPosition }}</span>
       </div>
       <div class="detail_item">
-        <strong>手术开始日期</strong>
+        <strong>{{ $t('surgery.dialog.item[4]') }}</strong>
         <span>{{ detail.operStartDate }}</span>
       </div>
       <div class="detail_item">
-        <strong>手术开始时间</strong>
+        <strong>{{ $t('surgery.dialog.item[5]') }}</strong>
         <span>{{ detail.operStartTime }}</span>
       </div>
       <div class="detail_item">
-        <strong>手术结束日期</strong>
+        <strong>{{ $t('surgery.dialog.item[6]') }}</strong>
         <span>{{ detail.operEndDate }}</span>
       </div>
       <div class="detail_item">
-        <strong>手术结束时间</strong>
+        <strong>{{ $t('surgery.dialog.item[7]') }}</strong>
         <span>{{ detail.operEndTime }}</span>
       </div>
       <div class="detail_item">
-        <strong>手术医生</strong>
+        <strong>{{ $t('surgery.dialog.item[8]') }}</strong>
         <span>{{ surgeryDetail.operDocName }}</span>
       </div>
     </el-card>

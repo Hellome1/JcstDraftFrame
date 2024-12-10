@@ -19,12 +19,12 @@ export default {
     const { selectedRow } = jcst;
     return {
       subTitles: [
-        'setting.modules.lis.labelConfig.popUpWindow.subTitles[0].left|hosInspRptId',
-        'setting.modules.lis.labelConfig.popUpWindow.subTitles[1].left|inspRptDeptName',
-        'setting.modules.lis.labelConfig.popUpWindow.subTitles[2].left|inspRptVerifyDocName',
-        'setting.modules.lis.labelConfig.popUpWindow.subTitles[3].left|inspSpecmCode',
-        'setting.modules.lis.labelConfig.popUpWindow.subTitles[4].left|inspRptVerifyDate',
-        'setting.modules.lis.labelConfig.popUpWindow.subTitles[5].left|inspRptVerifyTime'
+        'setting.lis.labelConfig.popUpWindow.subTitles[0].left|hosInspRptId',
+        'setting.lis.labelConfig.popUpWindow.subTitles[1].left|inspRptDeptName',
+        'setting.lis.labelConfig.popUpWindow.subTitles[2].left|inspRptVerifyDocName',
+        'setting.lis.labelConfig.popUpWindow.subTitles[3].left|inspSpecmCode',
+        'setting.lis.labelConfig.popUpWindow.subTitles[4].left|inspRptVerifyDate',
+        'setting.lis.labelConfig.popUpWindow.subTitles[5].left|inspRptVerifyTime'
       ].map(itm => ({ title: translate.$t(itm.split('|')[0]), val: selectedRow[itm.split('|')[1]] }))
     };
   },

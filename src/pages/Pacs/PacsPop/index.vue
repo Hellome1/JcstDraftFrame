@@ -37,45 +37,45 @@ export default {
       datas: [],
       head: [
         {
-          label: '项目名称',
+          label: this.$t('pacs.report.header[1]'),
           code: 'examItemName'
         },
         {
-          label: '检查号',
+          label: this.$t('pacs.report.header[2]'),
           code: 'examId'
         },
         {
-          label: '检查科室',
+          label: this.$t('pacs.report.header[3]'),
           code: 'examDeptName'
         },
         {
-          label: '检查医生',
+          label: this.$t('pacs.report.header[4]'),
           code: 'examDocName'
         },
         {
-          label: '审核医生',
+          label: this.$t('pacs.report.header[5]'),
           code: 'examRptDocName'
         },
         {
-          label: '检查日期',
+          label: this.$t('pacs.report.header[6]'),
           code: 'examDate'
         },
         {
-          label: '报告日期',
+          label: this.$t('pacs.report.header[7]'),
           code: 'examRptDate'
         },
         {
-          label: 'HIS医嘱号',
+          label: this.$t('pacs.report.header[8]'),
           code: 'hosOrdId'
         }
       ],
       body: [
         {
-          label: '检查所见',
+          label: this.$t('pacs.report.body[1]'),
           code: 'examSymptom'
         },
         {
-          label: '诊断建议',
+          label: this.$t('pacs.report.body[2]'),
           code: 'diagnoseComments'
         }
       ]

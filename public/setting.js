@@ -27,7 +27,7 @@ jcst.setting = {
     allergyData: [], // 数据
     handleClick: { // 事件
       'jcst.modal.dialogVisible': true,
-      'jcst.modal.title': '过敏信息',
+      'jcst.modal.title': translate.$t('header.allergy.dialog.title'),
       'jcst.modal.path': 'components/Table/index.vue',
       'jcst.table.tableData': 'Data.allergyData',
       'jcst.table.column': [
@@ -63,14 +63,14 @@ jcst.setting = {
     topTimeSubTract: 0
   },
   vitalsigns: {
-    vitalsignsTitle: '生命体征',
+    vitalsignsTitle: translate.$t('setting.vitalSigns.title'),
     rowHeight: 25,
     rowLine: 'dashed',
     columnLine: 'solid',
     vitalsignsItems: [ // 不开放配置
       {
         name: 'pulse',
-        desc: ['setting.modules.vitalSigns.items[0].desc[0]'],
+        desc: ['setting.vitalSigns.items[0].desc[0]'],
         color: '#FF6A50',
         startValue: 0,
         endValue: 200,
@@ -78,7 +78,7 @@ jcst.setting = {
       },
       {
         name: 'breathe',
-        desc: ['setting.modules.vitalSigns.items[1].desc[0]'],
+        desc: ['setting.vitalSigns.items[1].desc[0]'],
         color: '#FF9C00',
         startValue: 15,
         endValue: 60,
@@ -86,7 +86,7 @@ jcst.setting = {
       },
       {
         name: 'temperature',
-        desc: ['setting.modules.vitalSigns.items[2].desc[0]', 'setting.modules.vitalSigns.items[2].desc[1]'],
+        desc: ['setting.vitalSigns.items[2].desc[0]', 'setting.vitalSigns.items[2].desc[1]'],
         color: '#2AB66A',
         startValue: 34,
         endValue: 42,
@@ -95,11 +95,11 @@ jcst.setting = {
     ]
   },
   nursing: {
-    nursingTitle: '护理信息',
+    nursingTitle: translate.$t('setting.nursing.title'),
     showAllItems: false
   },
   medicalOrder: {
-    medicalOrderTitle: '用药医嘱',
+    medicalOrderTitle: translate.$t('setting.medicalOrder.title'),
     name: 'orderName',
     date: 'orderDate',
     time: 'orderTime',
@@ -115,14 +115,14 @@ jcst.setting = {
     }
   },
   pacs: {
-    pacsTitle: '检查',
+    pacsTitle: translate.$t('setting.pacs.title'),
     name: 'examItemName',
     // date: 'examDate',
     // time: 'examTime',
     date: 'examAppDate',
     time: 'examAppTime',
     leftKey: 'examDeptName',
-    noClassifyText: 'setting.modules.lis.noClassifyText',
+    noClassifyText: 'setting.lis.noClassifyText',
     labelConfig: {
       isDetail: true
     },
@@ -133,14 +133,14 @@ jcst.setting = {
     },
   },
   lis: {
-    lisTitle: '检验',
+    lisTitle: translate.$t('setting.lis.title'),
     name: 'orderName', // 必选，data中标签显示内容的key
     // date: 'inspectionDate',
     // time: 'inspectionTime',
     date: 'inspAppDate',
     time: 'inspAppTime',
     leftKey: 'inspRptDeptName',
-    noClassifyText: 'setting.modules.lis.noClassifyText',
+    noClassifyText: 'setting.lis.noClassifyText',
     labelConfig: {
       isDetail: true,
       pStyle: {
@@ -150,36 +150,36 @@ jcst.setting = {
     labelClick: {
       'jcst.modal.dialogVisible': true,
       'jcst.modal.path': 'pages/Lis/LisPop/index.vue',
-      'jcst.modal.title': '检验',
+      'jcst.modal.title': translate.$t('setting.lis.reportTitle'),
       'jcst.table.post.action': 'MES0023',
       'jcst.table.post.from': 'lisnorm',
       'jcst.table.column': [
         {
           prop: 'inspItemDesc',
-          label: translate.$t('setting.modules.lis.lisNormGrid.inspItemDesc')
+          label: translate.$t('setting.lis.lisNormGrid.inspItemDesc')
         },
         {
           prop: 'inspectionValue',
-          label: translate.$t('setting.modules.lis.lisNormGrid.inspectionValue')
+          label: translate.$t('setting.lis.lisNormGrid.inspectionValue')
         },
         {
           prop: 'inspResultUnitCode',
-          label: translate.$t('setting.modules.lis.lisNormGrid.inspResultUnitCode')
+          label: translate.$t('setting.lis.lisNormGrid.inspResultUnitCode')
         },
         {
           prop: 'inspResultRange',
-          label: translate.$t('setting.modules.lis.lisNormGrid.inspResultRange')
+          label: translate.$t('setting.lis.lisNormGrid.inspResultRange')
         },
         {
           prop: 'inspAbnoFlag',
-          label: translate.$t('setting.modules.lis.lisNormGrid.inspAbnoFlag'),
+          label: translate.$t('setting.lis.lisNormGrid.inspAbnoFlag'),
           rule: tableRules.rule1
         }
       ]
     },
   },
   surgery: {
-    surgeryTitle: '手术',
+    surgeryTitle: translate.$t('setting.surgery.title'),
     surgeryData: [],
     surgeryInfo: [],
     name: 'preOperDiagRemark',
@@ -196,16 +196,16 @@ jcst.setting = {
     labelClick: {
       'jcst.modal.dialogVisible': true,
       'jcst.modal.path': 'pages/Surgery/SurgeryPop/index.vue',
-      'jcst.modal.title': '手术详情'
+      'jcst.modal.title': translate.$t('surgery.dialog.title')
     }
   },
   consult: {
-    consultTitle: '会诊',
+    consultTitle: translate.$t('setting.consult.title'),
     name: '{ecrUserDesc} {ecrDate} {ecrTime} {ecPurpose}',
     date: 'ecrDate',
     time: 'ecrTime',
     leftKey: 'ecrLocDesc',
-    noClassifyText: 'setting.modules.consult.noClassifyText',
+    noClassifyText: 'setting.consult.noClassifyText',
     labelConfig: {
       isDetail: true
     }

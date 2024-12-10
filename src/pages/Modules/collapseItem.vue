@@ -18,20 +18,20 @@
 import { inject } from '@/common/vuePrototypeMethods.js';
 
 const tipdict = {
-  'vitalsigns': '定位到生命体征位置',
-  'medicalOrder': '定位到用药医嘱位置',
-  'pacs': '定位到检查位置',
-  'lis': '定位到检验位置',
-  'surgery': '定位到手术位置',
-  'consult': '定位到会诊位置'
+  'vitalsigns': translate.$t('vitalSigns.locIcon.tipmsg'),
+  'medicalOrder': translate.$t('medicalOrder.locIcon.tipmsg'),
+  'pacs': translate.$t('pacs.locIcon.tipmsg'),
+  'lis': translate.$t('lis.locIcon.tipmsg'),
+  'surgery': translate.$t('surgery.locIcon.tipmsg'),
+  'consult': translate.$t('consult.locIcon.tipmsg')
 };
 const wordDict = {
-  'vitalsigns': '生',
-  'medicalOrder': '药',
-  'pacs': '查',
-  'lis': '验',
-  'surgery': '手',
-  'consult': '会'
+  'vitalsigns': translate.$t('vitalSigns.locIcon.word'),
+  'medicalOrder': translate.$t('medicalOrder.locIcon.word'),
+  'pacs': translate.$t('pacs.locIcon.word'),
+  'lis': translate.$t('lis.locIcon.word'),
+  'surgery': translate.$t('surgery.locIcon.word'),
+  'consult': translate.$t('consult.locIcon.word')
 };
 export default {
   name: 'collapseItem',

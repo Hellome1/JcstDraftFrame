@@ -136,6 +136,13 @@ function handleVitalsignsItems() {
   var items = {};
   var thisSettingItems = jcst.setting.vitalsigns.vitalsignsItems;
   var max_scale = 0;
+
+  var dict = {
+    'Pulse': '脉搏',
+    'Breathe': '呼吸',
+    'Body Temperature': '体温',
+    'Axillary Temperature': '腋温'
+  };
   thisSettingItems.forEach(function(item) {
     var scale = [];
     for (var i = 0; i <= (item.endValue - item.startValue) / item.interval; i++) {
@@ -150,7 +157,8 @@ function handleVitalsignsItems() {
     smtzfield.data.forEach(function(el) {
       var vitalCode = el.vitalCode, vitalDesc = el.vitalDesc;
       var descs = desc.map(function(d){ return translate.$t(d); });
-      if (descs.includes(vitalDesc)) {
+      var descs_dict = descs.map(function(desc) { return dict[desc] });
+      if (descs.includes(vitalDesc) || descs_dict.includes(vitalDesc)) {
         code.push(vitalCode);
         el.isVitalsigns = true;
       }

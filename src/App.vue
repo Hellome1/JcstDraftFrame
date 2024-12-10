@@ -25,7 +25,7 @@
         <div id="patient_view-footer">
           <!-- <img style="width: auto; height: 11px;display: inline-block;margin-bottom: 4px; vertical-align: middle" id="btlogoimg" src="/EMR/emrviewdoctor/resources/image/btlogo.png"> -->
           <img style="width: auto; height: 11px;display: inline-block;margin-bottom: 4px; vertical-align: middle" id="btlogoimg" :src="imgsrc">
-          ©东华医为科技有限公司版权所有2024 临床数据中心患者集成视图PatView R2.4
+          ©{{$t('footer')}}
         </div>
       </el-col>
       <el-col v-if="showLiveSetting" :span="showLiveSetting ? 8 : 0">
