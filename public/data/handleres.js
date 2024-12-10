@@ -176,8 +176,40 @@ function setVitalTimes(data_trans, name) {
 function nursing_data(res) {
   console.log('nursing_data', res);
   bus.$emit('nursing', function() {
-    this.data = res && res.data && res.data[0] || {};
-    console.log('this.nursing_data', this.cp(this.data));
+    var datekey = 'vitalSignMeasDate', timekey = 'vitalSignMeasTime', vkey = 'vitalSignMeasValue';
+    var data = res && res.data && res.data[0] || {};
+    var ssdata = [], ssdatakey, szdata, szdatakey;
+    for (var k in data) {
+      var itm = data[k];
+      var desc = itm[0] && itm[0].vitalSignMeasItemDesc || '';
+      if (desc.indexOf('收缩压') > -1) ssdata = itm, ssdatakey = k;
+      if (desc.indexOf('舒张压') > -1) szdata = itm, szdatakey = k;
+      itm.sort(function(a, b) {
+        var at = a[datekey] + ' ' + a[timekey],
+          bt = b[datekey] + ' ' + b[timekey];
+        return dayjs(at).diff(bt);
+      });
+    }
+    if (szdata) {
+      var modify_desc = '收缩压/舒张压';
+      this.nursingItems[ssdatakey].desc = modify_desc;
+      delete data[szdatakey];
+      ssdata.forEach(function(itm) {
+        itm.vitalSignMeasItemDesc = modify_desc;
+        var szitm = szdata.filter(function(sz) { 
+          return itm[datekey] === sz[datekey] && itm[timekey] === sz[timekey];
+        });
+        var szitmValue = szitm.length && szitm[0][vkey] || '';
+        if (szitmValue) itm[vkey] = itm[vkey] + '/' + szitmValue;
+      });
+    }
+    for (var k in data) {
+      data[k].forEach(function(v) {
+        v[vkey] = '[' + v[timekey] + '] ' + v[vkey];
+      });
+    }
+    this.data = data;
+    console.log('[handleres.js 180] this.nursing_data:', this.cp(this.data));
     this.handleData();
   })
 }
