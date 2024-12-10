@@ -5,8 +5,11 @@
       <el-col :span="rightW" class="layout-right">
         <el-row class="module-content-list">
           <el-col v-for="(day, i) in showDays" :key="day" :sm="3" :xs="3">
-            <p v-for="(el, j) in item.data" :key="'data_' + j">
-              <span v-if="el.vitalSignMeasDate == curdates[i]">{{ el.vitalSignMeasValue }}</span>
+            <p v-for="(el, j) in item.data" :key="'data_' + j" class="nursing-item-p">
+              <template v-if="el.vitalSignMeasDate == curdates[i]">
+                <span>{{ el.vitalSignMeasTime ? '[' + el.vitalSignMeasTime + ']' : '' }}</span>
+                <span>{{ el.vitalSignMeasValue }}</span>
+              </template>
             </p>
           </el-col>
         </el-row>
@@ -73,4 +76,18 @@ export default {
   }
 };
 </script>
-<style lang="css"></style>
+<style lang="scss">
+.nursing-item-p {
+  display: flex;
+
+  span:first-of-type {
+    text-align: right;
+    margin-right: 8px;
+    flex: 1;
+  }
+  span:last-of-type {
+    text-align: left;
+    flex: 1;
+  }
+}
+</style>

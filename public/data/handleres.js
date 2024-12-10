@@ -203,11 +203,6 @@ function nursing_data(res) {
         if (szitmValue) itm[vkey] = itm[vkey] + '/' + szitmValue;
       });
     }
-    for (var k in data) {
-      data[k].forEach(function(v) {
-        v[vkey] = '[' + v[timekey] + '] ' + v[vkey];
-      });
-    }
     this.data = data;
     console.log('[handleres.js 180] this.nursing_data:', this.cp(this.data));
     this.handleData();
