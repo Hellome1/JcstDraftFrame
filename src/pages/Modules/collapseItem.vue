@@ -8,6 +8,11 @@
             <span class="tl-icon" @click.stop="handleClickIconBox"> {{word}} </span>
           </TipBox>
         </div>
+        <div v-if="name === 'lis'" class="loca-icon">
+          <TipBox :tipmsg="lisAbno ? $t('lis.moduleTitle.tipmsg.normal') : $t('lis.moduleTitle.tipmsg.abno')">
+            <span class="module-title-func-btn" :class="lisAbno ? 'normal' : ''" @click.stop="handleLisAbno">{{ lisAbno ? '全部值' : '异常值' }}</span>
+          </TipBox>
+        </div>
       </div>
     </template>
     <slot></slot>
@@ -45,7 +50,8 @@ export default {
     return {
       timeinfo: moduleTimeInfo[name],
       tipmsg,
-      word: wordDict[name] || 'L'
+      word: wordDict[name] || 'L',
+      lisAbno: false
     }
   },
   watch: {
@@ -83,11 +89,48 @@ export default {
         }
       }
       selectPageFromDate(firstDate);
+    },
+    handleLisAbno() {
+      this.lisAbno = !this.lisAbno;
+      let lisData = Data.lisData;
+      let abnoData = lisData.filter((itm, i) => (itm.abno || !this.lisAbno));
+      bus.$emit('lis', function() {
+        this.resdata = this.cp(abnoData);
+      });
     }
   }
 }
 </script>
 
-<style>
+<style lang="scss">
+.func-area {
+  display: flex;
+  
+  >div {
+    margin-right: 10px;
 
+    .module-title-func-btn {
+      color: white;
+      padding: 1px 5px;
+      font-size: 12px;
+      background-color: red;
+      border: 2px solid blue;
+      border-radius: 2px;
+      cursor: pointer;
+      position: relative;
+      top: 1px;
+
+      &:hover {
+        background-color: rgb(216, 0, 0);
+      }
+    }
+    .module-title-func-btn.normal {
+      background-color: #449bff;
+      
+      &:hover {
+        background-color: #2d7eda;
+      }
+    }
+  }
+}
 </style>

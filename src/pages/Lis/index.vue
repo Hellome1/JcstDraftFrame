@@ -13,9 +13,9 @@
       <el-col :span="rightW" class="layout-right">
         <el-row class="module-content-list" :class="nullData ? 'nullData' : ''">
           <el-col v-for="(day, i) in showDays" :key="i" :sm="3" :xs="3">
-            <div v-for="(item, d) in filteredData" :key="d" :log="false && log(item[date])">
+            <div v-for="(item, d) in filteredData" :key="d + (item.abno ? 'abno' : '')">
               <template v-if="curdates[i] === item[date]">
-                <Label v-if="item" :nullData="(nullData = false)" :param="item" :labelClick="labelClick" :basic="{ name, date, time }" :labelConfig="labelConfig" />
+                <Label v-if="item" :nullData="(nullData = false)" :param="item" :labelClick="labelClick" :basic="{ name, date, time }" :labelConfig="item.labelConfig" />
               </template>
             </div>
           </el-col>
@@ -43,7 +43,7 @@ export default {
     };
   },
   watch: {
-
+    
   },
 
   mounted() {
@@ -95,6 +95,11 @@ export default {
             dataArr[i] = dataArr[j];
             dataArr[j] = a;
           }
+          if (dataArr[i][dateKey] == dataArr[j][dateKey] && !dataArr[i].abno && dataArr[j].abno) {
+            let a = dataArr[i];
+            dataArr[i] = dataArr[j];
+            dataArr[j] = a;
+          }
         }
       }
 
@@ -107,6 +112,13 @@ export default {
       for (let i = 0; i < dataArr.length; i++) {
         if (!dataArr[i][dateKey]) {
           dataArr[i][dateKey] = dataArr[0][dateKey];
+        }
+        if (!dataArr[i].abno) dataArr[i].labelConfig = this.cp(this.labelConfig);
+        else {
+          dataArr[i].labelConfig = { 
+            isDetail: true, 
+            pStyle: { textAlign: 'center', backgroundColor: 'red', border: '1px solid red' } 
+          };
         }
       }
 

@@ -226,6 +226,10 @@ function lis_data(res) {
   console.log('[lis res] lis_data_res', res);
 
   bus.$emit('lis', function() {
+    res.data.forEach(function(itm, i) {
+      if (i % 2 === 1) itm.abno = true;
+    });
+    Data.lisData = res.data;
     this.resdata = JSON.parse(JSON.stringify(res.data));
   });
 }

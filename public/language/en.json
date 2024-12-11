@@ -91,6 +91,8 @@
   "pacs.report.body[1]": "Examine Finding",
   "pacs.report.body[2]": "Diagnostic Suggestion",
   "lis.noDataDesc": "No Inspection Data Was Found",
+  "lis.moduleTitle.tipmsg.abno": "Only View the Inspection Items with Abnormal Value",
+  "lis.moduleTitle.tipmsg.normal": "View All Inspection Items",
   "diagnose.noDataDesc": "No Diagnosis Data Was Found",
   "surgery.noDataDesc": "No Surgery Data Was Found",
   "surgery.dialog.title": "Surgery Detail",
