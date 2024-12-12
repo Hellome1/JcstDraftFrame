@@ -82,11 +82,13 @@ export default {
     };
   },
   mounted() {
-    s();
+    setTimeout(() => {
+      s();
+    }, 0);
     window.addEventListener('resize', () => { s() });
   },
   created() {
-    this.busOn();
+    bus.$on('timeline', cb => cb && cb.call(this));
   },
   watch: {
     selectPage() {
@@ -99,7 +101,7 @@ export default {
       this.handleSelectPage(this.selectPage);
     },
     showLiveSetting() {
-      s();
+      this.resizeTimelineWidth();
     }
   },
   computed: {
@@ -109,9 +111,6 @@ export default {
     }
   },
   methods: {
-    busOn() {
-      bus.$on('timeline', cb => cb && cb.call(this));
-    },
     handleSelectPage(num) {
       var days = jcst_timeline.days;
       var showDays = jcst_timeline.showDays;
@@ -120,6 +119,9 @@ export default {
     },
     handleClickIconBox() {
       selectPageFromDate(jcst.setting.surgery.surgeryInfo[0].surgeryDate);
+    },
+    resizeTimelineWidth() {
+      s();
     }
   }
 };

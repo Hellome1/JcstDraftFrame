@@ -52,6 +52,7 @@ service.interceptors.response.use(
       });
       return Promise.reject('error');
     } else {
+      bus.$emit('timeline', function() { this.resizeTimelineWidth(); });
       return response.data;
     }
   },
