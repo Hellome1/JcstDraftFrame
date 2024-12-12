@@ -50,6 +50,13 @@ function header_userInfo() {
 	  group: '研发人员',
 	  dept: '正在使用测试用户'
   };
+  if (INIT_lang === 'en') {
+    userInfo = {
+      name: 'Test User',
+      group: 'Developer',
+      dept: 'Test Dept'
+    }
+  }
   var field = FIELD.userInfo, style = TextStyle.userInfo;
   fetchField(userInfo, field, PARAM);
   addTextStyle(userInfo, style);
@@ -252,7 +259,18 @@ function consult_data(res) {
     this.loading = false;
     var data = res && res.data;
     if (data) {
-      this.datas = data;
+      var noVal = translate.$t('consult.dialog.row[5].noValPlaceholder');
+      this.datas = data.map(function(itm) {
+        itm.eccLocDescs = itm.consultItems.map(function(t) { return t.eccLocDesc; }).join(';') || '-';
+        itm.eccDocRanks = itm.consultItems.map(function(t) { return t.eccDocRank; }).join(';') || '-';
+        itm.ecSubMars = itm.consultItems.map(function(t) { return t.ecSubMar; }).join(';') || '-';
+        itm.eccDocDescs = itm.consultItems.map(function(t) { return t.eccDocDesc; }).join(';') || '-';
+        itm.ecEvaDescs = itm.consultItems.map(function(t) { return t.ecEvaDesc; }).join(';') || '-';
+        itm.ecOpinions = itm.consultItems.map(function(t) { return t.ecOpinion; }).join(';') || noVal;
+        itm.diagnoseDescs = itm.diagnoseList.map(function(t){ return t.diagnoseName; }).join(';') || noVal;
+        itm.hosInfo = itm.currWardDesc + ' ' + itm.currBedNo + ' ' + itm.currentRoomDesc;
+        return itm;
+      });
       this.setDept(data);
       moduleTimeInfo['consult'] = {
         0: [data[0][this.date]]

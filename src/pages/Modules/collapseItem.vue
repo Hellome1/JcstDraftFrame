@@ -10,7 +10,7 @@
         </div>
         <div v-if="name === 'lis'" class="loca-icon">
           <TipBox :tipmsg="lisAbno ? $t('lis.moduleTitle.tipmsg.normal') : $t('lis.moduleTitle.tipmsg.abno')">
-            <span class="module-title-func-btn" :class="lisAbno ? 'normal' : ''" @click.stop="handleLisAbno">{{ lisAbno ? '全部值' : '异常值' }}</span>
+            <span class="module-title-func-btn" :class="lisAbno ? 'normal' : ''" @click.stop="handleLisAbno">{{ lisAbno ? $t('lis.moduleTitle.switchabno.norm') : $t('lis.moduleTitle.switchabno.abno') }}</span>
           </TipBox>
         </div>
       </div>

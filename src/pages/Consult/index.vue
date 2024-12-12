@@ -33,35 +33,138 @@
       </el-col>
     </el-row>
 
-    <el-dialog :visible.sync="dialogVisible" :title="$t('consult.dialog.title')" width="80%" custom-class="consul-dialog">
-      <div class="consul-record-container" v-if="currentRecord">
-        <div class="consul-record-row">
-          <div class="consul-record-header">{{ $t('consult.dialog.row[0].title') }}</div>
-          <div class="consul-record-content">{{ currentRecord.ecCategory + ' ' + currentRecord.ecrLocDesc }}</div>
+    <el-dialog
+      :title="$t('consult.dialog.title')"
+      width="80%"
+      :visible.sync="dialogVisible"
+    >
+      <div class="consult-page" v-if="currentRecord">
+        <div class="consult-page-section">
+          <div class="cpso-row">
+            <div class="cpso-col">
+              <span class="cpso-col-l">{{$t('consult.detail.s1.p1')}}:</span>
+              <span class="cpso-col-r">{{ currentRecord.ecCategory }}</span>
+            </div>
+            <div class="cpso-col">
+              <span class="cpso-col-l">{{$t('consult.detail.s1.p2')}}:</span>
+              <span class="cpso-col-r">{{ currentRecord.ecnDate }}</span>
+            </div>
+            <div class="cpso-col">
+              <span class="cpso-col-l">{{$t('consult.detail.s1.p3')}}:</span>
+              <span class="cpso-col-r">{{ currentRecord.ecnPlace }}</span>
+            </div>
+          </div>
+          <div class="cpso-row">
+            <div class="cpso-col">
+              <span class="cpso-col-l">{{$t('consult.detail.s1.p4')}}:</span>
+              <span class="cpso-col-r">{{ currentRecord.patientName }}</span>
+            </div>
+            <div class="cpso-col">
+              <span class="cpso-col-l">{{$t('consult.detail.s1.p5')}}:</span>
+              <span class="cpso-col-r">{{ currentRecord.patGenderDesc }}</span>
+            </div>
+            <div class="cpso-col">
+              <span class="cpso-col-l">{{$t('consult.detail.s1.p6')}}:</span>
+              <span class="cpso-col-r">{{ currentRecord.patBirthDate }}</span>
+            </div>
+          </div>
+          <div class="cpso-row">
+            <div class="cpso-col">
+              <span class="cpso-col-l">{{$t('consult.detail.s1.p7')}}:</span>
+              <span class="cpso-col-r">{{ currentRecord.patMobPhone }}</span>
+            </div>
+            <div class="cpso-col">
+              <span class="cpso-col-l">{{$t('consult.detail.s1.p8')}}:</span>
+              <span class="cpso-col-r">{{ currentRecord.hosPatRegNo }}</span>
+            </div>
+            <div class="cpso-col">
+              <span class="cpso-col-l">{{$t('consult.detail.s1.p9')}}:</span>
+              <span class="cpso-col-r">{{ currentRecord.hosInfo }}</span>
+            </div>
+          </div>
+          <div class="cpso-row">
+            <div class="cpso-col" style="border-bottom: 1px solid black;">
+              <span class="cpso-col-l">{{$t('consult.detail.s1.p10')}}:</span>
+              <span class="cpso-col-r">{{ currentRecord.diagnoseDescs }}</span>
+            </div>
+          </div>
         </div>
-        <div class="consul-record-row">
-          <div class="consul-record-header">{{ $t('consult.dialog.row[1].title') }}</div>
-          <div class="consul-record-content">{{ currentRecord.ecrUserDesc + ' ' + currentRecord.ecrDate + ' ' + currentRecord.ecrTime }}</div>
+        <div class="consult-page-section">
+          <div class="cpso-row">
+            <div class="cpso-col cpso-col-h" style="background-color: #1890ff; text-align: center;">
+              <span class="cpso-col-l">{{$t('consult.detail.s2.p1')}}</span>
+            </div>
+          </div>
+          <div class="cpso-row">
+            <div class="cpso-col cpso-col-h">
+              <span class="cpso-col-l">{{$t('consult.detail.s2.p2')}}</span>
+            </div>
+            <div class="cpso-col cpso-col-h">
+              <span class="cpso-col-l">{{$t('consult.detail.s2.p3')}}</span>
+            </div>
+            <div class="cpso-col cpso-col-h">
+              <span class="cpso-col-l">{{$t('consult.detail.s2.p4')}}</span>
+            </div>
+            <div class="cpso-col cpso-col-h">
+              <span class="cpso-col-l">{{$t('consult.detail.s2.p5')}}</span>
+            </div>
+            <div class="cpso-col cpso-col-h">
+              <span class="cpso-col-l">{{$t('consult.detail.s2.p6')}}</span>
+            </div>
+          </div>
+          <div class="cpso-row" style="border-bottom: 1px solid black;">
+            <div class="cpso-col cpso-col-h">
+              <span class="cpso-col-r">{{ currentRecord.eccLocDescs }}</span>
+            </div>
+            <div class="cpso-col cpso-col-h">
+              <span class="cpso-col-r">{{ currentRecord.eccDocRanks }}</span>
+            </div>
+            <div class="cpso-col cpso-col-h">
+              <span class="cpso-col-r">{{ currentRecord.ecSubMars }}</span>
+            </div>
+            <div class="cpso-col cpso-col-h">
+              <span class="cpso-col-r">{{ currentRecord.eccDocDescs }}</span>
+            </div>
+            <div class="cpso-col cpso-col-h">
+              <span class="cpso-col-r">{{ currentRecord.ecEvaDescs }}</span>
+            </div>
+          </div>
         </div>
-        <div class="consul-record-row">
-          <div class="consul-record-header">{{ $t('consult.dialog.row[2].title') }}</div>
-          <div class="consul-record-content">{{ currentRecord.ecnDate + ' ' + currentRecord.ecnTime }}</div>
+        <div class="consult-page-section">
+          <div class="cpso-row">
+            <div class="cpso-col cpso-col-h" style="background-color: #1890ff; text-align: center;">
+              <span class="cpso-col-l">{{$t('consult.detail.s3.p1')}}</span>
+            </div>
+          </div>
+          <div class="cpso-row" style="border-bottom: 1px solid black;">
+            <div class="cpso-col cpso-col-xh">
+              <span class="cpso-col-r">{{ currentRecord.ectrePro }}</span>
+            </div>
+          </div>
         </div>
-        <div class="consul-record-row">
-          <div class="consul-record-header">{{ $t('consult.dialog.row[3].title') }}</div>
-          <div class="consul-record-content">{{ currentRecord.ecPurpose || $t('consult.dialog.row[3].noValPlaceholder') }}</div>
+        <div class="consult-page-section">
+          <div class="cpso-row">
+            <div class="cpso-col cpso-col-h" style="background-color: #1890ff; text-align: center;">
+              <span class="cpso-col-l">{{$t('consult.detail.s4.p1')}}</span>
+            </div>
+          </div>
+          <div class="cpso-row" style="border-bottom: 1px solid black;">
+            <div class="cpso-col cpso-col-xh">
+              <span class="cpso-col-r">{{ currentRecord.ecPurpose }}</span>
+            </div>
+          </div>
         </div>
-        <div class="consul-record-row">
-          <div class="consul-record-header">{{ $t('consult.dialog.row[4].title') }}</div>
-          <div class="consul-record-content">{{ currentRecord.ectrePro || $t('consult.dialog.row[4].noValPlaceholder') }}</div>
-        </div>
-        <div class="consul-record-row">
-          <div class="consul-record-header">{{ $t('consult.dialog.row[5].title') }}</div>
-          <div class="consul-record-content">{{ currentRecord.consultItems.map(itm => itm.ecOpinion).join('；') || $t('consult.dialog.row[5].noValPlaceholder') }}</div>
-        </div>
-        <div class="consul-record-row">
-          <div class="consul-record-header">{{ $t('consult.dialog.row[6].title') }}</div>
-          <div class="consul-record-content">{{ currentRecord.ecnPlace || $t('consult.dialog.row[6].noValPlaceholder') }}</div>
+        <div class="consult-page-section">
+          <div class="cpso-row">
+            <div class="cpso-col cpso-col-h" style="background-color: #1890ff; text-align: center;">
+              <span class="cpso-col-l">{{$t('consult.detail.s5.p1')}}</span>
+            </div>
+          </div>
+          <div class="cpso-row" style="border-bottom: 1px solid black;">
+            <div class="cpso-col cpso-col-xh">
+              <span class="cpso-col-r">{{ currentRecord.ecOpinions }}</span>
+            </div>
+          </div>
         </div>
       </div>
     </el-dialog>
@@ -173,6 +276,48 @@ export default {
     .consul-record-content {
       border: 1px solid #eee;
       padding: 5px 10px;
+    }
+  }
+}
+
+.consult-page {
+  max-height: 600px;
+  overflow: auto;
+  .consult-page-section {
+    margin-bottom: 20px;
+
+    .cpso-row {
+      display: flex;
+  
+      .cpso-col {
+        height: 30px;
+        line-height: 30px;
+        padding: 0 8px;
+        text-align: left;
+        flex: 1;
+        border-left: 1px solid black;
+        border-top: 1px solid black;
+        box-sizing: border-box;
+  
+        .cpso-col-l {
+          font-weight: bold;
+          margin-right: 10px;
+          color: #000;
+        }
+      }
+      .cpso-col:last-of-type {
+        border-right: 1px solid black;
+      }
+      .cpso-col.cpso-col-h {
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+      }
+      .cpso-col.cpso-col-xh {
+        height: 100px;
+        line-height: 20px;
+        padding: 5px 20px;
+      }
     }
   }
 }
