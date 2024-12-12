@@ -48,7 +48,7 @@ export default {
       }
       this.useStyle = { left, top };
       if (rootDomHeight > 70 && rootDomHeight > rootDomWidth / 4) {
-        this.useStyle = { top: (parseInt(top) + 30) + 'px', right: 0 };
+        this.useStyle = { top: (parseInt(top) + rootDomHeight - 35) + 'px', right: 0 };
       }
     }
   }
