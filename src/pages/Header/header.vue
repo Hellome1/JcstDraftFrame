@@ -28,6 +28,39 @@
         </div>
         <!-- <div class="header-l-f-center"></div> -->
         <div class="header-l-f-right">
+          <div class="header-tool-box">
+            <div class="htb-upper">
+              <TipBox tipmsg="切换语言 | Switch Language">
+                <span>
+                  <span class="lang-tip">Lang</span>
+                  <select :value='lang' ref="langSelect" @change="handleLangChange" style="border: none; outline: none;">
+                    <option label="中文" value="zh"></option>
+                    <option label="English" value="en"></option>
+                  </select>
+                </span>
+              </TipBox>
+            </div>
+            <div class="htb-lower">
+              <TipBox :tipmsg="$t('header.globalSearch.tipmsg')" :fns="[$t('header.globalSearch.fns[0]'), $t('header.globalSearch.fns[1]')]">
+                <div style="width: 150px; float: right;">
+                  <div class="global-search-box" :style="isFocus ? { width: '150px' } : {}">
+                      <input 
+                        type="text" 
+                        ref="globalSearch" 
+                        class="global-search"
+                        @focus="isFocus = true" 
+                        @blur="isFocus = false" 
+                        @keyup="handleKeyup" 
+                        @keyup.enter="globalSearch" 
+                      >
+                      <div class="gs-icon-box" @click="globalSearch">
+                        <i class="el-icon-search"></i>
+                      </div>
+                  </div>
+                </div>
+              </TipBox>
+            </div>
+          </div>
           <div class="user-info">
             <p>
               <Txt class="user-name" :txtstyle="stl(userInfo.name)" shape="userInfo_name">{{ txt(userInfo.name) }}</Txt>
@@ -50,12 +83,15 @@ export default {
   name: 'jcstheader',
   data() {
     return {
-      isProd: isProduction
+      isProd: isProduction,
+      lang: INIT_lang,
+      search: '',
+      isFocus: false
     }
   },
   watch: {
     allergyData(value) {
-      if (value.length) this.showModal();
+      // if (value.length) this.showModal();
     }
   },
   computed: {
@@ -68,6 +104,30 @@ export default {
     showModal() {
       if (jcst.modal.dialogVisible) return;
       handleEvent(this.handleClick)
+    },
+    handleLangChange() {
+      let select = this.$refs.langSelect;
+      let lang = select.value;
+      if (lang != this.lang) {
+        let searchs = location.search.split('&');
+        let searchsWithoutLang = searchs.filter(itm => itm.indexOf('lang=') === -1);
+        searchsWithoutLang.push('lang=' + lang);
+        let nsearch = searchsWithoutLang.join('&');
+        nsearch = nsearch.indexOf('?') > -1 ? nsearch : '?' + nsearch;
+        nsearch = nsearch.replace('?&', '?');
+        console.log('nsearch', nsearch);
+        let path = location.pathname;
+        let nurl = path + nsearch;
+        window.open(nurl, '_self');
+      }
+    },
+    handleKeyup() {
+      let input = this.$refs.globalSearch;
+      this.search = input.value;
+    },
+    globalSearch() {
+      let search = this.search;
+      console.log('search', search);
     }
   }
 };

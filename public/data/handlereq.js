@@ -184,7 +184,7 @@ function handleNursingVitalsignsItems() { // 必须保证生命体征请求在�
         desc: vitalDesc,
         unit: vitalUnit,
         code: vitalCode,
-        vitalGroup,
+        vitalGroup: vitalGroup,
       });
       nursingItems[vitalCode] = {
         desc: vitalDesc,

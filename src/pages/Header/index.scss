@@ -17,12 +17,73 @@
 
       .header-l-f-right {
         display: flex;
-
+        
+        .header-tool-box {
+          width: 200px;
+          margin-top: 8px;
+          margin-right: 25px;
+          color: black;
+          position: relative;
+          line-height: 18px;
+          .htb-upper {
+            height: 20px;
+            box-sizing: border-box;
+            text-align: right;
+            .lang-tip {
+              color: white;
+              font-size: 14px;
+              padding-right: 5px;
+              font-weight: bold;
+            }
+          }
+          .htb-lower {
+            height: 20px;
+            text-align: right;
+            .global-search-box {
+              position: relative;
+              background-color: white;
+              float: right;
+              width: 64px;
+              overflow: hidden;
+              transition: .3s;
+              &:hover {
+                width: 150px;;
+              }
+              .global-search {
+                outline: none;
+                padding: 1px 2px;
+                width: 120px;
+                margin-right: 20px;
+                position: relative;
+                top: -1px;
+                border: none;
+              }
+              .gs-icon-box {
+                position: absolute;
+                right: 0px;
+                top: 0px;
+                height: 19px;
+                width: 14px;
+                text-align: center;
+                cursor: pointer;
+                &:hover {
+                  color: #3483df;
+                }
+                .el-icon-search {
+                  line-height: 15px;
+                  font-size: 12px;
+                  font-weight: bold;
+                }
+              }
+            }
+          }
+        }
         .user-info {
           margin-top: 10px;
           margin-right: 15px;
           font-weight: bold;
           font-size: 14px;
+          min-width: 130px;
         }
       }
     }
