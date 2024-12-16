@@ -110,12 +110,13 @@ export default {
       }
       // 日期不存在则设置为数组最早日期
       for (let i = 0; i < dataArr.length; i++) {
-        if (!dataArr[i][dateKey]) {
-          dataArr[i][dateKey] = dataArr[0][dateKey];
+        let dataItm = dataArr[i];
+        if (!dataItm[dateKey]) {
+          dataItm[dateKey] = dataArr[0][dateKey];
         }
-        if (!dataArr[i].abno) dataArr[i].labelConfig = this.cp(this.labelConfig);
+        if (!dataItm.abno) dataItm.labelConfig = this.cp(this.labelConfig);
         else {
-          dataArr[i].labelConfig = { 
+          dataItm.labelConfig = { 
             isDetail: true, 
             pStyle: { textAlign: 'center', backgroundColor: 'red', border: '1px solid red' } 
           };

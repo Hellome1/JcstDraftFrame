@@ -7,6 +7,10 @@ body,
   padding: 0;
 }
 
+body {
+  font-family: 'Microsoft YaHei', '宋体', Arial;
+}
+
 //容器布局 el-header el-main
 .header {
   position: fixed;

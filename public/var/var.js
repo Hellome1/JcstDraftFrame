@@ -29,6 +29,7 @@ var moduleTimeInfo = {
   'surgery': {},
   'consult': {}
 };
+var Times = {};
 var jcst = {};
 jcst.currentClickedRow = null;
 jcst.selectedRow = null;

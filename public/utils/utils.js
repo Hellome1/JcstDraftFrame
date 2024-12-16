@@ -143,6 +143,22 @@ function loc_moduleTimeInfo(name) {
   }
 }
 
+function setGlobalSearchTimes(dataItm, datekey, namekey) {
+  var date = dataItm[datekey] || '', desc = '';
+  if (/{\w+}/.test(namekey)) {
+    desc = namekey.replace(/{\w+}/gi, function(match, index) {
+      var key = match.replace(/{|}/g, '');
+      return dataItm[key];
+    });
+  } else {
+    desc = dataItm[namekey] || '';
+  }
+  if (date && desc) {
+    if (date in Times) Times[date] += desc;
+    else Times[date] = desc;
+  }
+}
+
 function getPacsPDFPath() {
   var row = jcst.currentClickedRow || jcst.selectedRow;
   var rules = [

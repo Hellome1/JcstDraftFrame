@@ -104,7 +104,7 @@ function timeline_timelineData(res) {
     }
   });
   Data.encTimeRanges = encTimeRanges;
-  var firstNotNullTimeRange = encTimeRanges.filter(function (itm) { return itm })[0];
+  // var firstNotNullTimeRange = encTimeRanges.filter(function (itm) { return itm })[0];
   getTimelineDays();
   // console.log('tlDatesRange', tlDatesRange);
   selectPage(1);
@@ -132,11 +132,15 @@ function timeline_surgeryData(res) {
     return arr;
   }
   function handleSurgeryData(data) {
+    var jcst_setting_surgery = jcst.setting.surgery;
+    var datekey = jcst_setting_surgery.date,
+      namekey = jcst_setting_surgery.name;
     var surgeryInfo = data.map(function (itm, index) {
+      setGlobalSearchTimes(itm, datekey, namekey);
       return {
         surgeryDate: itm.operStartDate,
         count: index + 1
-      }
+      };
     });
     return surgeryInfo;
   }
@@ -222,6 +226,10 @@ function pacs_data(res) {
   jcst.datas['pacs'] = data;
 
   bus.$emit('pacs', function() {
+    var datekey = this.date, namekey = this.name;
+    data.forEach(function(itm) {
+      setGlobalSearchTimes(itm, datekey, namekey);
+    });
     this.resdata = data;
   });
   bus.$emit('pacspop', function() {
@@ -233,8 +241,10 @@ function lis_data(res) {
   console.log('[lis res] lis_data_res', res);
 
   bus.$emit('lis', function() {
+    var datekey = this.date, namekey = this.name;
     res.data.forEach(function(itm, i) {
       if (i % 2 === 1) itm.abno = true;
+      setGlobalSearchTimes(itm, datekey, namekey);
     });
     Data.lisData = res.data;
     this.resdata = JSON.parse(JSON.stringify(res.data));
@@ -260,6 +270,7 @@ function consult_data(res) {
     var data = res && res.data;
     if (data) {
       var noVal = translate.$t('consult.dialog.row[5].noValPlaceholder');
+      var datekey = this.date, namekey = this.name;
       this.datas = data.map(function(itm) {
         itm.eccLocDescs = itm.consultItems.map(function(t) { return t.eccLocDesc; }).join(';') || '-';
         itm.eccDocRanks = itm.consultItems.map(function(t) { return t.eccDocRank; }).join(';') || '-';
@@ -269,6 +280,9 @@ function consult_data(res) {
         itm.ecOpinions = itm.consultItems.map(function(t) { return t.ecOpinion; }).join(';') || noVal;
         itm.diagnoseDescs = itm.diagnoseList.map(function(t){ return t.diagnoseName; }).join(';') || noVal;
         itm.hosInfo = itm.currWardDesc + ' ' + itm.currBedNo + ' ' + itm.currentRoomDesc;
+        
+        setGlobalSearchTimes(itm, datekey, namekey);
+
         return itm;
       });
       this.setDept(data);
@@ -283,6 +297,7 @@ function medicalOrder_data(res) {
   console.log('medicalOrder_data', res);
   bus.$emit('medicalOrder', function() {
     var items = [];
+    var datekey = this.date, namekey = this.name;
     res && res.data && res.data.forEach(function(itm) {
       var code = itm.ordPriCode, desc = itm.ordPriDesc;
       var isLong = desc.indexOf('长期') > -1;
@@ -299,6 +314,8 @@ function medicalOrder_data(res) {
       } else {
         items.push(obj);
       }
+      
+      setGlobalSearchTimes(itm, datekey, namekey);
     });
 
     if (res && res.data && res.data[0]) {
@@ -306,6 +323,7 @@ function medicalOrder_data(res) {
         0: [res.data[0][this.date]]
       }
     }
+
     this.items = items;
     this.datas = this.handleData(res.data);
   })

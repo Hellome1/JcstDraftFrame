@@ -30,7 +30,7 @@
         <div class="header-l-f-right">
           <div class="header-tool-box">
             <div class="htb-upper">
-              <TipBox tipmsg="切换语言 | Switch Language">
+              <TipBox :isFixed="true" tipmsg="切换语言 | Switch Language">
                 <span>
                   <span class="lang-tip">Lang</span>
                   <select :value='lang' ref="langSelect" @change="handleLangChange" style="border: none; outline: none;">
@@ -41,24 +41,22 @@
               </TipBox>
             </div>
             <div class="htb-lower">
-              <TipBox :tipmsg="$t('header.globalSearch.tipmsg')" :fns="[$t('header.globalSearch.fns[0]'), $t('header.globalSearch.fns[1]')]">
-                <div style="width: 150px; float: right;">
-                  <div class="global-search-box" :style="isFocus ? { width: '150px' } : {}">
-                      <input 
-                        type="text" 
-                        ref="globalSearch" 
-                        class="global-search"
-                        @focus="isFocus = true" 
-                        @blur="isFocus = false" 
-                        @keyup="handleKeyup" 
-                        @keyup.enter="globalSearch" 
-                      >
-                      <div class="gs-icon-box" @click="globalSearch">
-                        <i class="el-icon-search"></i>
-                      </div>
+              <div style="position: relative; width: 150px; float: right;">
+                <HeaderTipBox v-show="showHeaderSearchTip" :text="$t('header.globalSearch.tipmsg')" :fns="[$t('header.globalSearch.fns[0]'), $t('header.globalSearch.fns[1]')]">
+                </HeaderTipBox>
+                <div class="global-search-box" @mouseenter="showHeaderSearchTip = true" @mouseleave="showHeaderSearchTip = false">
+                  <input 
+                    type="text" 
+                    ref="globalSearch" 
+                    class="global-search"
+                    @keyup="handleKeyup" 
+                    @keyup.enter="globalSearch" 
+                  >
+                  <div class="gs-icon-box" @click="globalSearch">
+                    <i class="el-icon-search"></i>
                   </div>
                 </div>
-              </TipBox>
+              </div>
             </div>
           </div>
           <div class="user-info">
@@ -78,15 +76,19 @@
 
 <script>
 import { inject } from '@/common/vuePrototypeMethods.js';
+import HeaderTipBox from './Tip/index.vue';
 
 export default {
   name: 'jcstheader',
+  components: {
+    HeaderTipBox
+  },
   data() {
     return {
       isProd: isProduction,
       lang: INIT_lang,
       search: '',
-      isFocus: false
+      showHeaderSearchTip: false
     }
   },
   watch: {
@@ -127,7 +129,16 @@ export default {
     },
     globalSearch() {
       let search = this.search;
+      if (!search.trim()) return;
       console.log('search', search);
+      let input = this.$refs.globalSearch;
+      input.blur();
+      let valuedate = '';
+      for (let date in Times) {
+        let value = Times[date];
+        if (value.indexOf(search) > -1 && !valuedate) valuedate = date;
+      }
+      if (valuedate) selectPageFromDate(valuedate);
     }
   }
 };

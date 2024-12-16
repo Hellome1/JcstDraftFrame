@@ -43,12 +43,8 @@
               position: relative;
               background-color: white;
               float: right;
-              width: 64px;
+              width: 150px;
               overflow: hidden;
-              transition: .3s;
-              &:hover {
-                width: 150px;;
-              }
               .global-search {
                 outline: none;
                 padding: 1px 2px;
