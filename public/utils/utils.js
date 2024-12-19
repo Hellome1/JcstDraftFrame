@@ -233,3 +233,16 @@ function getPathByRule(rules, row) {
   console.log('[utils.js] getPathByRule resule:', path);
   return path;
 }
+
+function changeSearchAndOpenSelf(k, v) {
+  let searchs = location.search.split('&');
+  let t = searchs.filter(itm => itm.indexOf(k + '=') === -1);
+  t.push(k + '=' + v);
+  let nsearch = t.join('&');
+  nsearch = nsearch.indexOf('?') > -1 ? nsearch : '?' + nsearch;
+  nsearch = nsearch.replace('?&', '?');
+  console.log('nsearch', nsearch);
+  let path = location.pathname;
+  let nurl = path + nsearch;
+  window.open(nurl, '_self');
+}

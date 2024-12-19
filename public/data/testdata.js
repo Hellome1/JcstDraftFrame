@@ -3,6 +3,7 @@ var useTestData = {
   'vitalsigns': true,
   'vitalsignsNursing': true,
   'timeline': true,
+  'tlSwitch': true,
   'medicalOrder': true,
   'pacs': true,
   'lis': true,

@@ -14,7 +14,7 @@ function getParam() {
   var queryParam = urlParams();
   if (!storage) return;
   var hosCode = 'undefined' != typeof COMMOMOBJ && COMMOMOBJ.BusinessFieldCodeMore || queryParam.hosCode || storage.getItem('HospitalCode') || '00001'; //业务域
-  var hosRegNo = 'undefined' != typeof COMMOMOBJ && COMMOMOBJ.HosPatientID || queryParam.hosRegNo || storage.getItem('PATHosPatientID') || storage.getItem('HosPatientID') || ''; //his登记号
+  var hosPatRegNo = 'undefined' != typeof COMMOMOBJ && COMMOMOBJ.HosPatientID || queryParam.hosPatRegNo || storage.getItem('PATHosPatientID') || storage.getItem('HosPatientID') || ''; //his登记号
   var hosEncId = 'undefined' != typeof COMMOMOBJ && COMMOMOBJ.HosVisitNumber[0] || queryParam.hosEncId || storage.getItem('HosVisitNumber') || ''; //his就诊号
   var hdcId = 'undefined' != typeof COMMOMOBJ && COMMOMOBJ.hdcPatientId || queryParam.hdcId || storage.getItem('PATPatientID') || ''; //患者主索引
   var hdcEncId = 'undefined' != typeof COMMOMOBJ && COMMOMOBJ.PatVisitNumber[0] || queryParam.hdcEncId || storage.getItem('PatVisitNumber') || ''; //平台就诊号
@@ -26,7 +26,7 @@ function getParam() {
 
   var param = {
     hosCode: hosCode,
-    hosRegNo: hosRegNo,
+    hosPatRegNo: hosPatRegNo,
     hosEncId: hosEncId,
     hdcId: hdcId,
     hdcEncId: hdcEncId,
@@ -104,7 +104,7 @@ function handleReq(obj) {
     
     var hosCode = PARAM.hosCode || query.hosCode;
     var hdcId = PARAM.hdcId;
-    var hosRegNo = PARAM.hosRegNo;
+    var hosPatRegNo = PARAM.hosPatRegNo;
     var hdcEncId = PARAM.hdcEncId;
     var hosEncId = PARAM.hosEncId;
     if (hdcEncId.indexOf(jcst_splitChar) > -1) hdcEncId = '';
@@ -118,7 +118,7 @@ function handleReq(obj) {
     var basic = { 
       businessFieldCode: hosCode, 
       hdcPatientId: hdcId, 
-      hosPatRegNo: hosRegNo,
+      hosPatRegNo: hosPatRegNo,
       hdcEncId: hdcEncId, 
       hosEncId: hosEncId, 
     };

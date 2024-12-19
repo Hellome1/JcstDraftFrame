@@ -44,6 +44,18 @@ function getVisit(query = {}) {
   })
 }
 
+export function getVisitAll(query = {}) {
+  request(
+    handleReq({
+      url: 'MES0002',
+      method: 'post',
+      data: query
+    })
+  ).then(res => {
+    tlSwitch_data(res);
+  })
+}
+
 function getSurgery(query = { from: 'surgery' }) {
   request(
     handleReq({

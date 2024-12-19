@@ -9,7 +9,7 @@
               <Timeline />
             </el-header>
 
-            <el-main class="main">
+            <el-main class="main" :style="mainStyle">
               <Modules />
             </el-main>
           </el-container>
@@ -74,7 +74,10 @@ export default {
     
   },
   computed: {
-    ...inject('layout', 'header')
+    ...inject('layout', 'header', 'timeline'),
+    mainStyle() {
+      return this.tlSwitchShow ? { marginTop: '130px' } : {};
+    }
   },
   methods: {
     

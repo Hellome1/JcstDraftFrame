@@ -19,9 +19,14 @@ FIELD.patInfo = {
 function header_patInfo(res) {
   var patInfo = {};
   var field = FIELD.patInfo, style = TextStyle.patInfo;
-  fetchField(patInfo, field, res.data && res.data[0] || {})
+  var data = res.data && res.data[0], hosPatRegNo = data && data.hosPatRegNo || '';
+  fetchField(patInfo, field, data || {});
   addTextStyle(patInfo, style);
   jcst.setting.header.patInfo = patInfo;
+  PARAM.hosPatRegNo = hosPatRegNo;
+  bus.$emit('tlSwitch', function() {
+    this.getVisitAll();
+  });
 }
 
 TextStyle.userInfo = {
@@ -70,7 +75,9 @@ function header_allergyData(res) {
   }
 }
 
+var timeline_timelineData_res = null;
 function timeline_timelineData(res) {
+  timeline_timelineData_res = res;
   var encTimeRanges = res.data.map(function (data) {
     var encStartDate = data.encStartDate || '',
       encStartTime = data.encStartTime || '',
@@ -144,6 +151,69 @@ function timeline_surgeryData(res) {
     });
     return surgeryInfo;
   }
+}
+
+var tlSwitch_data_isPush = false;
+function tlSwitch_data(res) {
+  bus.$emit('tlSwitch', function() {
+    var data = res && res.data || [];
+    if (!tlSwitch_data_isPush && timeline_timelineData_res) {
+      tlSwitch_data_isPush = true;
+      data.push(timeline_timelineData_res.data[0]);
+    }
+    var encTypes = [], encTypesCode = [];
+    this.rawtls = data.map(function(itm) {
+      var o = {}, style = {};
+      var hdcEncId = itm.hdcEncId,
+        encTypeCode = itm.encTypeCode, 
+        encTypeDesc = itm.encTypeDesc,
+        encStartDate = itm.encStartDate;
+      o.hdcEncId = hdcEncId;
+      o.type = encTypeCode;
+      o.desc = encStartDate + ' ' + encTypeDesc;
+      var check = o.check = hdcEncId === PARAM.hdcEncId;
+      var color = '';
+      switch (encTypeCode) {
+        case 'I':
+          color = 'rgb(80, 128, 246)';
+          break;
+        case 'O':
+          color = 'rgb(247, 191, 72)'
+          break;
+        case 'E':
+          color = 'rgb(255, 0, 0)';
+          break;
+        case 'H':
+          color = 'rgb(106, 171, 94)';
+          break;
+      }
+      style = { borderColor: color };
+      if (check) style.backgroundColor = color.replace('rgb', 'rgba').replace(')', ', 0.1)');
+      o.style = style;
+
+      var encTypeItm = {
+        type: encTypeCode, 
+        desc: encTypeDesc.slice(0, 1), 
+        backgroundColor: color,
+        borderColor: color
+      };
+      if (encTypesCode.indexOf(encTypeCode) === -1) {
+        encTypesCode.push(encTypeCode);
+        encTypes.push(encTypeItm);
+      }
+
+      return o;
+    });
+    encTypes.push({
+      type: 'E', 
+      desc: '急', 
+      backgroundColor: 'red',
+      borderColor: 'red'
+    });
+    this.encTypes = encTypes;
+    this.selectedEncTypes = encTypes.map(function(itm) { return itm.type; });
+    this.getDomWidth();
+  });
 }
 
 function vitalsigns_data(res) {

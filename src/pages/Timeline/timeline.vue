@@ -1,5 +1,8 @@
 <template>
   <div class="timeline tlrootref">
+    <el-row v-if="tlSwitchShow">
+      <TlSwitch />
+    </el-row>
     <el-row class="timeline-total">
       <el-col class="tl-select" :span="leftW" shape="leftW">
         <div class="tl-top">
@@ -64,6 +67,7 @@
 
 <script>
 import { inject } from '@/common/vuePrototypeMethods.js';
+import TlSwitch from './tlSwitch/index.vue';
 
 function s() {
   let domr = document.querySelector('.tl-list');
@@ -73,9 +77,13 @@ function s() {
   let modulerootw = moduleroot.offsetWidth;
   tlroot.style.width = (modulerootw - 2) + 'px';
 }
+window.addEventListener('resize', () => { s() });
 
 export default {
   name: 'timeline',
+  components: {
+    TlSwitch
+  },
   data() {
     return {
       selectPage: 1
@@ -85,7 +93,6 @@ export default {
     setTimeout(() => {
       s();
     }, 0);
-    window.addEventListener('resize', () => { s() });
   },
   created() {
     bus.$on('timeline', cb => cb && cb.call(this));

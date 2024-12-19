@@ -55,6 +55,7 @@ jcst.setting = {
   },
   timeline: {
     iconShow: true,
+    tlSwitchShow: true,
     pages: 1, // 内部决定
     days: [], // 数据决定
     curdays: [], // 内部决定

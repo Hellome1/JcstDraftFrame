@@ -111,16 +111,7 @@ export default {
       let select = this.$refs.langSelect;
       let lang = select.value;
       if (lang != this.lang) {
-        let searchs = location.search.split('&');
-        let searchsWithoutLang = searchs.filter(itm => itm.indexOf('lang=') === -1);
-        searchsWithoutLang.push('lang=' + lang);
-        let nsearch = searchsWithoutLang.join('&');
-        nsearch = nsearch.indexOf('?') > -1 ? nsearch : '?' + nsearch;
-        nsearch = nsearch.replace('?&', '?');
-        console.log('nsearch', nsearch);
-        let path = location.pathname;
-        let nurl = path + nsearch;
-        window.open(nurl, '_self');
+        changeSearchAndOpenSelf('lang', lang);
       }
     },
     handleKeyup() {
