@@ -235,14 +235,14 @@ function getPathByRule(rules, row) {
 }
 
 function changeSearchAndOpenSelf(k, v) {
-  let searchs = location.search.split('&');
-  let t = searchs.filter(itm => itm.indexOf(k + '=') === -1);
+  var searchs = location.search.split('&');
+  var t = searchs.filter(function(itm) { return itm.indexOf(k + '=') === -1; });
   t.push(k + '=' + v);
-  let nsearch = t.join('&');
+  var nsearch = t.join('&');
   nsearch = nsearch.indexOf('?') > -1 ? nsearch : '?' + nsearch;
   nsearch = nsearch.replace('?&', '?');
   console.log('nsearch', nsearch);
-  let path = location.pathname;
-  let nurl = path + nsearch;
+  var path = location.pathname;
+  var nurl = path + nsearch;
   window.open(nurl, '_self');
 }

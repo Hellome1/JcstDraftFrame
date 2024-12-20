@@ -157,9 +157,16 @@ var tlSwitch_data_isPush = false;
 function tlSwitch_data(res) {
   bus.$emit('tlSwitch', function() {
     var data = res && res.data || [];
-    if (!tlSwitch_data_isPush && timeline_timelineData_res) {
+    var timelineData = timeline_timelineData_res && timeline_timelineData_res.data[0];
+    if (!tlSwitch_data_isPush && timelineData) {
       tlSwitch_data_isPush = true;
-      data.push(timeline_timelineData_res.data[0]);
+      data.push(timelineData);
+      var timelineDataCopy = JSON.parse(JSON.stringify(timelineData));
+      timelineDataCopy.hdcEncId = timelineDataCopy.hdcEncId + '1';
+      timelineDataCopy.encTypeCode = 'E';
+      timelineDataCopy.encTypeDesc = '急诊';
+      timelineDataCopy.encStartDate = '2021-12-21';
+      data.push(timelineDataCopy);
     }
     var encTypes = [], encTypesCode = [];
     this.rawtls = data.map(function(itm) {
@@ -204,12 +211,14 @@ function tlSwitch_data(res) {
 
       return o;
     });
-    encTypes.push({
-      type: 'E', 
-      desc: '急', 
-      backgroundColor: 'red',
-      borderColor: 'red'
+    var seq = ['O', 'I', 'E', 'H'];
+    var itm = { type: 'placeholder', desc: ' ', backgroundColor: 'white', borderColor: 'white' };
+    encTypes.sort(function(a, b) {
+      return seq.indexOf(a.type) - seq.indexOf(b.type);
     });
+    while (encTypes.length < 4) {
+      encTypes.push(itm);
+    }
     this.encTypes = encTypes;
     this.selectedEncTypes = encTypes.map(function(itm) { return itm.type; });
     this.getDomWidth();

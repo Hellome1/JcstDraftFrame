@@ -1,10 +1,9 @@
 <template>
-  <div class="tl-switch" ref="root">
+  <div class="tl-switch" ref="root" @mousewheel.prevent="handleMouseWheel" >
     <div class="tls-scroll-tip">
       <div class="tls-stip-prev" v-show="stipPrev"></div>
       <ul 
         ref="ul"
-        @mousewheel="handleMouseWheel" 
         :style="{ transform: 'translateX(' + translate + 'px)', width: ulWidth + 'px' }"
       >
         <li 
@@ -24,7 +23,8 @@
         :key="i" 
         class="enc-type-item" 
         :class="t.type"
-        @click="handleCheck(t.type)"
+        :style="t.type != 'placeholder' && { cursor: 'pointer' }"
+        @click="t.type != 'placeholder' && handleCheck(t.type)"
       >
         <span class="circle" :style="{ backgroundColor: selectedEncTypes.includes(t.type) ? t.backgroundColor : 'white', borderColor: t.borderColor }"></span>
         <span class="desc">{{ t.desc }}</span>
@@ -93,14 +93,19 @@ export default {
     },
     handleCheck(type) {
       let selectedEncTypes = this.selectedEncTypes;
-      console.log('selectedEncType before:', selectedEncTypes);
+      // console.log('selectedEncType before:', selectedEncTypes);
       if (selectedEncTypes.includes(type)) {
         selectedEncTypes = selectedEncTypes.filter(itm => itm != type);
       } else {
         selectedEncTypes.push(type);
       }
-      console.log('selectedEncType after:', selectedEncTypes);
+      // console.log('selectedEncType after:', selectedEncTypes);
       this.selectedEncTypes = selectedEncTypes;
+      var checkIndex = -1;
+      this.tls.forEach((itm, index) => {
+        if (itm.check) checkIndex = index;
+      });
+      this.fixToCheck(checkIndex);
     },
     handleClick(itm) {
       console.log('itm', this.cp(itm));
@@ -110,7 +115,7 @@ export default {
     getDomWidth() {
       let { root } = this.$refs;
       if (root && root.offsetWidth) {
-        console.log('getDomWidth', root, root.offsetWidth);
+        // console.log('getDomWidth', root, root.offsetWidth);
         rootDom = root;
         rootWidth = root.offsetWidth;
         var checkIndex = -1;
@@ -128,11 +133,14 @@ export default {
       translate += wheelDelta;
       translate = translate >= 0 ? 0 :
         translate <= maxLeft ? maxLeft : translate;
-      console.log('translate', translate);
+      // console.log('translate', translate);
       this.translate = translate;
     },
     fixToCheck(index) {
-      if (index === -1) return;
+      if (index === -1) {
+        this.translate = 0;
+        return;
+      }
       let showRange = rootWidth - typeSelectWidth;
       let checkPos = index * everyItmWidth;
       let diff = checkPos + everyItmWidth - showRange;
@@ -143,6 +151,8 @@ export default {
         } else {
           this.translate = -diff;
         }
+      } else {
+        this.translate = 0;
       }
     }
   }
@@ -229,7 +239,7 @@ export default {
     justify-content: space-between;
     .enc-type-item {
       font-size: 0;
-      cursor: pointer;
+      flex: 1;
       &:hover {
         .desc {
           color: #3483df;
