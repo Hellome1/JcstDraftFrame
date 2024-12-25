@@ -45,15 +45,12 @@ export default {
   watch: {
     
   },
-
   mounted() {
   },
-
   created() {
     this.busOn();
     getLis();
   },
-
   computed: {
     ...inject('layout', 'timeline', 'lis'),
     curdates() {
@@ -134,7 +131,6 @@ export default {
       }
     }
   },
-
   methods: {
     busOn() {
       bus.$on('lis', cb => {

@@ -125,17 +125,13 @@ export function getLis(query = { from: 'lis' }) {
 }
 
 export function getLisnorm(query = { from: 'lisnorm' }) {
-  request(
+  return request(
     handleReq({
-      url: 'MES0024',
+      url: 'MES0023',
       method: 'post',
       data: query
     })
-  ).then(res => {
-    lis_data(res);
-  }).catch(e => {
-    throw e;
-  })
+  )
 }
 
 export function getSurgeryDetail(query = { from: 'surgeryDetail' }) {
@@ -172,7 +168,6 @@ export function ajax({action, method = 'post', query = {}}) {
   );
 }
 
-export function getLisNorm() {}
 export function getLoop() {}
 
 export default function () {

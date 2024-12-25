@@ -93,7 +93,7 @@ export default {
   },
   watch: {
     allergyData(value) {
-      // if (value.length) this.showModal();
+      if (value.length) this.showModal();
     }
   },
   computed: {

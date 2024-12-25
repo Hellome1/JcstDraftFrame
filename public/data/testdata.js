@@ -8,6 +8,7 @@ var useTestData = {
   'pacs': true,
   'lis': true,
   'lisnorm': true,
+  'lisnormHistory': true,
   'surgery': true,
   'surgeryDetail': true,
   'consult': true

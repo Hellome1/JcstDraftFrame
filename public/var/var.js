@@ -75,7 +75,8 @@ jcst.table = {
     //   label: "日期",
     //   width: "180",
     // }
-  ]
+  ],
+  handleClick: 'presetEventFn.placeholder'
 };
 jcst.iframe = {
   src: '',
@@ -145,3 +146,13 @@ jcst.rules = {
     return cellStyle;
   }
 };
+
+var presetEventFn = {
+  placeholder: function() {
+    console.log('placeholder');
+  },
+  handleLisnormRowClick: function(row) {
+    console.log('handleLisnormRowClick', row);
+    jcst.setting.lis.clickedLisnormRow = row;
+  }
+}

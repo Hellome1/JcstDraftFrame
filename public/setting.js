@@ -154,6 +154,7 @@ jcst.setting = {
       'jcst.modal.title': translate.$t('setting.lis.reportTitle'),
       'jcst.table.post.action': 'MES0023',
       'jcst.table.post.from': 'lisnorm',
+      'jcst.table.handleClick': 'presetEventFn.handleLisnormRowClick',
       'jcst.table.column': [
         {
           prop: 'inspItemDesc',
@@ -178,6 +179,7 @@ jcst.setting = {
         }
       ]
     },
+    clickedLisnormRow: null
   },
   surgery: {
     surgeryTitle: translate.$t('setting.surgery.title'),

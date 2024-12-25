@@ -42,6 +42,9 @@ export default {
     },
     from() {
       return this.table.post.from;
+    },
+    handleClick() {
+      return this.table.handleClick;
     }
   },
   render: function (h) {
@@ -53,6 +56,9 @@ export default {
           data: this.tableData,
           'row-style': rowO => jcst.rules.$2(rowO.row, this.columns),
           'cell-style': O => jcst.rules.$3(O, this.columns)
+        },
+        on: {
+          'row-click': this.handleRowClick
         },
         style: {
           width: '100%'
@@ -78,6 +84,13 @@ export default {
         ajax_data(res);
         this.loading = false;
       }).catch(e => { this.loading = false; throw e; });
+    },
+    handleRowClick(row, column, event) {
+      let handleClick = this.handleClick;
+      let eventName = handleClick.split('.')[1];
+      if (eventName && eventName in presetEventFn) {
+        presetEventFn[eventName](row, column, event);
+      }
     }
   }
 };

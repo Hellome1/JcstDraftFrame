@@ -327,7 +327,13 @@ function lis_data(res) {
     });
     Data.lisData = res.data;
     this.resdata = JSON.parse(JSON.stringify(res.data));
+    // jcst.selectedRow = res.data[0];
+    // handleEvent(jcst.setting.lis.labelClick);
   });
+}
+
+function lisnorm_data(res) {
+  return res;
 }
 
 function ajax_data(res) {
