@@ -221,7 +221,6 @@ function tlSwitch_data(res) {
     }
     this.encTypes = encTypes;
     this.selectedEncTypes = encTypes.map(function(itm) { return itm.type; });
-    this.getDomWidth();
   });
 }
 

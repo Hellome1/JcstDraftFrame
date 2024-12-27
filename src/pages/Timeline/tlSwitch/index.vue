@@ -1,10 +1,25 @@
 <template>
-  <div class="tl-switch" ref="root" @mousewheel.prevent="handleMouseWheel" >
-    <div class="tls-scroll-tip">
-      <div class="tls-stip-prev" v-show="stipPrev"></div>
+  <div class="tl-switch" ref="root" >
+    <div class="tl-list-control">
+      <span @click="showList = !showList">切换就诊</span>
+    </div>
+
+    <div class="tl-enc-list" v-show="showList">
+      <div class="enc-type-select" ref="typeSelect">
+        <span 
+          v-for="(t, i) in encTypes" 
+          :key="i" 
+          class="enc-type-item" 
+          :class="t.type"
+          :style="t.type != 'placeholder' && { cursor: 'pointer' }"
+          @click="t.type != 'placeholder' && handleCheck(t.type)"
+        >
+          <span class="circle" :style="{ backgroundColor: selectedEncTypes.includes(t.type) ? t.backgroundColor : 'white', borderColor: t.borderColor }"></span>
+          <span class="desc">{{ t.desc }}</span>
+        </span>
+      </div>
       <ul 
         ref="ul"
-        :style="{ transform: 'translateX(' + translate + 'px)', width: ulWidth + 'px' }"
       >
         <li 
           class="tls-item" 
@@ -15,40 +30,12 @@
           @click="handleClick(t)"
         >{{ t.desc }}</li>
       </ul>
-      <div class="tls-stip-after" v-show="stipAfter"></div>
-    </div>
-    <div class="enc-type-select" ref="typeSelect">
-      <span 
-        v-for="(t, i) in encTypes" 
-        :key="i" 
-        class="enc-type-item" 
-        :class="t.type"
-        :style="t.type != 'placeholder' && { cursor: 'pointer' }"
-        @click="t.type != 'placeholder' && handleCheck(t.type)"
-      >
-        <span class="circle" :style="{ backgroundColor: selectedEncTypes.includes(t.type) ? t.backgroundColor : 'white', borderColor: t.borderColor }"></span>
-        <span class="desc">{{ t.desc }}</span>
-      </span>
     </div>
   </div>
 </template>
 
 <script>
 import { getVisitAll } from '@/server/api.js';
-let rootDom = null;
-let rootWidth = 0, typeSelectWidth = 120, everyItmWidth = 120;
-
-window.addEventListener('resize', () => { 
-  if (rootDom) rootWidth = rootDom.offsetWidth; 
-});
-
-const getMaxLeft = (width) => {
-  let maxLeft = 0;
-  let showWidth = rootWidth - typeSelectWidth;
-  maxLeft = showWidth - width;
-  if (maxLeft > 0) maxLeft = 0;
-  return maxLeft;
-}
 
 export default {
   name: 'tlSwitch',
@@ -57,7 +44,7 @@ export default {
       rawtls: [],
       encTypes: [],
       selectedEncTypes: [],
-      translate: 0
+      showList: false
     };
   },
   watch: {
@@ -66,21 +53,6 @@ export default {
   computed: {
     tls() {
       return this.rawtls.filter(itm => this.selectedEncTypes.includes(itm.type));
-    },
-    ulWidth() {
-      return this.tls.length * everyItmWidth;
-    },
-    stipPrev() {
-      return this.translate != 0;
-    },
-    stipAfter() {
-      let root = this.$refs.root;
-      let targetNum = -10;
-      if (root) {
-        let showWidth = (root.offsetWidth - typeSelectWidth)
-        targetNum = showWidth - this.ulWidth;
-      }
-      return targetNum < 0 && this.translate != targetNum;
     }
   },
   created() {
@@ -93,67 +65,18 @@ export default {
     },
     handleCheck(type) {
       let selectedEncTypes = this.selectedEncTypes;
-      // console.log('selectedEncType before:', selectedEncTypes);
+      console.log(selectedEncTypes, type);
       if (selectedEncTypes.includes(type)) {
         selectedEncTypes = selectedEncTypes.filter(itm => itm != type);
       } else {
         selectedEncTypes.push(type);
       }
-      // console.log('selectedEncType after:', selectedEncTypes);
       this.selectedEncTypes = selectedEncTypes;
-      var checkIndex = -1;
-      this.tls.forEach((itm, index) => {
-        if (itm.check) checkIndex = index;
-      });
-      this.fixToCheck(checkIndex);
     },
     handleClick(itm) {
       console.log('itm', this.cp(itm));
       let hdcEncId = itm.hdcEncId || '';
       changeSearchAndOpenSelf('hdcEncId', hdcEncId);
-    },
-    getDomWidth() {
-      let { root } = this.$refs;
-      if (root && root.offsetWidth) {
-        // console.log('getDomWidth', root, root.offsetWidth);
-        rootDom = root;
-        rootWidth = root.offsetWidth;
-        var checkIndex = -1;
-        this.rawtls.forEach((itm, index) => {
-          if (itm.check) checkIndex = index;
-        });
-        this.fixToCheck(checkIndex);
-      }
-    },
-    handleMouseWheel(e) {
-      console.log('e wheelDelta', e.wheelDelta);
-      let wheelDelta = e.wheelDelta;
-      let translate = this.translate;
-      let maxLeft = getMaxLeft(this.ulWidth);
-      translate += wheelDelta;
-      translate = translate >= 0 ? 0 :
-        translate <= maxLeft ? maxLeft : translate;
-      // console.log('translate', translate);
-      this.translate = translate;
-    },
-    fixToCheck(index) {
-      if (index === -1) {
-        this.translate = 0;
-        return;
-      }
-      let showRange = rootWidth - typeSelectWidth;
-      let checkPos = index * everyItmWidth;
-      let diff = checkPos + everyItmWidth - showRange;
-      let maxLeft = getMaxLeft(this.ulWidth);
-      if (diff > 0) {
-        if (diff + everyItmWidth + maxLeft < 0) { // 增加一个身位
-          this.translate = -(diff + everyItmWidth);
-        } else {
-          this.translate = -diff;
-        }
-      } else {
-        this.translate = 0;
-      }
     }
   }
 }
@@ -161,32 +84,66 @@ export default {
 
 <style lang="scss">
 .tl-switch{
-  background-color: white;
   width: 100%;
-  overflow: hidden;
   position: relative;
   user-select: none;
-  .tls-scroll-tip {
-    position: relative;
-    .tls-stip-prev {
-      width: 20px;
-      height: 100%;
-      background: linear-gradient(to right, rgba(100, 100, 100, 1), rgba(100, 100, 100, 0.1));
-      position: absolute;
-      left: 0;
-      top: 0;
+  
+  .tl-list-control {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    padding: 1px 8px;
+    font-size: 12px;
+    border-radius: 3px;
+    color: white;
+    background-color: rgb(65, 173, 240);
+    z-index: 999;
+    cursor: pointer;
+    span {
+      line-height: 14px;
     }
-    .tls-stip-after {
-      width: 20px;
-      height: 100%;
-      background: linear-gradient(to left, rgba(100, 100, 100, 1), rgba(100, 100, 100, 0.1));
-      position: absolute;
-      right: 120px;
-      top: 0;
+    &:hover {
+      background-color: rgb(48, 151, 216);
+    }
+  }
+  .tl-enc-list {
+    position: absolute;
+    top: 16px;
+    right: -1px;
+    z-index: 1;
+    border: 1px solid #eee;
+    background-color: white;
+    .enc-type-select {
+      width: 100px;
+      padding: 0 8px;
+      border: 2px solid rgb(0, 13, 201);
+      display: flex;
+      justify-content: space-between;
+      .enc-type-item {
+        font-size: 0;
+        flex: 1;
+        &:hover {
+          .desc {
+            color: #3483df;
+          }
+        }
+        .circle {
+          display: inline-block;
+          width: 8px;
+          height: 8px;
+          border: 2px solid red;
+          border-radius: 50%;
+          background-color: white;
+          vertical-align: sub;
+        }
+        .desc {
+          font-size: 12px;
+        }
+      }
     }
     ul {
-      // width: 3000px;
-      overflow: hidden;
+      max-height: 300px;
+      overflow: auto;
       &::after {
         content: '';
         display: block;
@@ -197,7 +154,6 @@ export default {
         width: 100px;
         padding: 0px 8px;
         border: 2px solid pink;
-        float: left;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -224,38 +180,6 @@ export default {
         position: absolute;
         right: 1px;
         bottom: -1px;
-      }
-    }
-  }
-  .enc-type-select {
-    position: absolute;
-    background-color: white;
-    width: 100px;
-    right: 0;
-    top: 0;
-    padding: 0 8px;
-    border: 2px solid rgb(255, 215, 154);
-    display: flex;
-    justify-content: space-between;
-    .enc-type-item {
-      font-size: 0;
-      flex: 1;
-      &:hover {
-        .desc {
-          color: #3483df;
-        }
-      }
-      .circle {
-        display: inline-block;
-        width: 8px;
-        height: 8px;
-        border: 2px solid red;
-        border-radius: 50%;
-        background-color: white;
-        vertical-align: sub;
-      }
-      .desc {
-        font-size: 12px;
       }
     }
   }

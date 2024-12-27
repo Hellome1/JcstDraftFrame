@@ -97,6 +97,7 @@
   "lis.moduleTitle.tipmsg.normal": "View All Inspection Items",
   "lis.moduleTitle.switchabno.abno": "ABNO",
   "lis.moduleTitle.switchabno.norm": "NORM",
+  "lis.modal.lisnormHistory": "Historical Data Comparison",
   "diagnose.noDataDesc": "No Diagnosis Data Was Found",
   "surgery.noDataDesc": "No Surgery Data Was Found",
   "surgery.dialog.title": "Surgery Detail",

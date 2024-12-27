@@ -1,7 +1,7 @@
 <template>
   <div class="lisnorm-history">
     <div class="lh-header">
-      <h3>历史数据对比</h3>
+      <h3>{{$t('lis.modal.lisnormHistory')}}</h3>
       <span class="lh-back" @click="handleBack"><i class="el-icon-back"></i>返回</span>
     </div>
     <div class="lh-main" ref="main">
