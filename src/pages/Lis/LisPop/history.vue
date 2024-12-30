@@ -44,8 +44,8 @@ export default {
   },
   methods: {
     getLisnorm() {
-      let hdcInspRptId = this.clickedLisnormRow.hdcInspRptId;
-      getLisnorm({ from: 'lisnormHistory', inspOrdInfo: { hdcInspRptId: hdcInspRptId } }).then(res => {
+      let inspItemCode = this.clickedLisnormRow.inspItemCode;
+      getLisnorm({ from: 'lisnormHistory', hdcEncId: '', hosEncId: '', inspOrdInfo: { inspItemCode: inspItemCode } }).then(res => {
         res = lisnorm_data(res);
         let { data = [] } = res;
         console.log('lisnormHistory data', this.cp(data));
@@ -70,7 +70,7 @@ export default {
             position: 'top',
             fontWeight: 'bold'
           },
-          data: this.data.map(itm => [itm.inspRptVerifyDate ,parseInt(itm.inspectionValue)])
+          data: this.data.map(itm => [itm.inspRptVerifyDate + ' ' + itm.inspRptVerifyTime, itm.inspectionValue])
         }
       ];
       let xAxis = {

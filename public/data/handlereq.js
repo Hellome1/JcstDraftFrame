@@ -16,7 +16,7 @@ function getParam() {
   var hosCode = 'undefined' != typeof COMMOMOBJ && COMMOMOBJ.BusinessFieldCodeMore || queryParam.hosCode || storage.getItem('HospitalCode') || '00001'; //业务域
   var hosPatRegNo = 'undefined' != typeof COMMOMOBJ && COMMOMOBJ.HosPatientID || queryParam.hosPatRegNo || storage.getItem('PATHosPatientID') || storage.getItem('HosPatientID') || ''; //his登记号
   var hosEncId = 'undefined' != typeof COMMOMOBJ && COMMOMOBJ.HosVisitNumber[0] || queryParam.hosEncId || storage.getItem('HosVisitNumber') || ''; //his就诊号
-  var hdcId = 'undefined' != typeof COMMOMOBJ && COMMOMOBJ.hdcPatientId || queryParam.hdcId || storage.getItem('PATPatientID') || ''; //患者主索引
+  var hdcId = 'undefined' != typeof COMMOMOBJ && COMMOMOBJ.hdcPatientId || queryParam.hdcId || storage.getItem('hdcPatientId') || ''; //患者主索引
   var hdcEncId = 'undefined' != typeof COMMOMOBJ && COMMOMOBJ.PatVisitNumber[0] || queryParam.hdcEncId || storage.getItem('PatVisitNumber') || ''; //平台就诊号
 
   var userCode = storage.getItem('UserCode') || ''; //用户工号 -> 用作session没有token登陆用

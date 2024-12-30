@@ -85,7 +85,7 @@ export function getVitals(query = {}, cb) {
 export function getMedicalOrder(query = { from: 'medicalOrder' }) {
   request(
     handleReq({
-      url: 'MES005',
+      url: 'MES0005',
       method: 'post',
       data: query
     })
