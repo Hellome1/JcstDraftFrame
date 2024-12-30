@@ -16,6 +16,8 @@ var useTestData = {
 var JCSTTestData = {};
 
 (function () {
+  var isUseTestData = getSearchByKey('useTestData');
+  if (!isUseTestData) return;
   for (var k in useTestData) {
     if (useTestData[k]) {
       JCSTTestData[k] = xmlreq({

@@ -370,7 +370,7 @@ function consult_data(res) {
   bus.$emit('consult', function () {
     this.loading = false;
     var data = res && res.data;
-    if (data) {
+    if (data && data[0]) {
       var noVal = translate.$t('consult.dialog.row[5].noValPlaceholder');
       var datekey = this.date, namekey = this.name;
       this.datas = data.map(function (itm) {

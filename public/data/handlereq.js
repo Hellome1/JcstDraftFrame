@@ -50,7 +50,7 @@ function getAxiosSetting() {
     },
     param: {
       baseURL: setting_MS_HDCURL,
-      timeout: 10000
+      timeout: 15000
     }
   }
 }

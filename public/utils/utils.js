@@ -234,6 +234,12 @@ function getPathByRule(rules, row) {
   return path;
 }
 
+function getSearchByKey(key) {
+  var langArr = location.search.split('&').filter(function(itm) { return itm.indexOf(key + '=') > -1; });
+  var searchResult = langArr.length ? langArr[0].split('=')[1] : '';
+  return searchResult;
+}
+
 function changeSearchAndOpenSelf(k, v) {
   var searchs = location.search.split('&');
   var t = searchs.filter(function(itm) { return itm.indexOf(k + '=') === -1; });

@@ -1,7 +1,6 @@
 var isProduction = 'undefined' != typeof ms_address;
 var isInEMRView = 'undefined' != typeof COMMOMOBJ;
-var langArr = location.search.split('&').filter(function(itm) { return itm.indexOf('lang=') > -1; });
-var searchLang = langArr.length ? langArr[0].split('=')[1] : '';
+var searchLang = getSearchByKey('lang');
 var langs = ['zh', 'en'];
 var INIT_lang = searchLang && langs.indexOf(searchLang) > -1 ? searchLang : 'zh';
 
