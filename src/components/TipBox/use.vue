@@ -22,7 +22,7 @@ export default {
       const root = this.$refs.root;
       const tar = this.$slots.default[0] && this.$slots.default[0].elm;
       const pos = this.getDomAbsPosition(tar || root);
-      console.log('position', pos);
+      // console.log('position', pos);
       let { left, top, offsetHeight } = pos;
       let style = {};
       if (this.isFixed) {
@@ -31,7 +31,7 @@ export default {
         
         let tipIgnore = document.querySelector('.tipbox-scroll-ignore');
         let tipScroll = tipIgnore.scrollTop;
-        console.log('scrllTop', tipScroll);
+        // console.log('scrllTop', tipScroll);
         top += tipScroll;
       }
       style = { left: left + 'px', top: top + 'px' };
