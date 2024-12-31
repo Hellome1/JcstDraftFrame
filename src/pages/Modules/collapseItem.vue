@@ -107,7 +107,7 @@ export default {
   display: flex;
   
   >div {
-    margin-right: 10px;
+    margin: 0 5px;
 
     .module-title-func-btn {
       color: white;

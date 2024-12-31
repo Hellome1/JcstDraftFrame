@@ -7,7 +7,7 @@
           <i :style="{ backgroundColor: arrowStyle.color }" class="down"></i>
         </i>
       </div>
-      <TipBox :tipmsg="MSG['name']">
+      <TipBox :tipmsg="MSG['name']" :fns="MSG['fns']">
         <p ref="pLabel" :style="MSG['pStyle']" :title="isDetail ? '' : MSG.title">
           <i v-if="isIcon" :class="MSG['iconClass']"></i>
           {{ MSG.name }}
@@ -56,7 +56,8 @@ export default {
             left: 0,
           },
           loop: null,
-          rowData: null
+          rowData: null,
+          fns: []
         };
       }
     },
@@ -65,8 +66,7 @@ export default {
   },
   data() {
     return {
-      loopLoading: false,
-      actionsTip: []
+      loopLoading: false
     };
   },
   created() {},
@@ -126,7 +126,9 @@ export default {
         }
       }
 
-      if (this.labelClick) this.MSG['pStyle']['cursor'] = 'pointer';
+      if (this.labelClick) {
+        this.MSG['pStyle']['cursor'] = 'pointer';
+      }
     },
     updateArrowPosition() {
       // 初始化箭头位置以匹配时间

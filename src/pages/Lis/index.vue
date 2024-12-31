@@ -111,13 +111,11 @@ export default {
         if (!dataItm[dateKey]) {
           dataItm[dateKey] = dataArr[0][dateKey];
         }
-        if (!dataItm.abno) dataItm.labelConfig = this.cp(this.labelConfig);
-        else {
-          dataItm.labelConfig = { 
-            isDetail: true, 
-            pStyle: { textAlign: 'center', backgroundColor: 'red', border: '1px solid red' } 
-          };
+        let labelConfig = this.cp(this.labelConfig);
+        if (dataItm.abno) {
+          labelConfig.pStyle = { textAlign: 'center', backgroundColor: 'red', border: '1px solid red' };
         }
+        dataItm.labelConfig = labelConfig;
       }
 
       return dataArr.filter(itm => this.checkDept.includes(itm[this.leftKey]));

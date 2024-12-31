@@ -93,6 +93,7 @@
   "pacs.report.body[1]": "检查所见",
   "pacs.report.body[2]": "诊断建议",
   "lis.noDataDesc": "未查询到检验数据",
+  "lis.fns[0]": "左键查看检验报告",
   "lis.moduleTitle.tipmsg.abno": "只查看有异常值的检验项目",
   "lis.moduleTitle.tipmsg.normal": "查看全部检验项目",
   "lis.moduleTitle.switchabno.abno": "异常值",

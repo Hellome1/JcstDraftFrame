@@ -146,7 +146,8 @@ jcst.setting = {
       isDetail: true,
       pStyle: {
         textAlign: 'center'
-      }
+      },
+      fns: [translate.$t('lis.fns[0]')]
     },
     labelClick: {
       'jcst.modal.dialogVisible': true,

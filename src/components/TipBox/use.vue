@@ -9,7 +9,12 @@ export default {
   name: 'UseTipBox',
   props: {
     tipmsg: '',
-    fns: [],
+    fns: {
+      type: Array,
+      default: function() {
+        return [];
+      }
+    },
     isFixed: false
   },
   methods: {
