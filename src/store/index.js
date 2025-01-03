@@ -21,6 +21,7 @@ import medicalOrder from './pages/medicalOrder.js';
 import pacs from './pages/pacs.js';
 import lis from './pages/lis.js';
 import consult from './pages/consult.js';
+import EMR from './pages/EMR.js';
 
 Vue.use(Vuex);
 
@@ -50,6 +51,7 @@ export default new Vuex.Store({
     medicalOrder,
     pacs,
     lis,
-    consult
+    consult,
+    EMR
   }
 });

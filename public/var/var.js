@@ -85,7 +85,7 @@ var tableRules = {};
 tableRules.rule1 = {
   key: 'inspAbnoFlag',
   rowColor: '#fff1f0',
-  replaces: ['H|↑|0', 'L|↓|1'],
+  replaces: ['H|↑|0', 'L|↓|1', '↑|↑|0', '↓|↓|1'],
   cellStyles: [
     {
       color: '#e44b3b',

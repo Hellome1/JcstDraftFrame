@@ -41,17 +41,12 @@ export default {
       checkDept: []
     };
   },
-  watch: {
-    
-  },
-
-  mounted() {},
-
   created() {
-    this.busOn();
+    bus.$on('pacs', cb => {
+      cb && cb.call(this);
+    });
     getPacs();
   },
-
   computed: {
     ...inject('layout', 'timeline', 'pacs'),
     curdates() {
@@ -118,13 +113,6 @@ export default {
           time = examDate + ' ' + examTime;
         return dayjs(time).unix();
       }
-    }
-  },
-  methods: {
-    busOn() {
-      bus.$on('pacs', cb => {
-        cb && cb.call(this);
-      });
     }
   }
 };

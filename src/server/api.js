@@ -134,6 +134,20 @@ export function getLisnorm(query = { from: 'lisnorm' }) {
   )
 }
 
+export function getEmr(query = { from: 'EMR' }) {
+  request(
+    handleReq({
+      url: 'MES0060ByAdm',
+      method: 'post',
+      data: query
+    })
+  ).then(res => {
+    EMR_data(res);
+  }).catch(e => {
+    throw e;
+  });
+}
+
 export function getSurgeryDetail(query = { from: 'surgeryDetail' }) {
   request(
     handleReq({

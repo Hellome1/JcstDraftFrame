@@ -430,3 +430,55 @@ function medicalOrder_data(res) {
     this.datas = this.handleData(res.data);
   })
 }
+
+function EMR_data(res) {
+  var hdcPatientId = PARAM.hdcId;
+  var role = PARAM.MSRole || DATAFORMAT.userInfo.group;
+  bus.$emit('EMR', function () {
+    var data = res.data || [];
+    var documentTypes = [];
+    data = data.forEach(function(itm) {
+      documentTypes = documentTypes.concat(itm.documentTypes);
+    });
+    var emrDocs = [];
+    var emrTypes = documentTypes.map(function(type) {
+      var docTypeDesc = type.docTypeDesc,
+        documents = type.documents,
+        documentType = type.documentType;
+      var location = [];
+      documents.forEach(function(doc, i) {
+        var documentId = doc.documentId,
+          templateId = doc.templateId,
+          templateDesc = doc.templateDesc,
+          hosEncId = doc.hosEncId,
+          documentDate = doc.documentDate;
+        var targetSrc = 'http://43.143.230.30:8007/cdr-api/emr/document?params={"data":{"hdcPatientId":"{hdcPatientId}"}}&role={role}&documentId={documentId}&documentFormat=html&docType=html';
+        targetSrc = targetSrc.replace('{hdcPatientId}', hdcPatientId).replace('{role}', role).replace('{documentId}', documentId);
+        targetSrc = encodeURI(targetSrc);
+        var index = 0;
+        if (!Array.isArray(emrDocs[index])) emrDocs[index] = [];
+        emrDocs[index].push({
+          docId: documentId,
+          temId: templateId,
+          desc: templateDesc,
+          type: documentType,
+          hosNum: hosEncId,
+          date: documentDate.split(' ')[0],
+          display: true,
+          targetSrc: targetSrc
+        });
+        location.push([index, emrDocs[index].length - 1]);
+      });
+      return {
+        desc: docTypeDesc,
+        type: documentType,
+        location
+      };
+    });
+    this.emrTypes = emrTypes;
+    this.emrDocs = emrDocs;
+    this.hasDocs = this.emrDocs.filter(function(el) {
+      return el.length > 0;
+    }).length > 0;
+  });
+}

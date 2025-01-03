@@ -76,7 +76,14 @@ function handleObjData(param, obj) {
       }
     };
     param = Object.assign({}, param, extra);
-    console.log('extra', extra, row.ensLogId);
+  } else if (from === 'EMR') {
+    extra = {
+      emrDocInfo: { documentFormat: "html" },
+      userCode: "admin",
+      userLocCode: "CDR",
+      groupID: ""
+    };
+    param = Object.assign({}, param, extra);
   }
   obj.testData = JCSTTestData[from];
   return param;

@@ -6,7 +6,7 @@ jcst.setting = {
     leftBgColor: '#f9f9f9', // 颜色
     moduleHeadFontSize: '16px', // 字体大小
     moduleHeadColor: '#000', // 颜色
-    displayModules: ['vitalsigns', 'nursing', 'medicalOrder', 'pacs', 'lis', 'surgery', 'consult'] // 数组
+    displayModules: ['vitalsigns', 'nursing', 'medicalOrder', 'pacs', 'lis', 'surgery', 'consult', 'EMR'] // 数组
   },
   header: {
     isShow: true, // 布尔值
@@ -210,6 +210,15 @@ jcst.setting = {
     time: 'ecrTime',
     leftKey: 'ecrLocDesc',
     noClassifyText: 'setting.consult.noClassifyText',
+    labelConfig: {
+      isDetail: true
+    }
+  },
+  EMR: {
+    EMRTitle: translate.$t('setting.EMR.title'),
+    name: 'desc',
+    date: 'date',
+    time: '',
     labelConfig: {
       isDetail: true
     }
