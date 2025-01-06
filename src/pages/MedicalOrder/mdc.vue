@@ -10,7 +10,7 @@
         </el-checkbox-group>
       </div>
     </el-col>
-    <el-col :span="rightW" class="layout-right">
+    <el-col :span="rightW" class="layout-right" :style="item.display === 'line' ? { borderLeft: '1px solid #ddd' } : {}" >
       <el-row v-if="item.display == 'list'" class="module-content-list">
         <el-col v-for="(day, i) in showDays" :key="day" :sm="3" :xs="3" class="">
           <div v-for="(data, d) in filDatas" :key="data[name] + (data.isHighlight ? '1' + d : d) + curFirstDate">

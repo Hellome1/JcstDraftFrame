@@ -28,7 +28,8 @@ const tipdict = {
   'pacs': translate.$t('pacs.locIcon.tipmsg'),
   'lis': translate.$t('lis.locIcon.tipmsg'),
   'surgery': translate.$t('surgery.locIcon.tipmsg'),
-  'consult': translate.$t('consult.locIcon.tipmsg')
+  'consult': translate.$t('consult.locIcon.tipmsg'),
+  'EMR': translate.$t('EMR.locIcon.tipmsg'),
 };
 const wordDict = {
   'vitalsigns': translate.$t('vitalSigns.locIcon.word'),
@@ -36,7 +37,8 @@ const wordDict = {
   'pacs': translate.$t('pacs.locIcon.word'),
   'lis': translate.$t('lis.locIcon.word'),
   'surgery': translate.$t('surgery.locIcon.word'),
-  'consult': translate.$t('consult.locIcon.word')
+  'consult': translate.$t('consult.locIcon.word'),
+  'EMR': translate.$t('EMR.locIcon.word'),
 };
 export default {
   name: 'collapseItem',

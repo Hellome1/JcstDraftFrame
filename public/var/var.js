@@ -26,7 +26,8 @@ var moduleTimeInfo = {
   'pacs': {},
   'lis': {},
   'surgery': {},
-  'consult': {}
+  'consult': {},
+  'EMR': {}
 };
 var Times = {};
 var jcst = {};

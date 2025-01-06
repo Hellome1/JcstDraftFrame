@@ -436,6 +436,7 @@ function EMR_data(res) {
   var role = PARAM.MSRole || DATAFORMAT.userInfo.group;
   bus.$emit('EMR', function () {
     var data = res.data || [];
+    var firstDate = '';
     var documentTypes = [];
     data = data.forEach(function(itm) {
       documentTypes = documentTypes.concat(itm.documentTypes);
@@ -457,13 +458,15 @@ function EMR_data(res) {
         targetSrc = encodeURI(targetSrc);
         var index = 0;
         if (!Array.isArray(emrDocs[index])) emrDocs[index] = [];
+        var date = documentDate.split(' ')[0];
+        if (!firstDate) firstDate = date;
         emrDocs[index].push({
           docId: documentId,
           temId: templateId,
           desc: templateDesc,
           type: documentType,
           hosNum: hosEncId,
-          date: documentDate.split(' ')[0],
+          date: date,
           display: true,
           targetSrc: targetSrc
         });
@@ -475,6 +478,11 @@ function EMR_data(res) {
         location
       };
     });
+    if (firstDate) {
+      moduleTimeInfo['EMR'] = {
+        0: [firstDate]
+      }
+    }
     this.emrTypes = emrTypes;
     this.emrDocs = emrDocs;
     this.hasDocs = this.emrDocs.filter(function(el) {
