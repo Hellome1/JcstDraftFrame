@@ -1,5 +1,5 @@
 <template>
-  <div class="module-content">
+  <div class="module-content" v-loading="loading">
     <el-row>
       <el-col :span="leftW" :style="{ backgroundColor: leftBgColor }" class="layout-left">
         <div class="dept-check emr-check">
@@ -41,6 +41,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       checkTypes: [],
       emrTypes: [],
       emrDocs: [],

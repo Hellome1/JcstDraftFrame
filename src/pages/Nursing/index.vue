@@ -1,5 +1,5 @@
 <template>
-  <div class="module-content">
+  <div class="module-content" :style="loading ? { minHeight: '36px' } : {}" v-loading="loading">
     <el-row v-for="(item, i) in items" :key="i">
       <el-col :span="leftW" :style="{ backgroundColor: leftBgColor }" class="layout-left">{{ item.desc }} {{item.unit ? `(${item.unit})` : ''}}</el-col>
       <el-col :span="rightW" class="layout-right">
@@ -26,11 +26,11 @@ export default {
   components: {},
   data() {
     return {
+      loading: true,
       items: [],
       itemCodes: [],
       nursingItems: {},
-      data: {},
-      isNullData: true // 是否数据为空
+      data: {}
     };
   },
   created() {
@@ -70,7 +70,6 @@ export default {
         }
       }
       console.log('[nursing.vue 72] this.items:',this.items);
-      if (this.items.length) this.isNullData = false;
       this.$forceUpdate();
     },
   }

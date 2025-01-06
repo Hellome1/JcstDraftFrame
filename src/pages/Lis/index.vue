@@ -1,5 +1,5 @@
 <template>
-  <div class="module-content">
+  <div class="module-content" v-loading="loading">
     <el-row>
       <el-col :span="leftW" :style="{ backgroundColor: leftBgColor }" class="layout-left">
         <div class="dept-check pacs-check">
@@ -11,11 +11,11 @@
         </div>
       </el-col>
       <el-col :span="rightW" class="layout-right">
-        <el-row class="module-content-list" :class="nullData ? 'nullData' : ''">
+        <el-row class="module-content-list">
           <el-col v-for="(day, i) in showDays" :key="i" :sm="3" :xs="3">
             <div v-for="(item, d) in filteredData" :key="d + (item.abno ? 'abno' : '')">
               <template v-if="curdates[i] === item[date]">
-                <Label v-if="item" :nullData="(nullData = false)" :param="item" :labelClick="labelClick" :basic="{ name, date, time }" :labelConfig="item.labelConfig" />
+                <Label v-if="item" :param="item" :labelClick="labelClick" :basic="{ name, date, time }" :labelConfig="item.labelConfig" />
               </template>
             </div>
           </el-col>
@@ -37,9 +37,9 @@ export default {
   props: {},
   data() {
     return {
+      loading: true,
       resdata: [],
-      checkDept: [],
-      nullData: true
+      checkDept: []
     };
   },
   watch: {

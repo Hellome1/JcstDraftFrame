@@ -1,5 +1,5 @@
 <template>
-  <div class="module-content">
+  <div class="module-content" :style="loading ? { minHeight: '36px' } : {}" v-loading="loading">
     <el-row>
       <el-col :span="leftW" :style="{ backgroundColor: leftBgColor }" class="layout-left"></el-col>
       <el-col :span="rightW" class="layout-right">
@@ -26,15 +26,6 @@ export default {
   components: {
     Label
   },
-  data() {
-    return {};
-  },
-  watch: {
-    
-  },
-  mounted() {},
-  created() {
-  },
   computed: {
     ...inject('layout', 'timeline', 'surgery'),
     curdates() {
@@ -46,5 +37,6 @@ export default {
   }
 };
 </script>
+
 <style lang="scss">
 </style>

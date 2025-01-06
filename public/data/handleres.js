@@ -119,6 +119,7 @@ function timeline_timelineData(res) {
 
 function timeline_surgeryData(res) {
   var uniqueRes = uniqueData(res.data);
+  jcst.setting.surgery.loading = false;
   jcst.setting.surgery.surgeryData = uniqueRes;
   var surgeryInfo = handleSurgeryData(uniqueRes);
   jcst.setting.surgery.surgeryInfo = surgeryInfo;
@@ -273,6 +274,7 @@ function setVitalTimes(data_trans, name) {
 function nursing_data(res) {
   console.log('[handleres.js 275] nursing_data', res);
   bus.$emit('nursing', function () {
+    this.loading = false;
     var datekey = 'vitalSignMeasDate', timekey = 'vitalSignMeasTime', vkey = 'vitalSignMeasValue';
     var data = res && res.data && res.data[0] || {};
     var ssdata = [], ssdatakey, szdata, szdatakey;
@@ -321,6 +323,7 @@ function pacs_data(res) {
   jcst.datas['pacs'] = data;
 
   bus.$emit('pacs', function () {
+    this.loading = false;
     var datekey = this.date, namekey = this.name;
     data.forEach(function (itm) {
       setGlobalSearchTimes(itm, datekey, namekey);
@@ -334,8 +337,8 @@ function pacs_data(res) {
 
 function lis_data(res) {
   console.log('[handleres.js 337] lis_data_res', res);
-
   bus.$emit('lis', function () {
+    this.loading = false;
     var datekey = this.date, namekey = this.name;
     res.data.forEach(function (itm, i) {
       if (i % 2 === 1) itm.abno = true;
@@ -435,6 +438,7 @@ function EMR_data(res) {
   var hdcPatientId = PARAM.hdcId;
   var role = PARAM.MSRole || DATAFORMAT.userInfo.group;
   bus.$emit('EMR', function () {
+    this.loading = false;
     var data = res.data || [];
     var firstDate = '';
     var documentTypes = [];

@@ -1,5 +1,5 @@
 <template>
-  <div class="module-content">
+  <div class="module-content" v-loading="loading">
     <el-row>
       <el-col class="layout-left consul-left" :span="leftW" :style="{ backgroundColor: leftBgColor }">
         <div class="dept-check consul-check">

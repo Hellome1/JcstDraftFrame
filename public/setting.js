@@ -184,6 +184,7 @@ jcst.setting = {
   },
   surgery: {
     surgeryTitle: translate.$t('setting.surgery.title'),
+    loading: true,
     surgeryData: [],
     surgeryInfo: [],
     name: 'preOperDiagRemark',

@@ -144,6 +144,9 @@ export function getEmr(query = { from: 'EMR' }) {
   ).then(res => {
     EMR_data(res);
   }).catch(e => {
+    bus.$emit('EMR', function() {
+      this.loading = false;
+    });
     throw e;
   });
 }

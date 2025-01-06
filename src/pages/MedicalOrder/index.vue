@@ -1,5 +1,5 @@
 <template>
-  <div class="module-content" style="min-height: 34px;" v-loading="loading">
+  <div class="module-content" :style="loading ? { minHeight: '36px' } : {}" v-loading="loading">
     <Mdc
       ref="mdc"
       v-for="(item, i) in items"
