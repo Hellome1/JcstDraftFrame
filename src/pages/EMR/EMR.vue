@@ -16,7 +16,7 @@
             <template v-if="emrDocs">
               <div v-for="(data, j) in emrDocs[0]" :key="'data_' + j">
                 <template v-if="curdates[i] === data[date]">
-                  <Label v-if="data.display" :param="data" :basic="{ name, date, time }" :labelConfig="labelConfig" @click.native="handleClick(data)" />
+                  <Label v-if="data.display" :param="data" :basic="{ name, date, time }" :labelConfig="labelConfig" :labelClick="labelClick" @click.native="handleClick(data)" />
                 </template>
               </div>
             </template>

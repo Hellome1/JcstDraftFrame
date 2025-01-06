@@ -87,7 +87,7 @@ jcst.setting = {
       },
       {
         name: 'temperature',
-        desc: ['setting.vitalSigns.items[2].desc[0]', 'setting.vitalSigns.items[2].desc[1]'],
+        desc: ['setting.vitalSigns.items[2].desc[0]', 'setting.vitalSigns.items[2].desc[1]', 'setting.vitalSigns.items[2].desc[2]'],
         color: '#2AB66A',
         startValue: 34,
         endValue: 42,
@@ -221,7 +221,8 @@ jcst.setting = {
     time: '',
     labelConfig: {
       isDetail: true
-    }
+    },
+    labelClick: {}
   }
 };
 

@@ -14,6 +14,7 @@ $borderColor: #dedede;
     .tl-list {
       font-size: $tlListFontSize;
       border: none;
+      min-height: 70px;
       .tl-day {
         .tl-top.last {
           border-right: 1px solid #dedede;

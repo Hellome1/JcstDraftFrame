@@ -70,6 +70,7 @@ export default {
       let r = false;
       let moduleTimeInfo = this.moduleTimeInfo;
       let timeinfo = moduleTimeInfo[this.name];
+      if (!timeinfo) return false;
       for (let k in timeinfo) {
         r = true;
       }

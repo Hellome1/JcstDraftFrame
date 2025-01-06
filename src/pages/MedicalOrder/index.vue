@@ -1,5 +1,5 @@
 <template>
-  <div class="module-content">
+  <div class="module-content" style="min-height: 34px;" v-loading="loading">
     <Mdc
       ref="mdc"
       v-for="(item, i) in items"
@@ -21,6 +21,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       datas: [],
       keyArr: [],
       classifyObj: {},
@@ -28,23 +29,13 @@ export default {
       items: []
     };
   },
-  watch: {
-    
-  },
-
-  mounted() {},
-
-  updated() {},
-
   created() {
     bus.$on('medicalOrder', cb => (cb && cb.call(this)));
     getMedicalOrder();
   },
-
   computed: {
     ...inject('layout', 'timeline', 'medicalOrder')
   },
-
   methods: {
     handleData(data) {
       let _this = this;
@@ -99,6 +90,7 @@ export default {
   }
 };
 </script>
+
 <style lang="scss" scoped>
 .el-row {
   display: flex;

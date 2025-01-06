@@ -115,6 +115,7 @@ function selectPage(num) {
 
 function selectPageFromDate(date) {
   var encTimeRanges = Data.encTimeRanges;
+  if (!encTimeRanges) return -1;
   var encStartDate = encTimeRanges[0].encStartDate;
   var daysFromEncStartDate = dayjs(date).add(1, 'day').diff(encStartDate, 'day'); // 需要加一天，如果选择就诊第一天diff就会变成0天
   var showDays = jcst_timeline.showDays;

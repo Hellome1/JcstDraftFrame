@@ -38,7 +38,7 @@
           <i class="el-icon-caret-right clickable" :class="selectPage < pages ? 'clickable' : 'btn-disabled'" @click="() => { selectPage < pages ? selectPage++ : null }"></i>
         </div>
       </el-col>
-      <el-col class="tl-list" :span="rightW" shape="rightW">
+      <el-col class="tl-list" :span="rightW" shape="rightW" v-loading="!days.length">
         <el-row shape="showDays">
           <el-col
             :sm="3"

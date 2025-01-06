@@ -50,7 +50,7 @@ function getAxiosSetting() {
     },
     param: {
       baseURL: setting_MS_HDCURL,
-      timeout: 15000
+      timeout: 120000
     }
   }
 }
@@ -170,7 +170,7 @@ function handleVitalsignsItems() {
         el.isVitalsigns = true;
       }
     });
-    items[code[0]] = { module: item, code: code };
+    if (code[0]) items[code[0]] = { module: item, code: code };
   });
   console.log('[vitalsigns req] items', items);
   bus.$emit('vitalsigns', function() {

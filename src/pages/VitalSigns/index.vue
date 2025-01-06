@@ -1,5 +1,5 @@
 <template>
-  <div class="module-content vitalSigns" style="position: relative;" v-loading="isLoading">
+  <div class="module-content vitalSigns" style="position: relative;" v-loading="loading">
     <div>
       <el-row>
         <el-col class="layout-left vital-left" :span="leftW" shape="leftW-leftBgColor" :style="{ backgroundColor: leftBgColor }">
@@ -17,9 +17,6 @@
           </div>
         </el-col>
         <el-col :span="rightW" shape="rightW" class="layout-right vital-chart-outer">
-          <!-- <div v-if="nullData" class="nullDataFloat">
-            <el-empty :description="$t('vitalSigns.noDataDesc')"></el-empty>
-          </div> -->
           <canvas 
             :height="canvas_h"
             :width="canvas_w" 
@@ -58,12 +55,11 @@ export default {
   },
   data() {
     return {
+      loading: true,
       canvas_h: 300,
       canvas_w: 800,
       max_scale: 0,
       space: 0,
-      isLoading: false,
-      nullData: true,
       itemsObj: {},
       checkList: [],
       smtz_data: {},

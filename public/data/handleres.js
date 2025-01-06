@@ -227,6 +227,7 @@ function tlSwitch_data(res) {
 function vitalsigns_data(res) {
   console.log('[vitalsigns res] res', res);
   bus.$emit('vitalsigns', function () {
+    this.loading = false;
     var items = this.itemsObj;
     var data = res.data || [];
     var ndata = [{}];
@@ -239,7 +240,6 @@ function vitalsigns_data(res) {
     }
     data = ndata;
     var checkList = [];
-    var nullData = true;
     var smtz_data = {};
     for (var k in data[0]) {
       var module = items[k].module;
@@ -249,7 +249,6 @@ function vitalsigns_data(res) {
       });
       setVitalTimes(data_trans, module.name);
       checkList.push(module.name);
-      nullData = false;
       smtz_data[module.name] = { module: module, data: data_trans, display: true };
     }
     this.checkList = checkList;
@@ -272,7 +271,7 @@ function setVitalTimes(data_trans, name) {
 }
 
 function nursing_data(res) {
-  console.log('nursing_data', res);
+  console.log('[handleres.js 275] nursing_data', res);
   bus.$emit('nursing', function () {
     var datekey = 'vitalSignMeasDate', timekey = 'vitalSignMeasTime', vkey = 'vitalSignMeasValue';
     var data = res && res.data && res.data[0] || {};
@@ -317,7 +316,7 @@ function nursing_data(res) {
 }
 
 function pacs_data(res) {
-  console.log('[pacs res] pacs_data_res', res);
+  console.log('[handleres.js 320] pacs_data_res', res);
   var data = JSON.parse(JSON.stringify(res.data));
   jcst.datas['pacs'] = data;
 
@@ -334,7 +333,7 @@ function pacs_data(res) {
 }
 
 function lis_data(res) {
-  console.log('[lis res] lis_data_res', res);
+  console.log('[handleres.js 337] lis_data_res', res);
 
   bus.$emit('lis', function () {
     var datekey = this.date, namekey = this.name;
@@ -396,8 +395,9 @@ function consult_data(res) {
 }
 
 function medicalOrder_data(res) {
-  console.log('medicalOrder_data', res);
+  console.log('[handleres.js 399] medicalOrder_data', res);
   bus.$emit('medicalOrder', function () {
+    this.loading = false;
     var items = [];
     var datekey = this.date, namekey = this.name;
     res && res.data && res.data.forEach(function (itm) {

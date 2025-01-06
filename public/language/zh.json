@@ -7,6 +7,7 @@
   "setting.vitalSigns.items[1].desc[0]": "呼吸",
   "setting.vitalSigns.items[2].desc[0]": "体温",
   "setting.vitalSigns.items[2].desc[1]": "腋温",
+  "setting.vitalSigns.items[2].desc[2]": "肛温",
   "setting.medicalOrder.title": "用药医嘱",
   "setting.nursingOrder.title": "护理医嘱",
   "setting.nursing.title": "护理信息",

@@ -1,6 +1,6 @@
 <template>
   <div class="tl-switch" ref="root" >
-    <div class="tl-list-control">
+    <div class="tl-list-control" v-show="showSwitchEnc">
       <span @click="showList = !showList">切换就诊</span>
     </div>
 
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import { inject } from '@/common/vuePrototypeMethods.js';
 import { getVisitAll } from '@/server/api.js';
 
 export default {
@@ -51,8 +52,12 @@ export default {
     
   },
   computed: {
+    ...inject('timeline'),
     tls() {
       return this.rawtls.filter(itm => this.selectedEncTypes.includes(itm.type));
+    },
+    showSwitchEnc() {
+      return this.days.length && this.rawtls.length;
     }
   },
   created() {
