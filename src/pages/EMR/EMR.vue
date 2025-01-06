@@ -25,7 +25,9 @@
       </el-col>
     </el-row>
     <el-dialog v-if="dialogVisible" class="elDialog1" :title="emrTitle || $t(setting.noEMRTitlePlaceholder)" :visible.sync="dialogVisible" width="70%">
-      <iframe :src="targetSrc" width="100%" height="100%" frameborder="0"></iframe>
+      <div style="height: 100%;" v-loading="iframeLoading">
+        <iframe ref="iframe" :src="targetSrc" width="100%" height="100%" frameborder="0"></iframe>
+      </div>
     </el-dialog>
   </div>
 </template>
@@ -35,6 +37,7 @@ import { inject } from '@/common/vuePrototypeMethods.js';
 import Label from '@/components/Label/labelData.vue';
 import { getEmr } from '@/server/api.js';
 
+let bind = false;
 export default {
   components: {
     Label
@@ -42,6 +45,7 @@ export default {
   data() {
     return {
       loading: true,
+      iframeLoading: false,
       checkTypes: [],
       emrTypes: [],
       emrDocs: [],
@@ -54,6 +58,19 @@ export default {
   created() {
     bus.$on('EMR', cb => cb && cb.call(this));
     getEmr();
+  },
+  watch: {
+    dialogVisible(value) {
+      if (value && !bind) {
+        this.$nextTick(() => {
+          let dom = this.$refs.iframe;
+          console.log("dom", dom);
+          dom.onload = () => {
+            this.iframeLoading = false;
+          }
+        })
+      }
+    }
   },
   computed: {
     ...inject('layout', 'timeline', 'EMR'),
@@ -77,6 +94,7 @@ export default {
       this.targetSrc = data.targetSrc;
       this.emrTitle = data.desc;
       this.dialogVisible = true;
+      this.iframeLoading = true;
     }
   }
 };

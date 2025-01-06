@@ -125,7 +125,8 @@ jcst.setting = {
     leftKey: 'examDeptName',
     noClassifyText: 'setting.lis.noClassifyText',
     labelConfig: {
-      isDetail: true
+      isDetail: true,
+      fns: [translate.$t('lis.fns[0]')]
     },
     labelClick: {
       'jcst.modal.dialogVisible': true,

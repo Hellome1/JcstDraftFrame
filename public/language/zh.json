@@ -85,6 +85,7 @@
   "nursingOrder.noDataDesc": "未查询到医嘱数据",
   "nursing.noDataDesc": "未查询到护理数据",
   "pacs.noDataDesc": "未查询到检查数据",
+  "pacs.fns[0]": "左键查看检查报告",
   "pacs.report.header[1]": "项目名称",
   "pacs.report.header[2]": "检查号",
   "pacs.report.header[3]": "检查科室",

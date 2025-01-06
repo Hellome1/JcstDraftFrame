@@ -85,6 +85,7 @@
   "nursingOrder.noDataDesc": "No Order Data Was Found",
   "nursing.noDataDesc": "No Nursing Data Was Found",
   "pacs.noDataDesc": "No Examination Data Was Found",
+  "pacs.fns[0]": "Left Click to View the Pacs Report",
   "pacs.report.header[1]": "Item Name",
   "pacs.report.header[2]": "Examine Number",
   "pacs.report.header[3]": "Examine Department",
