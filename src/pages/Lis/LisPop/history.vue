@@ -7,6 +7,37 @@
     <div class="lh-main" ref="main">
       <canvas id="main" :width="width - 80" :height="height"></canvas>
     </div>
+    <el-table
+      :data="data"
+      border
+      size="mini"
+      max-height="150"
+      style="width: 100%">
+      <el-table-column
+        prop="inspItemDesc"
+        label="项目名称"
+        :width="width / 5">
+      </el-table-column>
+      <el-table-column
+        prop="inspRptVerifyDate"
+        label="日期"
+        :width="width / 5">
+      </el-table-column>
+      <el-table-column
+        prop="inspectionValue"
+        label="值"
+        :width="width / 5">
+      </el-table-column>
+      <el-table-column
+        prop="inspResultUnitCode"
+        label="单位"
+        :width="width / 5">
+      </el-table-column>
+      <el-table-column
+        prop="inspAbnoFlag"
+        label="异常标志">
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 
@@ -24,7 +55,7 @@ export default {
   },
   data() {
     return {
-      height: 550,
+      height: 500,
       data: []
     };
   },
