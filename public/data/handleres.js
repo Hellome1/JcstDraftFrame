@@ -479,7 +479,7 @@ function EMR_data(res) {
       return {
         desc: docTypeDesc,
         type: documentType,
-        location
+        location: location
       };
     });
     if (firstDate) {

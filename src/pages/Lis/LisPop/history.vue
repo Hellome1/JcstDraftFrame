@@ -1,42 +1,18 @@
 <template>
   <div class="lisnorm-history">
     <div class="lh-header">
-      <h3>{{$t('lis.modal.lisnormHistory')}}</h3>
+      <h3>{{ $t('lis.modal.lisnormHistory') }}</h3>
       <span class="lh-back" @click="handleBack"><i class="el-icon-back"></i>返回</span>
     </div>
     <div class="lh-main" ref="main">
       <canvas id="main" :width="width - 80" :height="height"></canvas>
     </div>
-    <el-table
-      :data="data"
-      border
-      size="mini"
-      max-height="150"
-      style="width: 100%">
-      <el-table-column
-        prop="inspItemDesc"
-        label="项目名称"
-        :width="width / 5">
-      </el-table-column>
-      <el-table-column
-        prop="inspRptVerifyDate"
-        label="日期"
-        :width="width / 5">
-      </el-table-column>
-      <el-table-column
-        prop="inspectionValue"
-        label="值"
-        :width="width / 5">
-      </el-table-column>
-      <el-table-column
-        prop="inspResultUnitCode"
-        label="单位"
-        :width="width / 5">
-      </el-table-column>
-      <el-table-column
-        prop="inspAbnoFlag"
-        label="异常标志">
-      </el-table-column>
+    <el-table :data="data" border size="mini" max-height="150" style="width: 100%">
+      <el-table-column prop="inspItemDesc" label="项目名称" :width="width / 5"> </el-table-column>
+      <el-table-column prop="inspRptVerifyDate" label="日期" :width="width / 5"> </el-table-column>
+      <el-table-column prop="inspectionValue" label="值" :width="width / 5"> </el-table-column>
+      <el-table-column prop="inspResultUnitCode" label="单位" :width="width / 5"> </el-table-column>
+      <el-table-column prop="inspAbnoFlag" label="异常标志"> </el-table-column>
     </el-table>
   </div>
 </template>
@@ -70,9 +46,7 @@ export default {
   computed: {
     ...inject('lis')
   },
-  mounted() {
-    
-  },
+  mounted() {},
   methods: {
     getLisnorm() {
       let inspItemCode = this.clickedLisnormRow.inspItemCode;
@@ -83,13 +57,13 @@ export default {
         this.data = data;
         this.$nextTick(() => {
           this.initCharts();
-        })
+        });
       });
     },
     initCharts() {
       // 基于准备好的dom，初始化echarts实例
       let myChart = echarts.init(document.getElementById('main'));
-      let name = this.data[0] && this.data[0].inspItemDesc || '';
+      let name = (this.data[0] && this.data[0].inspItemDesc) || '';
       let series = [
         {
           name: name,
@@ -116,9 +90,6 @@ export default {
         }
       };
       let option = {
-        title: {
-          text: ''
-        },
         legend: {
           data: [name]
         },

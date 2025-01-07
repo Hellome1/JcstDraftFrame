@@ -126,7 +126,7 @@ jcst.setting = {
     noClassifyText: 'setting.lis.noClassifyText',
     labelConfig: {
       isDetail: true,
-      fns: [translate.$t('lis.fns[0]')]
+      fns: [translate.$t('pacs.fns[0]')]
     },
     labelClick: {
       'jcst.modal.dialogVisible': true,

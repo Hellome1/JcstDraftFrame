@@ -62,6 +62,7 @@ export default {
   watch: {
     dialogVisible(value) {
       if (value && !bind) {
+        bind = true;
         this.$nextTick(() => {
           let dom = this.$refs.iframe;
           console.log("dom", dom);

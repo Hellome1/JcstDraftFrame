@@ -2,8 +2,8 @@
   <el-collapse-item class="module-item" :name="name">
     <template slot="title">
       <h4 class="module-title" shape="moduleHeadFontSize-moduleHeadColor-vitalsignsTitle" :style="{ fontSize: moduleHeadFontSize, color: moduleHeadColor }">{{titleText}}</h4>
-      <div class="func-area">
-        <div class="loca-icon" v-if="showLocaIcon">
+      <div class="func-area" v-if="showLocaIcon">
+        <div class="loca-icon">
           <TipBox :tipmsg="tipmsg">
             <span class="tl-icon" @click.stop="handleClickIconBox"> {{word}} </span>
           </TipBox>
