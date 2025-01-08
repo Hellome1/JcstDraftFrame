@@ -125,13 +125,17 @@ export function getLis(query = { from: 'lis' }) {
 }
 
 export function getLisnorm(query = { from: 'lisnorm' }) {
-  return request(
+  request(
     handleReq({
       url: 'MES0023',
       method: 'post',
       data: query
     })
-  )
+  ).then(res => {
+    lisnorm_data(res);
+  }).catch(e => {
+    throw e;
+  })
 }
 
 export function getEmr(query = { from: 'EMR' }) {

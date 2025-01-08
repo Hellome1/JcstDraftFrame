@@ -352,7 +352,16 @@ function lis_data(res) {
 }
 
 function lisnorm_data(res) {
-  return res;
+  console.log('[handleres.js 355] lisnorm_data:', res);
+  bus.$emit('lisnorm', function() {
+    this.loading = false;
+    var datekey = this.date, namekey = this.name;
+    res.data.forEach(function (itm, i) {
+      if (i % 2 === 1) itm.abno = true;
+      setGlobalSearchTimes(itm, datekey, namekey);
+    });
+    this.resdata = JSON.parse(JSON.stringify(res.data));
+  });
 }
 
 function ajax_data(res) {

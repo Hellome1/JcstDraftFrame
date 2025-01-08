@@ -8,6 +8,7 @@ var useTestData = {
   'pacs': true,
   'lis': true,
   'lisnorm': true,
+  'lisLisnorm': true,
   'lisnormHistory': true,
   'surgery': true,
   'surgeryDetail': true,
@@ -17,6 +18,9 @@ var JCSTTestData = {};
 
 (function () {
   var isUseTestData = getSearchByKey('useTestData');
+  JCSTTestData['lisnorm'] = xmlreq({
+    url: './data/testData/' + 'lisnorm' + '.json'
+  });
   if (!isUseTestData) return;
   for (var k in useTestData) {
     if (useTestData[k]) {

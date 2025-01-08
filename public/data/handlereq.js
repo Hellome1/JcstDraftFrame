@@ -68,14 +68,16 @@ function handleObjData(param, obj) {
     extra = handleNursingVitalsignsItems();
     console.log('[vitalsignsNursing req] extra', extra);
     param = Object.assign({}, param, extra);
-  } else if (from === 'MES0023' || from === 'lisnorm') {
-    console.log('selectedRow', JSON.parse(JSON.stringify(row)));
-    extra = {
-      inspOrdInfo: {
-        hdcInspRptId: row.hdcInspRptId
-      }
-    };
-    param = Object.assign({}, param, extra);
+  } else if (from === 'lisLisnorm') {
+    if (row) {
+      console.log('selectedRow', JSON.parse(JSON.stringify(row)));
+      extra = {
+        inspOrdInfo: {
+          hdcInspRptId: row.hdcInspRptId
+        }
+      };
+      param = Object.assign({}, param, extra);
+    }
   } else if (from === 'EMR') {
     extra = {
       emrDocInfo: { documentFormat: "html" },

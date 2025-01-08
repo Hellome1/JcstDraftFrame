@@ -80,7 +80,7 @@ export default {
     ajax() {
       if (!this.action) return;
       this.loading = true;
-      ajax({ action: this.action, query: { from: this.from || this.action } }).then(res => {
+      ajax({ action: this.action, query: { from: this.from } }).then(res => {
         ajax_data(res);
         this.loading = false;
       }).catch(e => { this.loading = false; throw e; });

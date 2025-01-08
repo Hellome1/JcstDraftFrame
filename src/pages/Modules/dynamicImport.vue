@@ -5,6 +5,7 @@ const dict = {
   'nursing': 'Nursing/index.vue',
   'pacs': 'Pacs/index.vue',
   'lis': 'Lis/index.vue',
+  'lisnorm': 'Lisnorm/index.vue',
   'surgery': 'Surgery/index.vue',
   'consult': 'Consult/index.vue',
   'EMR': 'EMR/EMR.vue'

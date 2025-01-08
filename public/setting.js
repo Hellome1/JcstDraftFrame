@@ -6,7 +6,7 @@ jcst.setting = {
     leftBgColor: '#f9f9f9', // 颜色
     moduleHeadFontSize: '16px', // 字体大小
     moduleHeadColor: '#000', // 颜色
-    displayModules: ['vitalsigns', 'nursing', 'medicalOrder', 'pacs', 'lis', 'surgery', 'consult', 'EMR'] // 数组
+    displayModules: ['vitalsigns', 'nursing', 'medicalOrder', 'pacs', 'lis', 'lisnorm', 'surgery', 'consult', 'EMR'] // 数组
   },
   header: {
     isShow: true, // 布尔值
@@ -155,7 +155,7 @@ jcst.setting = {
       'jcst.modal.path': 'pages/Lis/LisPop/index.vue',
       'jcst.modal.title': translate.$t('setting.lis.reportTitle'),
       'jcst.table.post.action': 'MES0023',
-      'jcst.table.post.from': 'lisnorm',
+      'jcst.table.post.from': 'lisLisnorm',
       'jcst.table.handleClick': 'presetEventFn.handleLisnormRowClick',
       'jcst.table.column': [
         {
@@ -182,6 +182,26 @@ jcst.setting = {
       ]
     },
     clickedLisnormRow: null
+  },
+  lisnorm: {
+    lisnormTitle: translate.$t('setting.lisnorm.title'),
+    name: 'inspItemDesc', // 必选，data中标签显示内容的key
+    date: 'inspectionDate',
+    time: 'inspectionTime',
+    leftKey: '',
+    noClassifyText: 'setting.lis.noClassifyText',
+    labelConfig: {
+      isDetail: true,
+      pStyle: {
+        textAlign: 'center'
+      },
+      fns: [translate.$t('lisnorm.fns[0]')]
+    },
+    labelClick: {
+      'jcst.modal.dialogVisible': true,
+      'jcst.modal.path': 'pages/Lisnorm/pop/index.vue',
+      'jcst.modal.title': translate.$t('setting.lisnorm.reportTitle')
+    }
   },
   surgery: {
     surgeryTitle: translate.$t('setting.surgery.title'),
