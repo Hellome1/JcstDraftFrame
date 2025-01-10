@@ -6,7 +6,7 @@ jcst.setting = {
     leftBgColor: '#f9f9f9', // 颜色
     moduleHeadFontSize: '16px', // 字体大小
     moduleHeadColor: '#000', // 颜色
-    displayModules: ['vitalsigns', 'nursing', 'medicalOrder', 'pacs', 'lis', 'lisnorm', 'surgery', 'consult', 'EMR'] // 数组
+    displayModules: ['vitalsigns', 'nursing', 'medicalOrder', 'pacs', 'lis',  'lisnorm', 'surgery', 'consult', 'EMR'] // 数组
   },
   header: {
     isShow: true, // 布尔值
@@ -181,6 +181,7 @@ jcst.setting = {
         }
       ]
     },
+    showBack: true,
     clickedLisnormRow: null
   },
   lisnorm: {
@@ -199,7 +200,7 @@ jcst.setting = {
     },
     labelClick: {
       'jcst.modal.dialogVisible': true,
-      'jcst.modal.path': 'pages/Lisnorm/pop/index.vue',
+      'jcst.modal.path': 'pages/Lis/LisPop/history.vue',
       'jcst.modal.title': translate.$t('setting.lisnorm.reportTitle')
     }
   },

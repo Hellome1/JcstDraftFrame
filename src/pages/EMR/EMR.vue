@@ -13,12 +13,12 @@
       <el-col :span="rightW" class="layout-right">
         <el-row class="module-content-list">
           <el-col v-for="(day, i) in showDays" :key="i" :sm="3" :xs="3" class="">
-            <template v-if="emrDocs">
-              <div v-for="(data, j) in emrDocs[0]" :key="'data_' + j">
-                <template v-if="curdates[i] === data[date]">
-                  <Label v-if="data.display" :param="data" :basic="{ name, date, time }" :labelConfig="labelConfig" :labelClick="labelClick" @click.native="handleClick(data)" />
-                </template>
-              </div>
+            <template v-if="emrDocs && emrDocs[0]">
+              <Wrapper :length="emrDocs[0].filter(item => curdates[i] === item[date]).length">
+                <div v-for="(item, j) in emrDocs[0]" :key="'data_' + j">
+                  <Label v-if="item.display && curdates[i] === item[date]" :param="item" :basic="{ name, date, time }" :labelConfig="labelConfig" :labelClick="labelClick" @click.native="handleClick(item)" />
+                </div>
+              </Wrapper>
             </template>
           </el-col>
         </el-row>

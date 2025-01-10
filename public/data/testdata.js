@@ -18,9 +18,9 @@ var JCSTTestData = {};
 
 (function () {
   var isUseTestData = getSearchByKey('useTestData');
-  JCSTTestData['lisnorm'] = xmlreq({
-    url: './data/testData/' + 'lisnorm' + '.json'
-  });
+  // JCSTTestData['lisnorm'] = xmlreq({
+  //   url: './data/testData/' + 'lisnorm' + '.json'
+  // });
   if (!isUseTestData) return;
   for (var k in useTestData) {
     if (useTestData[k]) {

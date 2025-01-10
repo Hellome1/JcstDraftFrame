@@ -18,16 +18,18 @@
             :sm="3"
             :xs="3"
           >
-            <div v-for="(item, d) in filDatas" :key="d">
-              <Label 
-                v-if="curdates[i] === item[date]" 
-                :param="item" 
-                :basic="{ name, date, time }"
-                :labelConfig="labelConfig"
-                :labelClick="{}"
-                @click.native="showRecord(item)" 
-              />
-            </div>
+            <Wrapper :length="filDatas.filter(item => curdates[i] === item[date]).length">
+              <div v-for="(item, d) in filDatas" :key="d">
+                <Label 
+                  v-if="curdates[i] === item[date]" 
+                  :param="item" 
+                  :basic="{ name, date, time }"
+                  :labelConfig="labelConfig"
+                  :labelClick="{}"
+                  @click.native="showRecord(item)" 
+                />
+              </div>
+            </Wrapper>
           </el-col>
         </el-row>
       </el-col>

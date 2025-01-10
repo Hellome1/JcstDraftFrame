@@ -3,6 +3,7 @@ import Modal from '@/components/Modal/index.vue';
 import ModalTwo from '@/components/ModalTwo/index.vue';
 import Table from '@/components/Table/index.vue';
 import TipBox from '@/components/TipBox/use.vue';
+import Wrapper from '@/components/Wrapper/wrapper.vue';
 
 export default function (Vue) {
   Vue.component('Txt', Txt);
@@ -10,6 +11,7 @@ export default function (Vue) {
   Vue.component('ModalTwo', ModalTwo);
   Vue.component('Table', Table);
   Vue.component('TipBox', TipBox);
+  Vue.component('Wrapper', Wrapper);
 
   Vue.directive('highlight', {
     bind: (el, binding) => {

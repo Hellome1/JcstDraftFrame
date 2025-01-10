@@ -153,6 +153,7 @@ var presetEventFn = {
   },
   handleLisnormRowClick: function(row) {
     console.log('handleLisnormRowClick', row);
+    jcst.setting.lis.showBack = true;
     jcst.setting.lis.clickedLisnormRow = row;
   }
 }

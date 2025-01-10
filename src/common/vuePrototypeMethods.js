@@ -8,8 +8,12 @@ Vue.prototype.getDomAbsPosition = function getDomAbsPosition(node) {
     node = node.offsetParent;
     x += node.offsetLeft;
     y += node.offsetTop;
+    if (node.className === 'label-wrapper') {
+      let matrix = getComputedStyle(node).transform;
+      let translateY = parseInt(matrix.split(',')[5]);
+      y += translateY;
+    }
     if (node.scrollTop && node.className != 'tipbox-scroll-ignore') {
-    // if (node.scrollTop) {
       y -= node.scrollTop;
     }
   }

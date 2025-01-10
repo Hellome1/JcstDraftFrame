@@ -13,17 +13,29 @@
     <el-col :span="rightW" class="layout-right" :style="item.display === 'line' ? { borderLeft: '1px solid #ddd' } : {}" >
       <el-row v-if="item.display == 'list'" class="module-content-list">
         <el-col v-for="(day, i) in showDays" :key="day" :sm="3" :xs="3" class="">
-          <div v-for="(data, d) in filDatas" :key="data[name] + (data.isHighlight ? '1' + d : d) + curFirstDate">
-            <template v-if="data[classifyKey] === item.code && curdates[i] === data[date]">
-              <Label :nullData="(nullData = false)" :basic="{ name, date, time }" :labelConfig="labelConfig" :param="data" />
-            </template>
-          </div>
+          <Wrapper 
+            :length="filDatas.filter(data => data[classifyKey] === item.code && curdates[i] === data[date]).length"
+            :maxShowRow="3"
+          >
+            <div v-for="(data, d) in filDatas" :key="data[name] + (data.isHighlight ? '1' + d : d) + curFirstDate">
+              <Label 
+                v-if="data[classifyKey] === item.code && curdates[i] === data[date]" 
+                :basic="{ name, date, time }" 
+                :labelConfig="labelConfig" 
+                :param="data" 
+              />
+            </div>
+          </Wrapper>
         </el-col>
       </el-row>
       <div v-if="item.display == 'line'" class="module-content-line">
         <div v-for="(data, d) in filDatas" :key="data[name] + data[date] + (data.isHighlight ? '1' + d : d) + curFirstDate">
           <template v-if="data[classifyKey] === item.code && isShow(data)">
-            <TDline :nullData="(nullData = false)" :basic="{ name, startDate: date, startTime: time }" :TDlineConfig="TDlineConfig" :data="data" />
+            <TDline 
+              :basic="{ name, startDate: date, startTime: time }" 
+              :TDlineConfig="TDlineConfig" 
+              :data="data" 
+            />
           </template>
         </div>
       </div>
@@ -52,7 +64,6 @@ export default {
   },
   data() {
     return {
-      nullData: true,
       checkDept: [],
       dept: [],
       filDatas: []

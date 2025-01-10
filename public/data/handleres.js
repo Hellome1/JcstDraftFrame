@@ -363,6 +363,10 @@ function lisnorm_data(res) {
     this.resdata = JSON.parse(JSON.stringify(res.data));
   });
 }
+function lisnorm_history_data(res) {
+  console.log('[handleres.js 367] lisnorm_history_data:', res);
+  return res;
+}
 
 function ajax_data(res) {
   console.log(res);

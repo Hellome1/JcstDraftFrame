@@ -65,6 +65,8 @@ body {
       border-left: 1px solid #ddd;
       height: inherit;
       min-height: 28px;
+      max-height: 240px;
+      overflow: hidden;
     }
   }
 }

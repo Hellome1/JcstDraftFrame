@@ -2,36 +2,35 @@
   <div class="lisnorm-history">
     <div class="lh-header">
       <h3>{{ $t('lis.modal.lisnormHistory') }}</h3>
-      <span class="lh-back" @click="handleBack"><i class="el-icon-back"></i>返回</span>
+      <span class="lh-back" v-show="showBack" @click="handleBack"><i class="el-icon-back"></i>返回</span>
     </div>
-    <div class="lh-main" ref="main">
-      <canvas id="main" :width="width - 80" :height="height"></canvas>
+    <div v-loading="loading">
+      <div class="lh-main" ref="main">
+        <canvas id="main" :width="width - 80" :height="height"></canvas>
+      </div>
+      <el-table :data="data" border size="mini" max-height="150" style="width: 100%">
+        <el-table-column prop="inspItemDesc" label="项目名称" :width="width / 5"> </el-table-column>
+        <el-table-column prop="inspRptVerifyDate" label="日期" :width="width / 5"> </el-table-column>
+        <el-table-column prop="inspectionValue" label="值" :width="width / 5"> </el-table-column>
+        <el-table-column prop="inspResultUnitCode" label="单位" :width="width / 5"> </el-table-column>
+        <el-table-column prop="inspAbnoFlag" label="异常标志"> </el-table-column>
+      </el-table>
     </div>
-    <el-table :data="data" border size="mini" max-height="150" style="width: 100%">
-      <el-table-column prop="inspItemDesc" label="项目名称" :width="width / 5"> </el-table-column>
-      <el-table-column prop="inspRptVerifyDate" label="日期" :width="width / 5"> </el-table-column>
-      <el-table-column prop="inspectionValue" label="值" :width="width / 5"> </el-table-column>
-      <el-table-column prop="inspResultUnitCode" label="单位" :width="width / 5"> </el-table-column>
-      <el-table-column prop="inspAbnoFlag" label="异常标志"> </el-table-column>
-    </el-table>
   </div>
 </template>
 
 <script>
 import * as echarts from 'echarts';
 import { inject } from '@/common/vuePrototypeMethods.js';
-import { getLisnorm } from '@/server/api.js';
+import { ajax } from '@/server/api.js';
 
 export default {
   name: 'lisnormHistory',
-  props: {
-    width: {
-      type: Number
-    }
-  },
   data() {
     return {
+      loading: false,
       height: 500,
+      width: 800,
       data: []
     };
   },
@@ -50,17 +49,27 @@ export default {
   methods: {
     getLisnorm() {
       let inspItemCode = this.clickedLisnormRow.inspItemCode;
-      getLisnorm({ from: 'lisnormHistory', hdcEncId: '', hosEncId: '', inspOrdInfo: { inspItemCode: inspItemCode } }).then(res => {
-        res = lisnorm_data(res);
+      this.loading = true;
+      ajax({ 
+        action: 'MES0023', 
+        query: { from: 'lisnormHistory', hdcEncId: '', hosEncId: '', inspOrdInfo: { inspItemCode: inspItemCode } } }
+      ).then(res => {
+        this.loading = false;
+        res = lisnorm_history_data(res);
         let { data = [] } = res;
         console.log('lisnormHistory data', this.cp(data));
         this.data = data;
+        this.setWidth();
         this.$nextTick(() => {
-          this.initCharts();
+          this.initChart();
         });
       });
     },
-    initCharts() {
+    setWidth() {
+      let dom = this.$refs.main;
+      this.width = dom.offsetWidth;
+    },
+    initChart() {
       // 基于准备好的dom，初始化echarts实例
       let myChart = echarts.init(document.getElementById('main'));
       let name = (this.data[0] && this.data[0].inspItemDesc) || '';
