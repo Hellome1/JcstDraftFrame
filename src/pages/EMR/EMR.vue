@@ -37,7 +37,6 @@ import { inject } from '@/common/vuePrototypeMethods.js';
 import Label from '@/components/Label/labelData.vue';
 import { getEmr } from '@/server/api.js';
 
-let bind = false;
 export default {
   components: {
     Label
@@ -61,13 +60,14 @@ export default {
   },
   watch: {
     dialogVisible(value) {
-      if (value && !bind) {
-        bind = true;
+      if (value) {
         this.$nextTick(() => {
           let dom = this.$refs.iframe;
-          console.log("dom", dom);
-          dom.onload = () => {
-            this.iframeLoading = false;
+          if (!dom.onload) {
+            this.iframeLoading = true;
+            dom.onload = () => {
+              this.iframeLoading = false;
+            };
           }
         })
       }
@@ -95,7 +95,6 @@ export default {
       this.targetSrc = data.targetSrc;
       this.emrTitle = data.desc;
       this.dialogVisible = true;
-      this.iframeLoading = true;
     }
   }
 };
