@@ -3,6 +3,19 @@
     <div class="lh-header">
       <h3>{{ $t('lis.modal.lisnormHistory') }}</h3>
       <span class="lh-back" v-show="showBack" @click="handleBack"><i class="el-icon-back"></i>返回</span>
+      <el-select
+        v-model="ordItemCodeList" 
+        multiple 
+        size="mini"
+        collapse-tags
+      >
+        <el-option
+          v-for="(opt, i) in historySelectOptions"
+          :key="i"
+          :label="opt.label"
+          :value="opt.value"
+        ></el-option>
+      </el-select>
     </div>
     <div v-loading="loading">
       <div class="lh-main" ref="main">
@@ -31,13 +44,19 @@ export default {
       loading: false,
       height: 500,
       width: 800,
-      data: []
+      data: [],
+      ordItemCodeList: []
     };
   },
   watch: {
     clickedLisnormRow(value) {
       console.log('clickedRow', this.cp(value));
       if (value) {
+        this.ordItemCodeList = [value.inspItemCode];
+      }
+    },
+    ordItemCodeList(value) {
+      if (value.length) {
         this.getLisnorm();
       }
     }
@@ -45,14 +64,13 @@ export default {
   computed: {
     ...inject('lis')
   },
-  mounted() {},
   methods: {
     getLisnorm() {
-      let inspItemCode = this.clickedLisnormRow.inspItemCode;
       this.loading = true;
+      let ordItemCodeList = this.ordItemCodeList;
       ajax({ 
         action: 'MES0023', 
-        query: { from: 'lisnormHistory', hdcEncId: '', hosEncId: '', inspOrdInfo: { inspItemCode: inspItemCode } } }
+        query: { from: 'lisnormHistory', hdcEncId: '', hosEncId: '', inspOrdInfo: { ordItemCodeList } } }
       ).then(res => {
         this.loading = false;
         res = lisnorm_history_data(res);
@@ -72,9 +90,13 @@ export default {
     initChart() {
       // 基于准备好的dom，初始化echarts实例
       let myChart = echarts.init(document.getElementById('main'));
-      let name = (this.data[0] && this.data[0].inspItemDesc) || '';
-      let series = [
-        {
+      if (!this.data.length) return;
+      let legend_data = [];
+      let series = this.ordItemCodeList.map(code => {
+        let history = this.data.filter(itm => itm.inspItemCode === code);
+        let name = history[0] && history[0].inspItemDesc || '';
+        legend_data.push(name);
+        return {
           name: name,
           type: 'line',
           symbol: 'circle',
@@ -84,9 +106,9 @@ export default {
             position: 'top',
             fontWeight: 'bold'
           },
-          data: this.data.map(itm => [itm.inspRptVerifyDate + ' ' + itm.inspRptVerifyTime, itm.inspectionValue])
+          data: history.map(itm => [itm.inspRptVerifyDate + ' ' + itm.inspRptVerifyTime, itm.inspectionValue])
         }
-      ];
+      });
       let xAxis = {
         type: 'time',
         axisLabel: {
@@ -100,7 +122,7 @@ export default {
       };
       let option = {
         legend: {
-          data: [name]
+          data: legend_data
         },
         tooltip: {
           trigger: 'axis',

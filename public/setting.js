@@ -182,7 +182,8 @@ jcst.setting = {
       ]
     },
     showBack: true,
-    clickedLisnormRow: null
+    clickedLisnormRow: null,
+    historySelectOptions: []
   },
   lisnorm: {
     lisnormTitle: translate.$t('setting.lisnorm.title'),

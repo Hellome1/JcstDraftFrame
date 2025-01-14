@@ -353,6 +353,15 @@ function lis_data(res) {
 
 function lisnorm_data(res) {
   console.log('[handleres.js 355] lisnorm_data:', res);
+  var historySelectOptions = jcst.setting.lis.historySelectOptions;
+  if (!historySelectOptions.length) {
+    res.data.forEach(function(itm) {
+      historySelectOptions.push({
+        label: itm.inspItemDesc,
+        value: itm.inspItemCode
+      });
+    });
+  }
   bus.$emit('lisnorm', function() {
     this.loading = false;
     var datekey = this.date, namekey = this.name;
