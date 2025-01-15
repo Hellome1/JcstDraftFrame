@@ -34,16 +34,19 @@ export default {
     }
   },
   watch: {
-    clickedLisnormRow(value) {
+    clickedRow(value) {
       if (value) {
         this.translate = -this.itmWidth;
       } else {
         this.translate = 0;
       }
+    },
+    dialogVisible(value) {
+      if (!value) this.translate = 0;
     }
   },
   computed: {
-    ...inject('modal', 'lis')
+    ...inject('modal', 'lis', 'lisnormHistory')
   },
   mounted() {
     let root = this.$refs.root;

@@ -181,9 +181,7 @@ jcst.setting = {
         }
       ]
     },
-    showBack: true,
-    clickedLisnormRow: null,
-    historySelectOptions: []
+    historySelectOptionsSource: []
   },
   lisnorm: {
     lisnormTitle: translate.$t('setting.lisnorm.title'),
@@ -203,7 +201,13 @@ jcst.setting = {
       'jcst.modal.dialogVisible': true,
       'jcst.modal.path': 'pages/Lis/LisPop/history.vue',
       'jcst.modal.title': translate.$t('setting.lisnorm.reportTitle')
-    }
+    },
+    historySelectOptionsSource: []
+  },
+  lisnormHistory: {
+    showBack: true,
+    clickedRow: null,
+    selectOptionsSource: []
   },
   surgery: {
     surgeryTitle: translate.$t('setting.surgery.title'),

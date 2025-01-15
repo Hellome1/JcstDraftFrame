@@ -353,15 +353,7 @@ function lis_data(res) {
 
 function lisnorm_data(res) {
   console.log('[handleres.js 355] lisnorm_data:', res);
-  var historySelectOptions = jcst.setting.lis.historySelectOptions;
-  if (!historySelectOptions.length) {
-    res.data.forEach(function(itm) {
-      historySelectOptions.push({
-        label: itm.inspItemDesc,
-        value: itm.inspItemCode
-      });
-    });
-  }
+  jcst.setting.lisnorm.historySelectOptionsSource = res.data;
   bus.$emit('lisnorm', function() {
     this.loading = false;
     var datekey = this.date, namekey = this.name;
@@ -380,6 +372,7 @@ function lisnorm_history_data(res) {
 function ajax_data(res) {
   console.log(res);
   if (res.data) {
+    jcst.setting.lis.historySelectOptionsSource = res.data;
     jcst.table.tableData = res.data;
   }
 }

@@ -100,8 +100,9 @@ export default {
   },
   methods: {
     handleClick(row) {
-      jcst.setting.lis.showBack = false;
-      jcst.setting.lis.clickedLisnormRow = row;
+      jcst.setting.lisnormHistory.showBack = false;
+      jcst.setting.lisnormHistory.clickedRow = row;
+      jcst.setting.lisnormHistory.selectOptionsSource = this.historySelectOptionsSource;
     }
   }
 };

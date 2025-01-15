@@ -10,7 +10,7 @@
         collapse-tags
       >
         <el-option
-          v-for="(opt, i) in historySelectOptions"
+          v-for="(opt, i) in selectOptions"
           :key="i"
           :label="opt.label"
           :value="opt.value"
@@ -49,7 +49,7 @@ export default {
     };
   },
   watch: {
-    clickedLisnormRow(value) {
+    clickedRow(value) {
       console.log('clickedRow', this.cp(value));
       if (value) {
         this.ordItemCodeList = [value.inspItemCode];
@@ -62,7 +62,10 @@ export default {
     }
   },
   computed: {
-    ...inject('lis')
+    ...inject('lisnormHistory'),
+    selectOptions() {
+      return this.selectOptionsSource.map(itm => ({ label: itm.inspItemDesc, value: itm.inspItemCode }));
+    }
   },
   methods: {
     getLisnorm() {
@@ -183,7 +186,7 @@ export default {
       myChart.setOption(option, true);
     },
     handleBack() {
-      jcst.setting.lis.clickedLisnormRow = null;
+      jcst.setting.lisnormHistory.clickedRow = null;
     }
   }
 };
