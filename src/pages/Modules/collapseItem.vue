@@ -2,17 +2,20 @@
   <el-collapse-item class="module-item" :name="name">
     <template slot="title">
       <h4 class="module-title" shape="moduleHeadFontSize-moduleHeadColor-vitalsignsTitle" :style="{ fontSize: moduleHeadFontSize, color: moduleHeadColor }">{{titleText}}</h4>
-      <div class="func-area" v-if="showLocaIcon">
-        <div class="loca-icon">
-          <TipBox :tipmsg="tipmsg">
-            <span class="tl-icon" @click.stop="handleClickIconBox"> {{word}} </span>
-          </TipBox>
+      <div style="display: flex;">
+        <div class="func-area">
+          <div class="loca-icon" >
+            <TipBox :tipmsg="tipmsg">
+              <span class="tl-icon" @click.stop="handleClickIconBox"> {{word}} </span>
+            </TipBox>
+          </div>
+          <div v-if="name === 'lis'" class="loca-icon">
+            <TipBox :tipmsg="lisAbno ? $t('lis.moduleTitle.tipmsg.normal') : $t('lis.moduleTitle.tipmsg.abno')">
+              <span class="module-title-func-btn" :class="lisAbno ? 'normal' : ''" @click.stop="handleLisAbno">{{ lisAbno ? $t('lis.moduleTitle.switchabno.norm') : $t('lis.moduleTitle.switchabno.abno') }}</span>
+            </TipBox>
+          </div>
         </div>
-        <div v-if="name === 'lis'" class="loca-icon">
-          <TipBox :tipmsg="lisAbno ? $t('lis.moduleTitle.tipmsg.normal') : $t('lis.moduleTitle.tipmsg.abno')">
-            <span class="module-title-func-btn" :class="lisAbno ? 'normal' : ''" @click.stop="handleLisAbno">{{ lisAbno ? $t('lis.moduleTitle.switchabno.norm') : $t('lis.moduleTitle.switchabno.abno') }}</span>
-          </TipBox>
-        </div>
+        <FiltersIndex :filterOptionsName="name"/>
       </div>
     </template>
     <slot></slot>
@@ -21,6 +24,7 @@
 
 <script>
 import { inject } from '@/common/vuePrototypeMethods.js';
+import FiltersIndex from './filters/index.vue';
 
 const tipdict = {
   'vitalsigns': translate.$t('vitalSigns.locIcon.tipmsg'),
@@ -45,6 +49,9 @@ export default {
   props: {
     name: '',
     titleText: ''
+  },
+  components: {
+    FiltersIndex
   },
   data() {
     const name = this.name;

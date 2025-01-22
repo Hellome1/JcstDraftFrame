@@ -157,4 +157,65 @@ var presetEventFn = {
     jcst.setting.lisnormHistory.clickedRow = row;
     jcst.setting.lisnormHistory.selectOptionsSource = jcst.setting.lis.historySelectOptionsSource;
   }
+};
+
+var moduleFilterOptions = {
+  'medicalOrder': [
+    {
+      value: '',
+      placeholder: '医嘱大类',
+      dataPropertyDesc: 'ordCatDesc',
+      dataProperty: 'ordCatCode',
+      options: [
+        {
+          label: '选项二',
+          value: 'value2'
+        }
+      ]
+    },
+    {
+      value: '',
+      dataProperty: 'ordSubCatCode',
+      dataPropertyDesc: 'ordSubCatDesc',
+      placeholder: '医嘱子类',
+      options: [
+        {
+          label: '选项一',
+          value: 'value1'
+        }
+      ]
+    }
+  ]
+};
+
+function generateModuleFilterOptions(moduleName, res) {
+  if (!res.data || generateModuleFilterOptions[moduleName]) return;
+  Data[moduleName] = JSON.parse(JSON.stringify(res));
+  if (!generateModuleFilterOptions[moduleName]) generateModuleFilterOptions[moduleName] = true;
+  var options = moduleFilterOptions[moduleName].filter(function(itm) { return !itm.type });
+  options.forEach(function(itm) {
+    var propertyName = itm.dataProperty;
+    var descPropertyName = itm.dataPropertyDesc;
+    if (propertyName && descPropertyName) {
+      var options = [], codes = [];
+      res.data.forEach(function(dataItm) {
+        var name = dataItm[descPropertyName];
+        var code = dataItm[propertyName];
+        if (code && name && codes.indexOf(code) === -1) {
+          codes.push(code);
+          options.push({
+            label: name,
+            value: code
+          });
+        }
+      });
+      itm.options = options;
+    }
+  });
+  if (moduleName === 'medicalOrder') {
+    bus.$emit('moduleFilterIndex', moduleName, function() {
+      console.log('this.filterOpitions', this.filterOptions);
+      this.filterOptions = options;
+    });
+  }
 }

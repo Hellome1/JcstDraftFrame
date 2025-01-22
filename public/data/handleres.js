@@ -414,6 +414,7 @@ function consult_data(res) {
 
 function medicalOrder_data(res) {
   console.log('[handleres.js 399] medicalOrder_data', res);
+  generateModuleFilterOptions('medicalOrder', res);
   bus.$emit('medicalOrder', function () {
     this.loading = false;
     var items = [];
@@ -425,6 +426,7 @@ function medicalOrder_data(res) {
         codes: [code],
         code: code,
         desc: desc,
+        key: itm.ordCatCode + itm.ordSubCatCode,
         isLong: isLong,
         display: isLong ? 'line' : 'list'
       };

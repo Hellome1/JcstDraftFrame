@@ -3,7 +3,7 @@
     <Mdc
       ref="mdc"
       v-for="(item, i) in items"
-      :key="i"
+      :key="i + item.key + datas.length"
       :item="item"
       :datas="classifyObj[item.code] ? classifyObj[item.code] : []"
     />
