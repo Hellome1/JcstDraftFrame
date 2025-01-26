@@ -239,7 +239,8 @@ jcst.setting = {
     leftKey: 'ecrLocDesc',
     noClassifyText: 'setting.consult.noClassifyText',
     labelConfig: {
-      isDetail: true
+      isDetail: true,
+      fns: [translate.$t('consult.fns[0]')]
     }
   },
   EMR: {
@@ -248,7 +249,8 @@ jcst.setting = {
     date: 'date',
     time: '',
     labelConfig: {
-      isDetail: true
+      isDetail: true,
+      fns: [translate.$t('EMR.fns[0]')]
     },
     labelClick: {}
   }
