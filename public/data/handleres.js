@@ -322,6 +322,7 @@ function pacs_data(res) {
   var data = JSON.parse(JSON.stringify(res.data));
   jcst.datas['pacs'] = data;
 
+  generateModuleFilterOptions('pacs', res);
   bus.$emit('pacs', function () {
     this.loading = false;
     var datekey = this.date, namekey = this.name;
@@ -337,6 +338,7 @@ function pacs_data(res) {
 
 function lis_data(res) {
   console.log('[handleres.js 337] lis_data_res', res);
+  generateModuleFilterOptions('lis', res);
   bus.$emit('lis', function () {
     this.loading = false;
     var datekey = this.date, namekey = this.name;

@@ -166,24 +166,32 @@ var moduleFilterOptions = {
       placeholder: '医嘱大类',
       dataPropertyDesc: 'ordCatDesc',
       dataProperty: 'ordCatCode',
-      options: [
-        {
-          label: '选项二',
-          value: 'value2'
-        }
-      ]
+      options: []
     },
     {
       value: '',
       dataProperty: 'ordSubCatCode',
       dataPropertyDesc: 'ordSubCatDesc',
       placeholder: '医嘱子类',
-      options: [
-        {
-          label: '选项一',
-          value: 'value1'
-        }
-      ]
+      options: []
+    }
+  ],
+  'pacs': [
+    {
+      value: '',
+      placeholder: '医嘱子类',
+      dataPropertyDesc: 'ordSubCatDesc',
+      dataProperty: 'ordSubCatCode',
+      options: []
+    }
+  ],
+  'lis': [
+    {
+      value: '',
+      placeholder: '申请科室',
+      dataPropertyDesc: 'inspAppDeptDesc',
+      dataProperty: 'inspAppDeptCode',
+      options: []
     }
   ]
 };
@@ -212,10 +220,14 @@ function generateModuleFilterOptions(moduleName, res) {
       itm.options = options;
     }
   });
-  if (moduleName === 'medicalOrder') {
-    bus.$emit('moduleFilterIndex', moduleName, function() {
-      console.log('this.filterOpitions', this.filterOptions);
-      this.filterOptions = options;
-    });
-  }
+  bus.$emit('moduleFilterIndex', moduleName, function() {
+    console.log('this.filterOpitions', moduleName, this.filterOptions);
+    this.filterOptions = options;
+  });
+}
+
+function allDataChanger(moduleName, res) {
+  console.log('allDataChanger', moduleName, res);
+  if (moduleName === 'medicalOrder') medicalOrder_data(res);
+  else if (moduleName === 'pacs') pacs_data(res);
 }

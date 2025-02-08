@@ -56,7 +56,7 @@ export default {
       console.log('change', this.moduleName, this.dataProperty, this.innerValue);
       var res = this.cp(Data[this.moduleName]);
       if (this.innerValue) res.data = res.data.filter(itm => itm[this.dataProperty] === this.innerValue);
-      medicalOrder_data(res);
+      allDataChanger(this.moduleName, res);
     }
   }
 }
