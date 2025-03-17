@@ -121,15 +121,32 @@ export default {
     globalSearch() {
       let search = this.search;
       if (!search.trim()) return;
-      console.log('search', search);
+      console.log('[header.vue 124] GlobalSearch:', search);
       let input = this.$refs.globalSearch;
       input.blur();
-      let valuedate = '';
+
+      let valuedate = '', searchMatch = '', mName = '', index = -1;
       for (let date in Times) {
-        let value = Times[date];
-        if (value.indexOf(search) > -1 && !valuedate) valuedate = date;
+        let moduleObj = Times[date];
+        for (let moduleName in moduleObj) {
+          if (valuedate) break;
+          let values = moduleObj[moduleName];
+          let result = values.filter((value, i) => {
+            let flag = value.indexOf(search) > -1;
+            if (flag && index === -1) {
+              index = i;
+              searchMatch = value;
+            }
+            return flag;
+          })[0];
+          if (result) valuedate = date, mName = moduleName;
+        }
       }
-      if (valuedate) selectPageFromDate(valuedate);
+      console.log('[header.vue 141] GlobalSearchResult valuedate:', valuedate, 'moduleName:', mName, 'index:', index);
+      if (valuedate) {
+        bus.$emit('wrapperSearch', mName, valuedate, searchMatch);
+        selectPageFromDate(valuedate);
+      }
     }
   }
 };

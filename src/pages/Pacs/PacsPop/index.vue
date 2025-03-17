@@ -82,7 +82,7 @@ export default {
     };
   },
   created() {
-    this.busOn();
+    bus.$on('pacspop', cb => cb && cb.call(this));
     this.handleClickedRow();
   },
   watch: {
@@ -94,9 +94,6 @@ export default {
     ...inject('modal', 'pacs')
   },
   methods: {
-    busOn() {
-      bus.$on('pacspop', cb => cb && cb.call(this));
-    },
     handleClickedRow() {
       let selectedRow = jcst.selectedRow;
       if (selectedRow) {
@@ -108,9 +105,9 @@ export default {
     },
     checkCurRqt(itm) {
       let selectedRow = jcst.selectedRow;
-      let { name, date, time } = this;
+      let { name, date, time, id } = this;
       if (selectedRow) {
-        return itm[name] + itm[date] + itm[time] === selectedRow[name] + selectedRow[date] + selectedRow[time];
+        return itm[name] + itm[date] + itm[time] + itm[id] === selectedRow[name] + selectedRow[date] + selectedRow[time] + selectedRow[id];
       }
       return false;
     },

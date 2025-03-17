@@ -6,15 +6,24 @@
       <el-col :span="rightW" class="layout-right">
         <el-row class="module-content-list">
           <el-col v-for="(day, i) in showDays" :key="i" :sm="3" :xs="3">
-            <Wrapper :length="filteredData.filter(item => curdates[i] === item[date]).length">
-              <div v-for="(item, d) in filteredData" :key="d + (item.abno ? 'abno' : '')">
+            <Wrapper 
+              moduleName="lisnorm" 
+              :date="curdates[i]"
+              :name="name"
+              :datas="filteredData.filter(item => curdates[i] === item[date])" 
+              :length="filteredData.filter(item => curdates[i] === item[date]).length"
+            >
+              <div 
+                v-for="(item, d) in filteredData.filter(item => curdates[i] === item[date])" 
+                :key="d + labelHighlightCondition[0] + labelHighlightCondition[1] + labelHighlightCondition[2] + (item.abno ? 'abno' : '')"
+              >
                 <Label 
-                  v-if="curdates[i] === item[date]" 
                   :param="item" 
                   :labelClick="labelClick" 
                   :basic="{ name, date, time }" 
                   :labelConfig="item.labelConfig" 
                   @click.native="handleClick(item)"
+                  :highlight="labelHighlightCondition[0] === 'lisnorm' && labelHighlightCondition[1] === curdates[i] && labelHighlightCondition[2] === d"
                 />
               </div>
             </Wrapper>

@@ -144,7 +144,7 @@ function loc_moduleTimeInfo(name) {
   }
 }
 
-function setGlobalSearchTimes(dataItm, datekey, namekey) {
+function setGlobalSearchTimes(dataItm, datekey, namekey, moduleName) {
   var date = dataItm[datekey] || '', desc = '';
   if (/{\w+}/.test(namekey)) {
     desc = namekey.replace(/{\w+}/gi, function(match, index) {
@@ -155,8 +155,18 @@ function setGlobalSearchTimes(dataItm, datekey, namekey) {
     desc = dataItm[namekey] || '';
   }
   if (date && desc) {
-    if (date in Times) Times[date] += desc;
-    else Times[date] = desc;
+    if (date in Times) {
+      var moduleObj = Times[date];
+      if (moduleName in moduleObj) {
+        moduleObj[moduleName].push(desc);
+      } else {
+        moduleObj[moduleName] = [ desc ];
+      }
+    }
+    else {
+      Times[date] = {};
+      Times[date][moduleName] = [ desc ];
+    }
   }
 }
 

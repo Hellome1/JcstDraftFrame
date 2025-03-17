@@ -34,6 +34,10 @@ export default {
       default: function() {
         return [];
       }
+    },
+    highlight: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -83,15 +87,19 @@ export default {
           }
         }
       }
-      config = this.handleCare(labelParam['name'], config);
-      if (config) {
-        labelParam.config = config;
+      // config = this.handleCare(labelParam['name'], config);
+      if (this.highlight) {
+        labelParam.pStyle && (
+          labelParam.pStyle.backgroundColor = jcst_layout.labelHighlightColor,
+          labelParam.pStyle.borderColor = jcst_layout.labelHighlightColor
+        );
       }
       if (opt.loop) {
         labelParam.loop = opt.loop;
         labelParam.rowData = data;
       }
 
+      if (this.highlight) console.log('labelParam', this.cp(labelParam));
       return labelParam;
     },
     // 处理关注的部分

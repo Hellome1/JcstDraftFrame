@@ -18,7 +18,7 @@ Vue.prototype.getDomAbsPosition = function getDomAbsPosition(node) {
     }
   }
   return { left: x, top: y + offsetHeight, offsetHeight };
-};
+}
 Vue.prototype.$t = translate.$t;
 Vue.prototype.weekContract = translate.weekContract;
 

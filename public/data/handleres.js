@@ -144,7 +144,7 @@ function timeline_surgeryData(res) {
     var datekey = jcst_setting_surgery.date,
       namekey = jcst_setting_surgery.name;
     var surgeryInfo = data.map(function (itm, index) {
-      setGlobalSearchTimes(itm, datekey, namekey);
+      setGlobalSearchTimes(itm, datekey, namekey, 'surgery');
       return {
         surgeryDate: itm.operStartDate,
         count: index + 1
@@ -327,7 +327,7 @@ function pacs_data(res) {
     this.loading = false;
     var datekey = this.date, namekey = this.name;
     data.forEach(function (itm) {
-      setGlobalSearchTimes(itm, datekey, namekey);
+      setGlobalSearchTimes(itm, datekey, namekey, 'pacs');
     });
     this.resdata = data;
   });
@@ -344,7 +344,7 @@ function lis_data(res) {
     var datekey = this.date, namekey = this.name;
     res.data.forEach(function (itm, i) {
       if (i % 2 === 1) itm.abno = true;
-      setGlobalSearchTimes(itm, datekey, namekey);
+      setGlobalSearchTimes(itm, datekey, namekey, 'lis');
     });
     Data.lisData = res.data;
     this.resdata = JSON.parse(JSON.stringify(res.data));
@@ -361,7 +361,7 @@ function lisnorm_data(res) {
     var datekey = this.date, namekey = this.name;
     res.data.forEach(function (itm, i) {
       if (i % 2 === 1) itm.abno = true;
-      setGlobalSearchTimes(itm, datekey, namekey);
+      setGlobalSearchTimes(itm, datekey, namekey, 'lisnorm');
     });
     this.resdata = JSON.parse(JSON.stringify(res.data));
   });
@@ -402,7 +402,7 @@ function consult_data(res) {
         itm.diagnoseDescs = itm.diagnoseList.map(function (t) { return t.diagnoseName; }).join(';') || noVal;
         itm.hosInfo = itm.currWardDesc + ' ' + itm.currBedNo + ' ' + itm.currentRoomDesc;
 
-        setGlobalSearchTimes(itm, datekey, namekey);
+        setGlobalSearchTimes(itm, datekey, namekey, 'consult');
 
         return itm;
       });
@@ -439,7 +439,7 @@ function medicalOrder_data(res) {
         items.push(obj);
       }
 
-      setGlobalSearchTimes(itm, datekey, namekey);
+      setGlobalSearchTimes(itm, datekey, namekey, 'medicalOrder');
     });
 
     if (res && res.data && res.data[0]) {
